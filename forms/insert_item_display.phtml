@@ -1,0 +1,21 @@
+<!-- ** START DISPLAY SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<header>Display Settings</header>
+    <div class="section-wrapper">
+        <div class="form-sub-section">
+            <p class="input-wrap">
+                Style:  
+                <select  name="<?php echo $this->get_field_name( 'display' ); ?>">
+                    <option value="basic_gallery" <?php selected( $in['display'], 'list'); ?>>Basic Gallery</option>
+                    <option value="list" <?php selected( $in['display'], 'list'); ?>>List</option>
+                    <option value="promo" <?php selected( $in['display'], 'promo'); ?>>Promo</option>
+                    <option value="column_promo" <?php selected( $in['display'], 'column_promo');?>>Column Promo</option>
+                    <option value="full" <?php selected( $in['display'], 'full');?>>Full Content</option>
+                </select>
+            </p>
+            <?php include cahnrswp\cahnrs\core\DIR.'forms/parts/display_image_size.phtml';?>
+            <?php include cahnrswp\cahnrs\core\DIR.'forms/parts/display_options.phtml';?>
+        </div>
+    </div>
+</section>
+<!-- ** END DISPLAY SETTINGS ************* -->

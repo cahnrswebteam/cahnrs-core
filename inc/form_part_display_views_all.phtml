@@ -1,0 +1,19 @@
+<?php 
+	$image_sizes = get_intermediate_image_sizes();
+?>
+<h4 style="border-bottom: 1px solid #ccc" >Display Settings</h4>
+        <p><label>Gallery Type: </label>
+    	<select id="<?php echo $widget->get_field_id( 'display' ); ?>" name="<?php echo $widget->get_field_name( 'display' ); ?>">
+        	<option value="basic_content" <?php selected( $val['display'], 'basic_content'); ?>>Basic Content</option>
+        	<option value="basic_gallery" <?php selected( $val['display'], 'basic_gallery'); ?>>Basic Gallery</option>
+            <option value="list" <?php selected( $val['display'], 'list'); ?>>List</option>
+            <option value="promo" <?php selected( $val['display'], 'promo'); ?>>Image Promo</option>
+            <option value="column_promo" <?php selected( $val['display'], 'column_promo'); ?>>Column Promo</option>
+        </select></p>
+        <p><label>Image Size: </label>
+    	<select id="<?php echo $widget->get_field_id( 'image_size' ); ?>" name="<?php echo $widget->get_field_name( 'image_size' ); ?>">
+        	<?php foreach ( $image_sizes as $size_name ): ?>
+                <option value="<?php echo $size_name ?>" <?php selected( $val['image_size'], $size_name ); ?> ><?php echo $size_name ?></option>
+            <?php endforeach; ?>
+        	
+        </select></p>

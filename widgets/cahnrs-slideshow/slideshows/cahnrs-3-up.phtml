@@ -1,0 +1,25 @@
+<?php
+$fields = array('title','link','excerpt','content','image');
+if ( $query->have_posts() ) :?>
+<div class="cahnrs-slideshow-wrapper">
+    <div class="cahnrs-slideshow slideshow-<?php echo $instance['display'];?>">
+        <div class="slide">
+        <?php //$s = 0; foreach( $show_obj['features'] as $slide ): 
+          //if( $s < 3 ):
+		$i = 0;
+		while ( $query->have_posts() && $i < 3 ) :
+			$query->the_post();
+			$display_obj = $feed_control->get_display_obj( $args, $instance, $query->post , $fields );
+			?><div class="sub-slide">
+            	<?php if( $display_obj->image ) echo $display_obj->image;?>
+                <!--<img src="<?php echo $slide['image'];?>" class="slide-image" /> -->
+                <div class="slide-details">
+                    <div class="slide-title"><?php if( $display_obj->title ) echo $display_obj->title;?></div>
+                    <div class="slide-summary"><?php if( $display_obj->excerpt ) echo $display_obj->excerpt;?></div>
+                </div>
+                <a class="slide-link" href="<?php echo $slide['url'];?>" ></a>
+            </div><?php $i++; endwhile;?>
+        </div>
+    </div>
+</div>
+<?php endif;?>

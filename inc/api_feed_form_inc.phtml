@@ -1,0 +1,6 @@
+<h4 style="border-bottom: 1px solid #ccc" >CAHNRS API Feed</h4>
+        <p><label>Feed: </label>
+    	<select id="<?php echo $widget->get_field_id( 'api_feed' ); ?>" name="<?php echo $widget->get_field_name( 'api_feed' ); ?>">
+        	<option value="0" <?php selected( $val['api_feed'], 0); ?>>None</option>
+            <option value="featured_stories" <?php selected( $val['api_feed'], 'featured_stories'); ?>>Featured Stories</option>
+        </select></p>

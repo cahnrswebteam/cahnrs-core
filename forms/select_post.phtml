@@ -1,0 +1,44 @@
+<?php
+$post_types = get_post_types( array( 'public' => true ) , 'objects' );
+foreach ( $post_types  as $post_type ) { // THIS IS A FOREACH LOOP IN CASE YOU DIDN'T NOTICE- DB
+	$title = ( 'attachment' != $post_type->name )? $post_type->labels->name : 'Media Libary'; // WHAT'S AN ATTACHMENT ANYWAY???? - DB
+	$type_array[] = array('id' => $post_type->name ,'title' => $title ); // WRITE THE ID AND TITLE TO A NEW ARRAY FOR THE DROP DOWN - DB
+};
+;?>
+<!-- ** START FEED SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<?php echo '<script>var widget_home_url = "'. \get_site_url() .'"</script>';?>
+	<header class="active">Feed Settings</header>
+    <div class="section-wrapper active">
+        <div class="form-sub-section cc-form-feed-type">
+            <label for="static" href="#" class="action-select-basic active">Static</label>
+            <input type="radio" name="type_group" id="basic" />
+            <label for="url" href="#" class="action-select-url in-active">URL</label>
+            <input type="radio" name="type_group" id="url" disabled />
+        </div>
+        <div class="form-sub-section cc-form-feed-options">
+        	<div class="dynamic-load-group">
+                <p class="input-wrap">
+                    <label>Select Type: </label>
+                    <select class="dynamic-load-select" id="" name="" data-source="?cahnrs-feed=select-list">
+                        <option value="0"><em>Not Selected...</em></option>
+                        <?php foreach( $type_array as $type ):?>
+                        <option value="<?php echo $type['id'];?>"  ><?php echo $type['title'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </p>
+                <p class="input-wrap">
+                    <label>Select Item: </label><br />
+                    <select style="width: 80%; max-width: 90%; max-height: 150px;" class="dynamic-load-select-content not-loaded" id="<?php echo $this->get_field_id( 'selected_item' ); ?>" name="<?php echo $this->get_field_name( 'selected_item' ); ?>" data-type="0">
+                        <?php if( isset( $in['selected_item'] ) && $in['selected_item']  ):?>
+                            <option value="<?php echo $in['selected_item'];?>" selected><?php echo get_the_title( $in['selected_item'] );?></option>
+                        <?php else:?>
+                            <option value="0">Not Set</option>
+                        <?php endif;?>
+                    </select><br /><span class="input-helper">*** You must <strong>select a type</strong> before you can choose a new item.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ** END FEED SETTINGS ************* -->

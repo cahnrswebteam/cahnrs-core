@@ -1,0 +1,111 @@
+<?php
+$post_types = get_post_types( array( 'public' => true ) , $output ); // GET POST TYPES - YEP THAT'S WHAT IT DOES - DB
+$exclude_post_types = array('easter_egg'); // NOT REALLY SURE WHAT THIS DOES .. JUST KIDDING - DB
+if( is_multisite() ){
+	$sites = wp_get_sites();
+	if( $sites ){
+		foreach( $sites as $site ){
+			$details = get_blog_details( $site['blog_id'] );
+			$multisite[] = array('id' => $site['blog_id'] , 'title' => $details->blogname  );
+		}
+	}
+} else {
+	$multisite = false;
+}
+foreach ( $post_types  as $post_type ) { // THIS IS A FOREACH LOOP IN CASE YOU DIDN'T NOTICE- DB
+	$title = ( 'attachment' != $post_type->name )? $post_type->labels->name : 'Media Libary'; // WHAT'S AN ATTACHMENT ANYWAY???? - DB
+	$type_array[] = array('id' => $post_type->name ,'title' => $title ); // WRITE THE ID AND TITLE TO A NEW ARRAY FOR THE DROP DOWN - DB
+};
+;?>
+<!-- ** START FEED SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<header class="active">Feed Settings</header>
+    <div class="section-wrapper active">
+        <div class="form-sub-section cc-form-feed-type">
+            <label for="basic" href="#" class="action-select-basic active">Basic</label>
+            <input type="radio" name="type_group" id="basic" />
+            <label for="url" href="#" class="action-select-url in-active">URL</label>
+            <input type="radio" name="type_group" id="url" disabled />
+            <label for="api" href="#" class="action-select-feed-api in-active">API</label>
+            <input type="radio" name="type_group" id="api" disabled />
+            <label for="advanced" href="#" class="action-select-advanced in-active">Adv +</label>
+            <input type="radio" name="type_group" id="advanced" disabled />
+        </div>
+        <div class="form-sub-section cc-form-feed-options">
+        	
+            <p class="input-wrap">
+                Content Type: 
+                <select name="<?php echo $this->get_field_name( 'post_type' ); ?>">
+                    <option value="any" <?php selected( $in['post_type'], 'any'); ?> >All</option>
+                <?php foreach( $type_array as $type ):?>
+                    <option value="<?php echo $type['id'];?>" <?php selected( $in['post_type'], $type['id']); ?>><?php echo $type['title'];?></option>
+                <?php endforeach;?>
+                </select>
+            </p>
+            <p class="input-wrap">
+                Feed By: 
+                <select name="<?php echo $this->get_field_name( 'taxonomy' ); ?>">
+                	<option value="all" <?php selected( $in['taxonomy'], 'all'); ?>>All</option>
+            		<option value="category" <?php selected( $in['taxonomy'], 'category'); ?>>Categories</option>
+            		<option value="tag" <?php selected( $in['taxonomy'], 'tag'); ?>>Tags</option>
+                </select>
+            </p>
+            <p class="input-wrap">
+                Category or Tag Names:<br /> 
+                <input type="text" name="<?php echo $this->get_field_name( 'terms' ); ?>" value="<?php echo $in['terms'];?>" /><br />
+                <span class="input-helper">Separate multiple values with ",".</span>
+            </p>
+            <p class="input-wrap">
+                Count:  
+                <input name="<?php echo $this->get_field_name( 'count' ); ?>" style="width: 30px" type="text" value="<?php echo $in['count'];?>" /> &nbsp;&nbsp;
+                Skip: 
+                <input name="<?php echo $this->get_field_name( 'skip' ); ?>"style="width: 30px" type="text" value="<?php echo $in['skip'];?>" />
+            </p>
+        </div>
+    </div>
+</section>
+<!-- ** END FEED SETTINGS ************* -->
+<!-- ** START ADVANCED FEED SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<header>Advanced Feed Settings</header>
+    <div class="section-wrapper">
+      <div class="form-sub-section cc-form-feed-advanced">
+      	<?php if( is_multisite() ):?>
+            <p class="input-wrap">
+                Source:  
+                <select name="" style="max-width: 80%;">
+                	<option value="0" >Current Site</option>
+                	<?php foreach( $multisite as $ms ):?>
+                    <option value="<?php echo $ms['id'];?>" ><?php echo $ms['title'];?></option>
+                    <?php endforeach;?>
+                </select>
+            </p>
+            <?php endif;?>
+        <p class="input-wrap">
+                Order By: 
+                <select name="<?php echo $this->get_field_name( 'order_by' ); ?>">
+                	<option value="date" <?php selected( $in['order_by'], 'date'); ?>>Published Date</option>
+                    <option value="title" <?php selected( $in['order_by'], 'title'); ?>>Title</option>
+                    <option value="name" <?php selected( $in['order_by'], 'name'); ?>>URL/Slug</option>
+                    <option value="modified" <?php selected( $in['order_by'], 'modified'); ?>>Published Date</option>
+                    <option value="parent" <?php selected( $in['order_by'], 'parent'); ?>>Parent ID</option>
+                    <option value="rand" <?php selected( $in['order_by'], 'rand'); ?>>Random</option>
+                    <option value="comment_count" <?php selected( $in['order_by'], 'comment_count'); ?>>Comment Count</option>
+                    <option value="menu_order" <?php selected( $in['order_by'], 'menu_order'); ?>>Menu Order</option>
+                    <option value="meta_value" <?php selected( $in['order_by'], 'meta_value'); ?>>Meta Value*</option>
+                    <option value="meta_value_nu" <?php selected( $in['order_by'], 'meta_value_nu'); ?>>Meta Value (Number)*</option>
+                    <option value="post__in" <?php selected( $in['order_by'], 'post__in'); ?>>Query Order</option>
+                </select>
+            </p>
+             <p class="input-wrap">
+                Display Order: 
+                <select name="<?php echo $this->get_field_name( 'order' ); ?>">
+                	<option value="ASC" <?php selected( $in['order'], 'ASC'); ?>>Ascending</option>
+                    <option value="DESC" <?php selected( $in['order'], 'DESC'); ?>>Descending</option>
+                    
+                </select>
+            </p>
+        </div>
+    </div>
+</section>
+<!-- ** END FEED SETTINGS ************* -->

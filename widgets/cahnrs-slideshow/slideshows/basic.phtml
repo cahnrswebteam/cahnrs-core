@@ -1,0 +1,44 @@
+<?php
+$s = 0;
+$fields = array('title','link','excerpt','content','image');
+$slide_nav = array();
+if ( $query->have_posts() ) :?>
+<div class="cahnrs-slideshow slideshow-basic" data-speed="5000" data-action="fade" data-auto="1" data-transition="fade">
+    <div class="slideshow-inner">
+        <div class="slideshow-wrapper">	
+		<?php while ( $query->have_posts() ) :
+            $query->the_post();
+            $display_obj = $feed_control->get_display_obj( $args, $instance, $query->post , $fields );?>
+            <?php if( $display_obj->image ):?>
+            	<?php $isActive = ( 0 == $s )? ' current-slide': '';?>
+                <div class="cahnrs-slide <?php echo $isActive;?>" >
+                	<?php echo $display_obj->link_start; echo $display_obj->link_end;?>
+                    <div class="image-wrapper">
+                    	<?php echo $display_obj->image;?>
+                    </div>
+                    <div class="caption">
+                    	<div class="caption-inner">
+							<?php if( $display_obj->title ):?>
+                            <div class="title"><?php echo $display_obj->title;?></div>
+                            <?php endif;?>
+                            <?php if( $display_obj->excerpt ):?>
+                            <div class="excerpt"><?php echo $display_obj->excerpt;?></div>
+                            <?php endif;?>
+                            <?php if( $display_obj->link ):?>
+                            <div class="link"><?php echo $display_obj->link_start;?>Learn More ><?php echo $display_obj->link_end;?></div>
+                            <?php endif;?>
+                            <?php $slide_nav[] = '<a href="#" class="'.$isActive.'" data-slide="'.$s.'" ></a>';?>
+                        </div>
+                    </div>
+                </div>
+            <?php $s++; endif; ?>     
+        <?php endwhile;?>
+    	</div>
+	</div>
+    <div class="cahnrs-slide-nav">
+		<?php foreach( $slide_nav as $nav ):?>
+        	<?php echo $nav;?>
+        <?php endforeach;?>
+    </div>
+</div>
+<?php endif;?>

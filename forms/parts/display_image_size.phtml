@@ -1,0 +1,8 @@
+<?php $image_sizes = \get_intermediate_image_sizes();?>
+<p class="input-wrap">
+	Image Size: <select id="<?php echo $this->get_field_id( 'image_size' ); ?>" name="<?php echo $this->get_field_name( 'image_size' ); ?>">
+    <?php foreach ( $image_sizes as $size_name ): ?>
+    	<option value="<?php echo $size_name ?>" <?php selected( $in['image_size'], $size_name ); ?> ><?php echo $size_name ?></option>
+    <?php endforeach; ?>
+    </select>
+</p>

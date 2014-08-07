@@ -1,0 +1,27 @@
+<?php 
+$type_array = array();
+$output = 'objects'; // names or objects
+$post_types = get_post_types( array( 'public' => true ) , $output );
+foreach ( $post_types  as $post_type ) {
+	$title = ( 'attachment' != $post_type->name )? $post_type->labels->name : 'Media Libary'; 
+	$type_array[] = array('id' => $post_type->name ,'title' => $title );
+};?>
+		
+
+<h4 style="border-bottom: 1px solid #ccc" >Basic Feed Settings</h4>
+        <p><label>Content Type: </label>
+    	<select id="<?php echo $widget->get_field_id( 'post_type' ); ?>" name="<?php echo $widget->get_field_name( 'post_type' ); ?>">
+        	<option value="any" <?php selected( $val['post_type'], 'any'); ?>>Any</option>
+            <?php foreach( $type_array as $type ):?>
+            <option value="<?php echo $type['id'];?>" <?php selected( $val['post_type'], $type['id']); ?> ><?php echo $type['title'];?></option>
+            <?php endforeach;?>
+        </select></p>
+        <p><label>Feed By: </label>
+    	<select id="<?php echo $widget->get_field_id( 'taxonomy' ); ?>" name="<?php echo $widget->get_field_name( 'taxonomy' ); ?>">
+        	<option value="all" <?php selected( $val['taxonomy'], 'all'); ?>>All</option>
+            <option value="category" <?php selected( $val['taxonomy'], 'category'); ?>>Categories</option>
+            <option value="tag" <?php selected( $val['taxonomy'], 'tag'); ?>>Tags</option>
+        </select></p>
+        <p><label>Names: </label>
+    	<input type="text" id="<?php echo $widget->get_field_id( 'terms' ); ?>" name="<?php echo $widget->get_field_name( 'terms' ); ?>"  value="<?php echo $val['terms'];?>"/><br />Separate multiple Tags/Categories with ",".
+        </p>

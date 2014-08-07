@@ -1,0 +1,28 @@
+<?php echo '<script>var widget_home_url = "'. \get_site_url() .'"</script>';
+		$type_array = array();
+		$output = 'objects'; // names or objects
+		$post_types = get_post_types( array( 'public' => true ) , $output );
+		foreach ( $post_types  as $post_type ) {
+			$title = ( 'attachment' != $post_type->name )? $post_type->labels->name : 'Media Libary'; 
+			$type_array[] = array('id' => $post_type->name ,'title' => $title );
+		};?>
+        <h4>Basic Settings</h4>
+        <div class="display-next-wrapper">
+        <div class="dynamic-load-group">
+        <p><label>Select Type: </label>
+        <select class="dynamic-load-select" id="" name="" data-source="?cahnrs-feed=select-list">
+        	<option value="0"><em>Not Selected...</em></option>
+            <?php foreach( $type_array as $type ):?>
+            <option value="<?php echo $type['id'];?>"  ><?php echo $type['title'];?></option>
+            <?php endforeach;?>
+        </select></p>
+        <p><label>Select Item: </label><br />
+        <select style="width: 80%; max-width: 90%; max-height: 150px;" class="dynamic-load-select-content not-loaded" id="<?php echo $widget->get_field_id( 'selected_item' ); ?>" name="<?php echo $widget->get_field_name( 'selected_item' ); ?>" data-type="0">
+        	<?php if( isset( $val['selected_item'] ) && $val['selected_item']  ):?>
+            	<option value="<?php echo $val['selected_item'];?>" selected><?php echo get_the_title( $val['selected_item'] );?></option>
+            <?php else:?>
+            	<option value="0">Not Set</option>
+			<?php endif;?>
+        </select><br /><span style="font-size: 0.9em;">*** You must <strong>select a type</strong> before you can choose a new item.</span></p>
+        </div>
+        </div>

@@ -1,0 +1,23 @@
+<?php 
+	$image_sizes = get_intermediate_image_sizes();
+?>
+<h4 style="border-bottom: 1px solid #ccc" >Display Settings</h4>
+        <p><label>Gallery Type: </label>
+    	<select id="<?php echo $widget->get_field_id( 'display' ); ?>" name="<?php echo $widget->get_field_name( 'display' ); ?>">
+        	<option value="basic_gallery" <?php selected( $val['display'], 'basic_gallery'); ?>>Basic Gallery</option>
+        </select></p>
+        <p><label>Image Size: </label>
+    	<select id="<?php echo $widget->get_field_id( 'image_size' ); ?>" name="<?php echo $widget->get_field_name( 'image_size' ); ?>">
+        	<?php foreach ( $image_sizes as $size_name ): ?>
+                <option value="<?php echo $size_name ?>" <?php selected( $val['image_size'], $size_name ); ?> ><?php echo $size_name ?></option>
+            <?php endforeach; ?>
+        	
+        </select></p>
+        <p><label>Columns: </label>
+    	<select id="<?php echo $widget->get_field_id( 'columns' ); ?>" name="<?php echo $widget->get_field_name( 'columns' ); ?>">
+        	<option value="1" <?php selected( $val['columns'], '1'); ?>>1</option>
+            <option value="2" <?php selected( $val['columns'], '2'); ?>>2</option>
+            <option value="3" <?php selected( $val['columns'], '3'); ?>>3</option>
+            <option value="4" <?php selected( $val['columns'], '4'); ?>>4</option>
+        </select></p>
+       

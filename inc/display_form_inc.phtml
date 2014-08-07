@@ -1,0 +1,15 @@
+ <p><label>Count: </label>
+    	<input type="text" id="<?php echo $widget->get_field_id( 'count' ); ?>" name="<?php echo $widget->get_field_name( 'count' ); ?>" value="<?php echo $val['count'];?>"/><br /></p>
+        <p><label>Skip First: </label>
+    	<input type="text" id="<?php echo $widget->get_field_id( 'skip' ); ?>" name="<?php echo $widget->get_field_name( 'skip' ); ?>" value="<?php echo $val['skip'];?>"/><br /></p>
+        <p><label>Display Title: </label>
+        <input style="display: none;" type="checkbox" id="<?php echo $widget->get_field_id( 'display_title' ); ?>" name="<?php echo $widget->get_field_name( 'display_title' ); ?>" checked="checked" value="0" />
+    	<input type="checkbox" id="<?php echo $widget->get_field_id( 'display_title' ); ?>" name="<?php echo $widget->get_field_name( 'display_title' ); ?>" <?php checked( $val['display_title'], 1 ); ?> value="1" /></p>
+        <p>
+        
+    	<input type="radio"  name="<?php echo $widget->get_field_name( 'display_content' ); ?>" value="excerpt" <?php checked( $val['display_content'], 'excerpt' ); ?>/> Summary &nbsp;&nbsp;
+        <input type="radio"  name="<?php echo $widget->get_field_name( 'display_content' ); ?>" value="full"  <?php checked( $val['display_content'], 'full' ); ?>/> Full Text &nbsp;&nbsp;
+        <input type="radio"  name="<?php echo $widget->get_field_name( 'display_content' ); ?>" value="0"  <?php checked( $val['display_content'], '0' ); ?>/> None<br /></p>
+        <p><label>Link: </label>
+    	<input style="display: none;" type="checkbox" id="<?php echo $widget->get_field_id( 'display_link' ); ?>" name="<?php echo $widget->get_field_name( 'display_link' ); ?>" value="0" checked="checked" />
+        <input type="checkbox" id="<?php echo $widget->get_field_id( 'display_link' ); ?>" name="<?php echo $widget->get_field_name( 'display_link' ); ?>" value="1" <?php checked( $val['display_link'], 1 ); ?> /></p>

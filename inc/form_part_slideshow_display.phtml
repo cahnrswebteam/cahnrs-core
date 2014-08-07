@@ -1,0 +1,17 @@
+<?php 
+	$image_sizes = get_intermediate_image_sizes();
+?>
+<h4 style="border-bottom: 1px solid #ccc" >Display Settings</h4>
+        <p><label>Slideshow Type: </label>
+    	<select id="<?php echo $widget->get_field_id( 'display' ); ?>" name="<?php echo $widget->get_field_name( 'display' ); ?>">
+        	<option value="basic" <?php selected( $val['display'], 'basic'); ?>>Basic Slideshow</option>
+            <option value="3-up" <?php selected( $val['display'], '3-up'); ?>>CAHNRS 3-Up</option>
+        </select></p>
+        <p><label>Image Size: </label>
+        <?php echo $val['image_size'];?>
+    	<select id="<?php echo $widget->get_field_id( 'image_size' ); ?>" name="<?php echo $widget->get_field_name( 'image_size' ); ?>">
+        	<?php foreach ( $image_sizes as $size_name ): ?>
+                <option value="<?php echo $size_name ?>" <?php selected( $val['image_size'], $size_name ); ?> ><?php echo $size_name ?></option>
+            <?php endforeach; ?>
+        	
+        </select></p>

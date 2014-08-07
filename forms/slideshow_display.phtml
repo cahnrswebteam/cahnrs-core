@@ -1,0 +1,20 @@
+<?php
+;?>
+<!-- ** START DISPLAY SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<header>Display Settings</header>
+    <div class="section-wrapper">
+        <div class="form-sub-section">
+            <p class="input-wrap">
+                Slideshow Style:  
+                <select  name="<?php echo $this->get_field_name( 'display' ); ?>">
+                    <option value="slideshow-basic" <?php selected( $in['display'], 'slideshow-basic'); ?>>Standard</option>
+                    <option value="slideshow-3-up" <?php selected( $in['display'], 'slideshow-3-up'); ?>>CAHNRS 3 UP</option>
+                </select>
+            </p>
+            <?php include cahnrswp\cahnrs\core\DIR.'forms/parts/display_image_size.phtml';?>
+            <?php include cahnrswp\cahnrs\core\DIR.'forms/parts/display_options.phtml';?>
+        </div>
+    </div>
+</section>
+<!-- ** END DISPLAY SETTINGS ************* -->

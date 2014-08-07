@@ -1,0 +1,20 @@
+<?php
+;?>
+<!-- ** START DISPLAY SETTINGS ************* -->
+<section class="cc-form-section cc-form-feed">
+	<header>Display Settings</header>
+    <div class="section-wrapper">
+        <div class="form-sub-section">
+            <p class="input-wrap">
+                Display Style:  
+                <select  name="<?php echo $this->get_field_name( 'display' ); ?>">
+                    <option value="list" <?php selected( $in['display'], 'list'); ?>>List</option>
+                    <option value="promo" <?php selected( $in['display'], 'promo'); ?>>Promo</option>
+                    <option value="column_promo" <?php selected( $in['display'], 'column_promo');?>>Column Promo</option>
+                </select>
+            </p>
+            <?php include cahnrswp\cahnrs\core\DIR.'forms/parts/display_options.phtml';?>
+        </div>
+    </div>
+</section>
+<!-- ** END DISPLAY SETTINGS ************* -->
