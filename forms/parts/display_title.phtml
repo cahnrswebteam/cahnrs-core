@@ -1,0 +1,15 @@
+<div class="input-wrap">
+	<div style="width: 200px; display: inline-block;">
+	Item Title:<br /> 
+    <input style="max-width: 90%;" type="text" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $in['title'];?>" />
+    </div>
+    <div style="width: 100px; display: inline-block;">
+	Display As:<br /> 
+    <select name="<?php echo $this->get_field_name( 'title_tag' ); ?>">
+    	<option value="0" <?php selected( $in['title_tag'], 0 ); ?>>N/A</option>
+        <option value="h2" <?php selected( $in['title_tag'], 'h2' ); ?>>H2</option>
+        <option value="h3" <?php selected( $in['title_tag'], 'h3' ); ?>>H3</option>
+        <option value="h4" <?php selected( $in['title_tag'], 'h4' ); ?>>H4</option>
+    </select>
+    </div>
+</div>

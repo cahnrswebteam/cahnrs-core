@@ -7,6 +7,11 @@
 <file name="select_post.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/" local="130517378784823977" remote="130515474600000000" Dst="2" />
 <file name="slideshow_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/" local="130517378784974082" remote="130516572600000000" Dst="2" />
 <file name="azindex_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/" local="130517378783372961" remote="130517368800000000" Dst="2" />
-<file name="feed.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130518410757062502" remote="130518410400000000" Dst="2" />
-<file name="insert_item_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130518429368271789" remote="130518429000000000" Dst="2" />
+<file name="feed.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519287585230756" remote="130518410400000000" Dst="2" />
+<file name="insert_item_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519842913883713" remote="130519842600000000" Dst="2" />
+<file name="azindex_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519843077162841" remote="130519842600000000" Dst="2" />
+<file name="feed_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519835802060375" remote="130519835400000000" Dst="2" />
+<file name="gallery_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519842791181698" remote="130519842600000000" Dst="2" />
+<file name="select_post.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519287587142042" remote="130515474600000000" Dst="2" />
+<file name="slideshow_display.phtml" server="ftp.wpdev.cahnrs.wsu.edu//public_html/m1.wpdev.cahnrs.wsu.edu/wp-content/plugins/cahnrs-core/" local="130519287587392232" remote="130516572600000000" Dst="2" />
 </dwsync>

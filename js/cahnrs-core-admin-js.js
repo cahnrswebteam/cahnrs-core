@@ -7,14 +7,14 @@ var cahnrs_core_widget_settings = function(){
 	s.be = function(){ // BIND EVENTS
 		//s.edtr.on('change','.activate-next',function(){ s.act_n( jQuery( this ) ) });
 		jQuery('body').on('change','.dynamic-load-select',function(){ s.dy_l_s( jQuery( this ) ) });
-		jQuery('body').on('click','.cc-form-section > header', function(){ s.chg_frm_sec( jQuery( this ) ) });
+		jQuery('body').on('click','.cc-form-section > header,.cc-form-section-advanced > header ', function(){ s.chg_frm_sec( jQuery( this ) ) });
 		//s.edtr.on('focus','.dynamic-load-select-content',function(){ s.dy_l_s( jQuery( this ) ) });
 	}
 	
 	s.chg_frm_sec = function( i_c ){
 		if( !i_c.hasClass('active') ){
 			par = i_c.parents('.settings-wrapper');
-			par.find('.cc-form-section > header').removeClass('active');
+			par.find('.cc-form-section > header, .cc-form-section-advanced > header ').removeClass('active');
 			i_c.addClass('active');
 			par.find('.section-wrapper.active').slideUp('medium' ,function(){
 				jQuery( this ).removeClass('active');

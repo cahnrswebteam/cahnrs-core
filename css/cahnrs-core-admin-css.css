@@ -49,10 +49,14 @@
 .cc-form-section > header:nth-of-type(odd) {
 	background-color: #eff0f1;
 }
+.cc-form-section-advanced .section-wrapper,
 .cc-form-section .section-wrapper {
 	padding: 10px 0 15px;
 	display: none;
 }
 .cc-form-section .section-wrapper.active {
 	display: block;
+}
+.cc-form-section .section-wrapper .cc-inline-input {
+	display: inline-block; width: 50%;
 }
