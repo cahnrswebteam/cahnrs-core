@@ -30,14 +30,24 @@ class cahnrs_action_item extends \WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		$name = esc_attr( $instance['name'] );
-		$url = esc_attr( $instance['url'] );
+		$name_1 = esc_attr( $instance['name_1'] );
+		$url_1 = esc_attr( $instance['url_1'] );
+		
+		$name_2 = esc_attr( $instance['name_2'] );
+		$url_2 = esc_attr( $instance['url_2'] );
+		
+		$name_3 = esc_attr( $instance['name_3'] );
+		$url_3 = esc_attr( $instance['url_3'] );
 
-		if ( ! empty( $name ) && ! empty( $url ) ){
+		if ( ! empty( $name_1 ) && ! empty( $url_1 ) ) {
 			echo $args['before_widget'];
-			echo '<a href="' . $url . '">' . $name . '</a>';
+			echo '<a href="' . $url_1 . '">' . $name_1 . '</a>';
+			if ( ! empty( $name_2 ) && ! empty( $url_2 ) ) echo '<a href="' . $url_2 . '">' . $name_2 . '</a>';
+			if ( ! empty( $name_3 ) && ! empty( $url_3 ) ) echo '<a href="' . $url_3 . '">' . $name_3 . '</a>';
 			echo $args['after_widget'];
 		}
+		
+		
 
 	}
 
@@ -51,24 +61,60 @@ class cahnrs_action_item extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		if ( isset( $instance[ 'name' ] ) )
-			$name = $instance[ 'name' ];
+		if ( isset( $instance[ 'name_1' ] ) )
+			$name_1 = $instance[ 'name_1' ];
 		else
-			$name = '';
-			
-		if ( isset( $instance[ 'url' ] ) )
-			$url = $instance[ 'url' ];
+			$name_1 = '';
+
+		if ( isset( $instance[ 'url_1' ] ) )
+			$url_1 = $instance[ 'url_1' ];
 		else
-			$url = '';
+			$url_1 = '';
+
+		if ( isset( $instance[ 'name_2' ] ) )
+			$name_2 = $instance[ 'name_2' ];
+		else
+			$name_2 = '';
+
+		if ( isset( $instance[ 'url_2' ] ) )
+			$url_2 = $instance[ 'url_2' ];
+		else
+			$url_2 = '';
+
+		if ( isset( $instance[ 'name_3' ] ) )
+			$name_3 = $instance[ 'name_3' ];
+		else
+			$name_3 = '';
+
+		if ( isset( $instance[ 'url_3' ] ) )
+			$url_3 = $instance[ 'url_3' ];
+		else
+			$url_3 = '';
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'name' ); ?>">Name</label> 
-			<input class="widefat" id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>" type="text" value="<?php echo esc_attr( $name ); ?>">
+			<label for="<?php echo $this->get_field_id( 'name_1' ); ?>">First Action Item Name</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'name_1' ); ?>" name="<?php echo $this->get_field_name( 'name_1' ); ?>" type="text" value="<?php echo esc_attr( $name_1 ); ?>">
 		</p>
     <p>
-			<label for="<?php echo $this->get_field_id( 'url' ); ?>">URL</label> 
-			<input class="widefat" id="<?php echo $this->get_field_id( 'url' ); ?>" name="<?php echo $this->get_field_name( 'url' ); ?>" type="text" value="<?php echo esc_attr( $url ); ?>">
+			<label for="<?php echo $this->get_field_id( 'url_1' ); ?>">First Action Item URL</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'url_1' ); ?>" name="<?php echo $this->get_field_name( 'url_1' ); ?>" type="text" value="<?php echo esc_attr( $url_1 ); ?>">
+		</p>
+    <p>
+			<label for="<?php echo $this->get_field_id( 'name_2' ); ?>">Second Action Item Name</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'name_2' ); ?>" name="<?php echo $this->get_field_name( 'name_2' ); ?>" type="text" value="<?php echo esc_attr( $name_2 ); ?>">
+		</p>
+    <p>
+			<label for="<?php echo $this->get_field_id( 'url_2' ); ?>">Second Action Item URL</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'url_2' ); ?>" name="<?php echo $this->get_field_name( 'url_2' ); ?>" type="text" value="<?php echo esc_attr( $url_2 ); ?>">
+		</p>
+    <p>
+			<label for="<?php echo $this->get_field_id( 'name_3' ); ?>">Third Action Item Name</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'name_3' ); ?>" name="<?php echo $this->get_field_name( 'name_3' ); ?>" type="text" value="<?php echo esc_attr( $name_3 ); ?>">
+		</p>
+    <p>
+			<label for="<?php echo $this->get_field_id( 'url_3' ); ?>">Third Action Item URL</label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'url_3' ); ?>" name="<?php echo $this->get_field_name( 'url_3' ); ?>" type="text" value="<?php echo esc_attr( $url_3 ); ?>">
 		</p>
 		<?php 
 
