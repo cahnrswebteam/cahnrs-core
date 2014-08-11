@@ -91,10 +91,18 @@ class content_view {
 		include DIR.'inc/item_form_legacy_handler.php';
 		
 		$display_obj = new \stdClass();
+		/***********************************************
+		** POST **
+		************************************************/
 		$display_obj->post = $post;
+		/***********************************************
+		** TITLE **
+		************************************************/
 		$display_obj->title = ( in_array( 'title' , $fields ) && isset( $in['display_title'] ) && 1 == $in['display_title'] )? 
 			$post->post_title : false;
-			
+		/***********************************************
+		** EXCERPT **
+		************************************************/
 		if( in_array( 'excerpt' , $fields ) && isset( $in['display_excerpt'] ) && 1 == $in['display_excerpt']  ) {
 			if( $post->post_excerpt ){
 				$display_obj->excerpt = $post->post_excerpt;
@@ -107,12 +115,19 @@ class content_view {
 		} else {
 			$display_obj->excerpt = false;
 		}
-			
-			
+		/***********************************************
+		** CONTENT **
+		************************************************/	
 		$display_obj->content = ( in_array( 'content' , $fields ) && isset( $in['display_content'] ) && 1 == $in['display_content'] )? 
-			\apply_filters( 'cc_the_content', $post->post_content ) : false;
+			\apply_filters( 'the_content', $post->post_content ) : false;
+		/***********************************************
+		** LINK **
+		************************************************/
 		$display_obj->link = ( in_array( 'link' , $fields ) && isset( $in['display_link'] ) && 1 == $in['display_link'] )? 
 			\get_permalink( $post->ID ) : false;
+		/***********************************************
+		** IMAGE **
+		************************************************/
 		if( in_array( 'image' , $fields ) && isset( $in['display_link'] ) && 1 == $in['display_image'] ){
 			$post_type = ( $post->post_type )? $post->post_type : get_post_type( $post->ID );
 			$size = ( isset( $in['image_size'] ) )? $in['image_size'] : 'large';
@@ -131,9 +146,18 @@ class content_view {
 		} else {
 			$display_obj->image = false;
 		}
+		/***********************************************
+		** LINK **
+		************************************************/
 		$display_obj->link_start = ( $display_obj->link )? '<a href="'.$display_obj->link.'">' : '';
 		$display_obj->link_end = ( $display_obj->link )? '</a>' : '';
+		/***********************************************
+		** META **
+		************************************************/
 		$display_obj->meta = ( in_array( 'meta' , $fields ) )? \get_the_date() : '';
+		/***********************************************
+		** RETURN OBJ **
+		************************************************/
 		return $display_obj;
 	}
 	
