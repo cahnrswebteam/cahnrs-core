@@ -14,7 +14,7 @@ class widget_control {
 	}
 	
 	private function add_custom_filter(){
-		\add_filter('cc_the_content', 'oembed_dataparse' );
+		//\add_filter('cc_the_content', 'embed_oembed_html' );
 		\add_filter('cc_the_content', 'do_shortcode');
 		\add_filter( 'cc_the_content', 'wptexturize'        );
 		\add_filter( 'cc_the_content', 'convert_smilies'    );
