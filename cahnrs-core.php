@@ -34,6 +34,8 @@ class cahnrs_core {
 		$taxonomy = new taxonomy_control();
 		$feeds = new feed_control();
 		$feeds->init_feed_control();
+		$metabox = new metabox_control();
+		$metabox->init();
 	}
 
 }
