@@ -8,7 +8,51 @@ var cahnrs_core_widget_settings = function(){
 		//s.edtr.on('change','.activate-next',function(){ s.act_n( jQuery( this ) ) });
 		jQuery('body').on('change','.dynamic-load-select',function(){ s.dy_l_s( jQuery( this ) ) });
 		jQuery('body').on('click','.cc-form-section > header,.cc-form-section-advanced > header ', function(){ s.chg_frm_sec( jQuery( this ) ) });
+		jQuery('body').on('click','.settings-wrapper .cc-feed-settings label', function(){ 
+			s.chg_set_ops( jQuery( this ) ) });
+		jQuery('body').on('click','.settings-wrapper .action-add-selected', function( event ){ 
+			event.preventDefault(); s.add_sel_item( jQuery( this ) ) });
+		jQuery('body').on('click','.settings-wrapper .cc-inserted-items-wrap a', function( event ){ 
+			event.preventDefault(); s.rmv_sel_itm( jQuery( this ) ) });
 		//s.edtr.on('focus','.dynamic-load-select-content',function(){ s.dy_l_s( jQuery( this ) ) });
+	}
+	
+	s.add_sel_item = function( i_c ){
+		var par = i_c.parents('.settings-wrapper');
+		var drp = par.find('.cc-select-content-drpdwn');
+		var loc = par.find('.cc-inserted-items-wrap');
+		if( drp.val() != 0 ){
+			loc.append('<a href="#" data-id="'+drp.val()+'"><span>X</span>'+drp.find('option:selected').text()+'</a>' );
+		}
+		s.updt_sel_item( loc );
+	}
+	
+	s.rmv_sel_itm = function( i_c ){
+		var loc = i_c.parents('.cc-inserted-items-wrap');
+		i_c.slideUp('fast', function(){
+			i_c.remove();
+			s.updt_sel_item( loc );
+		});
+	}
+	
+	s.updt_sel_item = function( par ){
+		var items = new Array();
+		par.find('a').each(function(){
+			items.push( jQuery(this).data('id') );
+		});
+		par.find('input').val( items.join(',') )
+	}
+	
+	s.chg_set_ops = function( i_c ){
+		var sel_set = i_c.data('set');
+		i_c.addClass('active').siblings('label').removeClass('active');
+		if( sel_set ){
+			var par = i_c.parents('.settings-wrapper');
+			var sec = par.find('.'+sel_set );
+			if( sec.length > 0 ){
+				sec.addClass('selected').siblings().removeClass( 'selected' );
+			}
+		}
 	}
 	
 	s.chg_frm_sec = function( i_c ){

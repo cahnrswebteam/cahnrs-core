@@ -36,6 +36,12 @@ class cahnrs_core {
 		$feeds->init_feed_control();
 		$metabox = new metabox_control();
 		$metabox->init();
+		/*********************************************
+		** ADD CUSTOM POST TYPES **
+		*********************************************/
+		$post_types = new post_type_control();
+		
+		\add_action( 'init', array( $post_types , 'register_post_types' ) );
 	}
 
 }
