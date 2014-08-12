@@ -33,38 +33,48 @@
 	padding-left: 10px;
 }
 
+.pagebuilder-layout .pagebuilder-column > aside.widget_cahnrs_faqs,
+.pagebuilder-column > aside.widget_cahnrs_faqs {
+	background: none;
+	padding: 0;
+} /* Probably need to accommodate for a title on accordion sections - PC */
 .cahnrs-core-faq {
-	background: #fff;
+	/*background: #fff;*/
 }
-
 .cahnrs-core-faq > a {
-	background-color: #fff;
-	display: block;
-	color: #981e32;
-	font-weight: bold;
-	padding: 1em;
-	font-size: 1.1em;
-	background-image: url('http://brand.wsu.edu/wp-content/themes/brand/images/elements/plus-green-er.svg');
+	background-color: #fff; background-color: rgba( 255, 255, 255, 0.9 );
+	background-image: url(../images/accordion-plus.svg);
 	background-position: 95% center;
 	background-repeat: no-repeat;
-	border-top: 1px solid #eff0f1;
+	/*border-top: 1px solid #eff0f1;*/
+	color: #981e32;
+	display: block;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding: 1em 2em;
 }
-
 .cahnrs-core-faq > a.active {
-	background-image: url('http://brand.wsu.edu/wp-content/themes/brand/images/elements/x-green-er.svg');
+	background-image: url(../images/accordion-x.svg);
 }
 .cahnrs-core-faq > a:hover {
+	background-image: url(../images/accordion-plus-hover.svg);
 	color: #c60c30;
 }
-
+.cahnrs-core-faq > a.active:hover {
+	background-image: url(../images/accordion-x-hover.svg);
+}
 .cahnrs-core-faq > a:nth-of-type(odd) {
-	background-color: #eff0f1;
+	background-color: #eff0f1; background-color: rgba( 239, 240, 241, 0.9 );
 }
 .cahnrs-core-faq > .cc-content {
-	background-color: #fff;
+	background-color: #fff; background-color: rgba( 255, 255, 255, 0.9 );
 	display: none;
-	margin: 0 20px;
-	padding: 10px 0;
+	/*margin: 0 20px;*/ margin-bottom: 1px;
+	padding: 10px 0; padding: 1em 2em;
+}
+.cahnrs-core-faq > .cc-content:nth-of-type(odd) {
+	background: rgba( 239, 240, 241, 0.9 );
 }
 
 .cahnrs-promo-view {
