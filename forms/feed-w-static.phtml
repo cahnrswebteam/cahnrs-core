@@ -72,27 +72,33 @@ foreach ( $post_types  as $post_type ) { // THIS IS A FOREACH LOOP IN CASE YOU D
         <div class="form-sub-section cc-form-feed-options select-feed-type cc-dynamic-section <?php if( 'select' == $in['feed_type'] ) echo 'selected';?>">
             <div class="dynamic-load-group">
                 <p class="input-wrap">
-                    <label>Select Type: </label>
-                    <select class="dynamic-load-select" id="" name="" data-source="?cahnrs-feed=select-list">
-                        <option value="0"><em>Not Selected...</em></option>
-                        <?php foreach( $type_array as $type ):?>
-                        <option value="<?php echo $type['id'];?>"  ><?php echo $type['title'];?></option>
-                        <?php endforeach;?>
-                    </select>
-                </p>
-                <p class="input-wrap">
+                	
                     <label>Select Item: </label><br />
-                    <select style="width: 70%; max-width: 80%; max-height: 150px;" class="cc-select-content-drpdwn dynamic-load-select-content not-loaded" id="" name="" data-type="0">
-                        <?php if( isset( $in['selected_item'] ) && $in['selected_item']  ):?>
-                            <option value="<?php echo $in['selected_item'];?>" selected><?php echo get_the_title( $in['selected_item'] );?></option>
-                        <?php else:?>
-                            <option value="">Select Type First</option>
-                        <?php endif;?>
+                    <select class="cc-select-content-drpdwn" style="width: 70%; max-width: 80%; max-height: 150px;" id="" name="" data-type="0">
+                    	<?php if( isset( $in['post_type'] ) ){
+							$post_query = new WP_Query( array('post_type' => $in['post_type'], 'posts_per_page' => -1 ) );
+							if ( $post_query->have_posts() ) {
+								while ( $post_query->have_posts() ) {
+									$post_query->the_post();
+									echo '<option value="'.$post_query->post->ID.'">'.$post_query->post->post_title.'</option>';
+								}
+							} 
+							wp_reset_postdata();
+						};?>
                     </select><a href="#" class="cc-button-primary action-add-selected">+ ADD</a>
                 </p>
                 <p class="input-wrap cc-inserted-items-wrap">
                 <label>Selected Items: </label><br />
-                <input type="text" value="<?php echo $in['selected_item'];?>" name="<?php echo $this->get_field_name( 'selected_item' ); ?>" /> 
+                <input class="hidden-input" type="text" value="<?php echo $in['selected_item'];?>" name="<?php echo $this->get_field_name( 'selected_item' ); ?>" />
+                <?php if( isset( $in['selected_item'] ) && $in['selected_item'] ){
+					$selected_items = explode(',',$in['selected_item'] );
+					foreach( $selected_items as $item ){
+						$c_post = \get_post( $item );
+						if( $c_post ){
+							echo '<a href="#" data-id="'.$item.'"><span>X</span>'.$c_post->post_title.'</a>';
+						}
+					}
+				};?>
                 </p>
             </div>
         </div>

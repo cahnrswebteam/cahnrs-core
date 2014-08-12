@@ -33,6 +33,40 @@
 	padding-left: 10px;
 }
 
+.cahnrs-core-faq {
+	background: #fff;
+}
+
+.cahnrs-core-faq > a {
+	background-color: #fff;
+	display: block;
+	color: #981e32;
+	font-weight: bold;
+	padding: 1em;
+	font-size: 1.1em;
+	background-image: url('http://brand.wsu.edu/wp-content/themes/brand/images/elements/plus-green-er.svg');
+	background-position: 95% center;
+	background-repeat: no-repeat;
+	border-top: 1px solid #eff0f1;
+}
+
+.cahnrs-core-faq > a.active {
+	background-image: url('http://brand.wsu.edu/wp-content/themes/brand/images/elements/x-green-er.svg');
+}
+.cahnrs-core-faq > a:hover {
+	color: #c60c30;
+}
+
+.cahnrs-core-faq > a:nth-of-type(odd) {
+	background-color: #eff0f1;
+}
+.cahnrs-core-faq > .cc-content {
+	background-color: #fff;
+	display: none;
+	margin: 0 20px;
+	padding: 10px 0;
+}
+
 .cahnrs-promo-view {
 	padding: 10px 0;
 	border-top: 1px solid #ddd;

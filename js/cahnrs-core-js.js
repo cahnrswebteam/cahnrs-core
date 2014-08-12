@@ -2,6 +2,7 @@ jQuery(document).ready(function(){
 	jQuery('.cahnrs-slideshow').each( 
 		function( index ) { window['c_s_'+index ] = new cahnrs_slideshow( jQuery( this ) );
 		} );
+	var cahnrs_core = new cahnrs_core_init();
 	});
 
 var cahnrs_slideshow = function( sh ){
@@ -51,4 +52,31 @@ var cahnrs_slideshow = function( sh ){
 	}
 	
 	if( sh.hasClass('slideshow-basic') && sh.find('.cahnrs-slide').length > 1 ) s.init_basic();
+}
+
+var cahnrs_core_init = function(){
+	var s = this;
+	/***********************************
+	** FAQ MODULE **
+	************************************/
+	s.init_faq = function(){
+		var sf = this;
+		jQuery('.cahnrs-core-faq > a').on('click',function( event ){ 
+			event.preventDefault(); sf.hdl_faq( jQuery( this ) )});
+		
+		sf.hdl_faq = function( ic ){
+			if( ic.hasClass('active') ){
+				ic.next('.cc-content').slideUp('medium');
+				ic.removeClass('active');
+			} else {
+				ic.next('.cc-content').siblings('.cc-content').slideUp('medium');
+				ic.addClass('active').siblings('a').removeClass('active');
+				ic.next('.cc-content').slideDown('medium');
+			}
+		}
+	}
+	/***********************************
+	** TEST AND ACTIVATE MODULES **
+	************************************/
+	if( jQuery('.cahnrs-core-faq').length > 0 ) s.init_faq();
 }

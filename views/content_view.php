@@ -2,10 +2,16 @@
 
 class content_view {
 	
-	public function get_content_view( $args, $instance , $query ){
+	public function get_content_view( $args, $instance , $query = false ){
 		$i = 0;
 		$view = $this->get_sub_view( $instance ); // GET VIEW LAYOUT TYPE AND USED FIELDS
-		if( 'list' == $view['type'] ) echo '<ul>';
+		$wrap_display = array('faq');
+		if( 'list' == $view['type'] ) {
+			echo '<ul>';
+		} 
+		else if( in_array( $instance['display'], $wrap_display ) ){
+			echo '<div class="cahnrs-core-'.$instance['display'].'" >'; 
+		}
 		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
@@ -16,7 +22,12 @@ class content_view {
 				$i++;
 			} // END WHILE
 		} // END IF
-		if( 'list' == $view['type'] ) echo '</ul>';
+		if( 'list' == $view['type'] ) {
+			echo '</ul>';
+		} 
+		else if( in_array( $instance['display'], $wrap_display ) ){
+			echo '</div>'; 
+		}
 	}
 	
 	public function get_index_view( $args, $instance , $query ){
@@ -54,6 +65,11 @@ class content_view {
 	public function get_sub_view( $instance ){
 		$view = array();
 		switch ( $instance['display'] ){ // GET DISPLAY TYPE
+			case 'faq':
+				$view['method'] = 'get_faq_view';
+				$view['type'] = 'faq';
+				$view['fields'] = array('title','content', 'link');
+				break;
 			case 'slideshow-basic':
 			case 'slideshow-3-up':
 				$view['method'] = 'get_slide_view';
@@ -162,10 +178,20 @@ class content_view {
 	}
 	
 	
-	public function get_editor_ops(){?>
-    <?php edit_post_link('Edit Item', '<span class="cc-edit-link">', '</span>'); ?>
-    <?php
+	public function get_editor_ops(){
+		if( current_user_can( 'edit_posts') || current_user_can( 'edit_pages') ){
+    		edit_post_link(' - Edit Item', '<span class="cc-edit-link">', '</span>');
+		}
 	}
+	
+	
+	public function get_faq_view( $instance , $display_obj ){
+		$is_odd = ( isset($instance['i'] ) && !( $instance['i'] % 2 == 0 ) )? 'is-odd' : '';
+		?>
+        	<a href="<?php echo $display_obj->link;?>" class="cc-title"><?php echo $display_obj->title;?></a>
+            <div class="cc-content"><?php echo $display_obj->content;?><?php $this->get_editor_ops();?></div>
+	<?php }
+	
 	
 	public function get_basic_list_view( $instance , $display_obj ){
 		$ls = $display_obj->link_start;

@@ -10,6 +10,8 @@ class cahnrs_faqs extends \WP_Widget {
 	 * Sets up the widgets name etc.
 	 */
 	public function __construct() {
+		$this->content_feed_control = new cahnrswp\cahnrs\core\content_feed_control();
+		$this->view = new cahnrswp\cahnrs\core\content_view();
 
 		parent::__construct(
 			'cahnrs_faqs', // Base ID
@@ -19,7 +21,21 @@ class cahnrs_faqs extends \WP_Widget {
 
 	}
 
-	public function widget( $args, $instance ) {
+	public function widget( $args, $in ) {
+		/** DEFAULT HANDLER ****************/
+		$in = $this->set_defaults( $in );
+		/** END DEFAULT HANDLER ****************/
+		global $wp_query; // GET GLOBAL QUERY
+		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
+		$q_args = $this->content_feed_control->get_basic_query_args( $in ); // BUILD THE QUERY ARGS
+		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
+		
+		\query_posts($q_args); // DO YOU HAVE A QUERY?????
+		
+		$this->view->get_content_view( $args, $in );
+		echo $args['after_widget']; // ECHO AFTER WRAPPER
+		
+		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
 	}
 
 
@@ -37,7 +53,7 @@ class cahnrs_faqs extends \WP_Widget {
 			'display_excerpt' => 0,
 			'display_content' => 1,
 			'display_image' => 0,
-			'display_link' => 0,
+			'display_link' => 1,
 		);
 	}
 	
