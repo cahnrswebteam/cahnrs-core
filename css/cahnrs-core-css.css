@@ -532,4 +532,16 @@ color: #981e32;
 		width: 100% !important; /* Kind of gross, I know, but easy - PC */
 		margin-right: 0 !important;
 	}
+	
+	/*** A-Z index, three columns ***/
+	.widget_cahnrs_az_index .az-columns-3 .cahnrs-az-column {
+		width: 100%;
+	}
+	.widget_cahnrs_az_index .cahnrs-az-column .inner-column {
+		margin: 0;
+	}
+	.widget_cahnrs_az_index .cahnrs-az-column .inner-column > ul > li.cahnrs-azindex-header {
+		padding-left: 0;
+	}
+
 }
