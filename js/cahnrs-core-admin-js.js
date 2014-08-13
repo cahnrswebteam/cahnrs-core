@@ -8,7 +8,7 @@ var cahnrs_core_widget_settings = function(){
 		//s.edtr.on('change','.activate-next',function(){ s.act_n( jQuery( this ) ) });
 		jQuery('body').on('change','.dynamic-load-select',function(){ s.dy_l_s( jQuery( this ) ) });
 		jQuery('body').on('click','.cc-form-section > header,.cc-form-section-advanced > header ', function(){ s.chg_frm_sec( jQuery( this ) ) });
-		jQuery('body').on('click','.settings-wrapper .cc-feed-settings label', function(){ 
+		jQuery('body').on('click','.settings-wrapper .cc-feed-settings label, .settings-wrapper .cc-form-feed-type label', function(){ 
 			s.chg_set_ops( jQuery( this ) ) });
 		jQuery('body').on('click','.settings-wrapper .action-add-selected', function( event ){ 
 			event.preventDefault(); s.add_sel_item( jQuery( this ) ) });
@@ -22,7 +22,7 @@ var cahnrs_core_widget_settings = function(){
 		var drp = par.find('.cc-select-content-drpdwn');
 		var loc = par.find('.cc-inserted-items-wrap');
 		if( drp.val() != 0 ){
-			loc.append('<a href="#" data-id="'+drp.val()+'"><span>X</span>'+drp.find('option:selected').text()+'</a>' );
+			loc.prepend('<a href="#" data-id="'+drp.val()+'"><span>X</span>'+drp.find('option:selected').text()+'</a>' );
 		}
 		s.updt_sel_item( loc );
 	}
@@ -68,8 +68,8 @@ var cahnrs_core_widget_settings = function(){
 	}
 	
 	s.dy_l_s = function( ci ){ // DYNAMIC LOAD SELECT
-		var p = ci.parents('.dynamic-load-group');
-		var l = p.find('.dynamic-load-select-content');
+		var p = ci.parents('.cc-form-section');
+		var l = p.find('.cc-select-content-drpdwn');
 		var v = ci.val();
 		if( v != l.data('type') ){
 			//l.addClass('inactive');

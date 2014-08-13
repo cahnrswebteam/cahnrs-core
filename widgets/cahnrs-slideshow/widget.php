@@ -19,6 +19,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 	
 	public function get_defaults(){
 		return array(
+			'feed_type' => 'basic',
 			'image_size' => '16x9-medium',
 			'post_type' => 'post',
 			'taxonomy' => 'all',
@@ -96,16 +97,20 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
-		include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
-		include cahnrswp\cahnrs\core\DIR.'forms/slideshow_display.phtml';
-		//$val = $this->get_defaults();
-		//foreach( $val as $v_k => $v_d ){
-			//$val[ $v_k ] = ( isset( $instance[ $v_k ] ) )? $instance[ $v_k ] : $val[ $v_k ];
-		//}
-		//$this->content_feed_control->get_form( 'basic_feed', $this , $val );
-		//$this->content_feed_control->get_form( 'cahnrs_api_feed', $this , $val );
-		//$this->content_feed_control->get_form( 'slideshow_display', $this , $val );
-		//$this->content_feed_control->get_form( 'form_part_count', $this , $val );
+		$caps = array(
+			'show_feed' => true,
+			'show_adv_feed' => true,
+			'show_display' => array( 'slideshowstyle' ),
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
+		
+		//$caps = array(
+			//'show_feed' => true,
+			//);
+		//include cahnrswp\cahnrs\core\DIR.'forms/uber-form.php';
+		//include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
+		//include cahnrswp\cahnrs\core\DIR.'forms/slideshow_display.phtml';
 	}
 
 	/**
