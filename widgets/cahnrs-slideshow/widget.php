@@ -100,7 +100,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		$caps = array(
 			'show_feed' => true,
 			'show_adv_feed' => true,
-			'show_display' => array( 'slideshowstyle' ),
+			'show_display' => array( 'title','slideshowstyle', 'imagesize', 'details' ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );

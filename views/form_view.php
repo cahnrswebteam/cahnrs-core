@@ -112,12 +112,68 @@ class form_view{
 		$this->section_wrap();
 	}
 	
+	public function show_display_title(){
+		$this->input_wrap( true ); 
+		echo '<div style="width: 200px; display: inline-block;">';
+			echo '<label>Item Title:</label><br>'; 
+    		$this->input_text( 'title', array( 'value' => $this->in['title'] ) );
+    	echo '</div>';
+		echo '<div style="width: 100px; display: inline-block;">';
+			echo '<label>Display As:</label><br>';
+			$vals = array( 0 => 'N/A' , 'h2' => 'H2' , 'h3' => 'H3','h4' => 'H4' ); 
+			$this->input_select( 'title_tag' , array( 'value' => $vals ) );
+    	echo '</div>';
+		$this->input_wrap();
+	}
+	
 	public function show_display_slideshowstyle(){
-		/** Select Taxonomy **/
 		$this->input_wrap( true ); 
 		echo '<label>Slideshow Style: </label>';
 		$vals = array( 'slideshow-basic' => 'Standard Slideshow' , 'slideshow-3-up' => 'CAHNRS 3 UP' );
 		$this->input_select( 'display' , array( 'value' => $vals ) );
+		$this->input_wrap();
+	}
+	
+	public function show_display_imagesize(){
+		$vals = array();
+		$image_sizes = \get_intermediate_image_sizes();
+		foreach ( $image_sizes as $size_name ){
+			$vals[ $size_name ] = $size_name;
+		}
+		$this->input_wrap( true ); 
+		echo '<label>Image Size: </label>';
+		$this->input_select( 'image_size' , array( 'value' => $vals ) );
+		$this->input_wrap();
+	}
+	
+	public function show_display_details(){
+		$this->input_wrap( true ); 
+		$wrap = '<div class="cc-inline-input">';
+			echo $wrap;
+				$this->input_checkbox( 'display_title', array( 'value' => 1 ) );
+				echo ' <label>Display Post Title</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_excerpt', array( 'value' => 1 ) );
+				echo ' <label>Display Summary</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_content', array( 'value' => 1 ) );
+				echo ' <label>Display Full Text</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_image', array( 'value' => 1 ) );
+				echo ' <label>Display Image</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_link', array( 'value' => 1 ) );
+				echo ' <label>Link to Content</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_meta', array( 'value' => 1 ) );
+				echo ' <label>Display Meta</label>';
+			echo '</div>';
+		$this->input_wrap();
 	}
 	
 	public function show_feed( $cap ){
@@ -288,6 +344,15 @@ class form_view{
 		$args['class'] = ( $args['hidden'] )? $args['class'].' hidden-input': $args['class']; 
 		echo '<input id="'.$args['id'].'" class="'.$args['class']
 			.'" type="radio" value="'.$args['value'].'" name="'.$full_name.'" '.checked( $args['value'], $this->in[$name], false ).' />';
+	}
+	
+	public function input_checkbox( $name, $args = array() ){
+		$args = $this->input_defaults( $args );
+		$full_name = $this->wid_obj->get_field_name( $name );
+		$args['class'] = ( $args['hidden'] )? $args['class'].' hidden-input': $args['class']; 
+		echo '<input id="" class="hidden-input" type="checkbox" value="" name="'.$full_name.'" checked="checked" />';
+		echo '<input id="'.$args['id'].'" class="'.$args['class']
+			.'" type="checkbox" value="'.$args['value'].'" name="'.$full_name.'" '.checked( $args['value'], $this->in[$name], false ).' />';
 	}
 	
 	public function input_select( $name, $args = array() ){
