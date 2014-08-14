@@ -90,17 +90,53 @@ class CAHNRS_feed_widget extends \WP_Widget {
 			// no posts found
 		}
 	}
+	
+	public function get_defaults(){
+		return array(
+			'feed_type' => 'basic',
+			'post_type' => 'post',
+			'taxonomy' => 'all',
+			'terms' => '',
+			'display' => 'list',
+			'count' => 5,
+			'skip' => 0,
+			'display_title' => 1,
+			'display_excerpt' => 1,
+			'display_content' => 0,
+			'display_image' => 1,
+			'display_link' => 1,
+			'display_meta' => 0,
+		);
+	}
+	
+	public function set_defaults( $instance ){
+		$defaults = $this->get_defaults(); // GET THE DEFAULTS - DB
+		foreach( $defaults as $d_k => $d_v ){ // FOR EACH DEFAULT SETTING - DB
+			if( !isset($instance[ $d_k ] ) ){ // IF IS NOT SET - DB
+				$instance[ $d_k ] = $d_v; // ADD DEFAULT VALUE - DB
+			} // END IF - DB
+		} // END FOREACH - DB
+		return $instance;
+	}
 
-	/**
-	 * Outputs the options form on admin
-	 *
-	 * @param array $instance The widget options
-	 */
+
+
 	public function form( $in ) {
 		
 		include cahnrswp\cahnrs\core\DIR.'inc/item_form_legacy_handler.php';
 		
-		$val = array(
+		/** DEFAULT HANDLER ****************/
+		$in = $this->set_defaults( $in );
+		/** END DEFAULT HANDLER ****************/
+		$caps = array(
+			'show_feed' => true,
+			'show_adv_feed' => true,
+			'show_display' => array( 'title', 'style','imagesize', 'details' ),
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
+		
+		/*$val = array(
 			'post_type' => 'post',
 			'taxonomy' => 'all',
 			'terms' => '',
@@ -118,7 +154,7 @@ class CAHNRS_feed_widget extends \WP_Widget {
 			$in[ $v_k ] = ( isset( $in[ $v_k ] ) )? $in[ $v_k ] : $val[ $v_k ];
 		}
 		include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
-		include cahnrswp\cahnrs\core\DIR.'forms/feed_display.phtml';
+		include cahnrswp\cahnrs\core\DIR.'forms/feed_display.phtml';*/
 		/*$this->content_feed_control->get_form( 'basic_feed', $this , $val );
         $this->content_feed_control->get_form( 'cahnrs_api_feed', $this , $val );
         $this->content_feed_control->get_form( 'feed_display', $this , $val );

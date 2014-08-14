@@ -86,9 +86,20 @@ class cahnrs_insert_item extends \WP_Widget {
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
+		$caps = array(
+			'show_feed' => array('select'),
+			'show_adv_feed' => true,
+			'show_display' => array( 'title', 'imagesize', 'details' ),
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
 		
-		include cahnrswp\cahnrs\core\DIR.'forms/select_post.phtml';
-		include cahnrswp\cahnrs\core\DIR.'forms/insert_item_display.phtml';
+		/** DEFAULT HANDLER ****************/
+		//$in = $this->set_defaults( $in );
+		/** END DEFAULT HANDLER ****************/
+		
+		//include cahnrswp\cahnrs\core\DIR.'forms/select_post.phtml';
+		//include cahnrswp\cahnrs\core\DIR.'forms/insert_item_display.phtml';
 		//$this->content_feed_control->get_form( 'select_item', $this , $val );
 		//$this->content_feed_control->get_form( 'display_view_all', $this , $val );
 		//$this->content_feed_control->get_form( 'content_display', $this , $val );

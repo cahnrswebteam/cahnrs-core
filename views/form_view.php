@@ -32,6 +32,7 @@ class form_view{
 		$this->in = $in;
 		$this->wid_obj = $wid_obj;
 		$this->sel = false;
+		$this->caps = $caps;
 		$i = 0;
 		foreach( $caps as $cap_key => $cap ){
 			$this->sel = ( 0 == $i )? true : false;
@@ -113,16 +114,14 @@ class form_view{
 	}
 	
 	public function show_display_title(){
-		$this->input_wrap( true ); 
-		echo '<div style="width: 200px; display: inline-block;">';
+		$this->input_wrap( true , '' , 'display: inline-block; width: 70%;' ); 
 			echo '<label>Item Title:</label><br>'; 
-    		$this->input_text( 'title', array( 'value' => $this->in['title'] ) );
-    	echo '</div>';
-		echo '<div style="width: 100px; display: inline-block;">';
+    		$this->input_text( 'title', array( 'value' => $this->in['title'] , 'style' => 'width: 90% !important;' ) );
+		$this->input_wrap();
+		$this->input_wrap( true , '' , 'display: inline-block; width: 25%;' ); 
 			echo '<label>Display As:</label><br>';
 			$vals = array( 0 => 'N/A' , 'h2' => 'H2' , 'h3' => 'H3','h4' => 'H4' ); 
 			$this->input_select( 'title_tag' , array( 'value' => $vals ) );
-    	echo '</div>';
 		$this->input_wrap();
 	}
 	
@@ -144,6 +143,38 @@ class form_view{
 		echo '<label>Image Size: </label>';
 		$this->input_select( 'image_size' , array( 'value' => $vals ) );
 		$this->input_wrap();
+	}
+	
+	public function show_display_style(){
+		$has_columns = ( in_array('columns', $this->caps['show_display']) )? true : false;
+		$vals = array(
+			"list" => 'List',
+			"promo" => 'Promo',
+			"column_promo" => 'Column Promo',
+			'faq' => 'FAQs',
+			'basic_gallery' => 'Gallery'
+		);
+		if( $has_columns ){ 
+			$this->input_wrap( true , '', 'display: inline-block; width: 70%;' );
+			echo '<label>Display Style:</label><br />'; 
+		} else {
+			$this->input_wrap( true );
+			echo '<label>Display Style: </label>';
+		}
+		$this->input_select( 'display' , array( 'value' => $vals , 'style' => 'width: 90% !important;' ) );
+		$this->input_wrap();
+		if( $has_columns ){
+			$col_vals = array(
+				1 => 1,
+				2 => 2,
+				3 => 3,
+				4 => 4,
+			);
+			$this->input_wrap( true , '', 'display: inline-block; width: 25%;' ); 
+			echo '<label>Columns:</label><br />';
+			$this->input_select( 'columns' , array( 'value' => $col_vals ) );
+			$this->input_wrap();
+		}
 	}
 	
 	public function show_display_details(){
@@ -258,7 +289,7 @@ class form_view{
 			echo '<label>Select Type:</label>';
 			echo '<select class="dynamic-load-select" id="" name="" data-source="?cahnrs-feed=select-list">';
 			foreach( $this->post_types as $type_key => $type_title ){
-				echo '<option value="'.$type_key.'" >'.$type_title.'</option>';
+				echo '<option value="'.$type_key.'" '.selected( $type_key, $this->in['post_type'], false).'>'.$type_title.'</option>';
 			}
 			echo '</select>';
 		$this->input_wrap();
@@ -294,7 +325,7 @@ class form_view{
 				}
 			}
 			echo '<label>Selected IDs: </label>';
-			$this->input_text('selected_item', array( 'hidden' => false ));
+			$this->input_text('selected_item', array( 'value' => $this->in['selected_item'] , 'hidden' => false ));
 		$this->input_wrap();
 	}
 	
@@ -325,9 +356,9 @@ class form_view{
 		echo $wrap;
 	}
 	
-	public function input_wrap( $start = false , $class = '' ){
+	public function input_wrap( $start = false , $class = '' , $style='' ){
 		$wrap = '</p>';
-		$wrap = ( $start )? '<p class="input-wrap '.$class.'">' : $wrap;
+		$wrap = ( $start )? '<p class="input-wrap '.$class.'" style="'.$style.'">' : $wrap;
 		echo $wrap;
 	}
 	

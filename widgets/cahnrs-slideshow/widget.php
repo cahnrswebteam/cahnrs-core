@@ -104,13 +104,6 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
-		
-		//$caps = array(
-			//'show_feed' => true,
-			//);
-		//include cahnrswp\cahnrs\core\DIR.'forms/uber-form.php';
-		//include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
-		//include cahnrswp\cahnrs\core\DIR.'forms/slideshow_display.phtml';
 	}
 
 	/**

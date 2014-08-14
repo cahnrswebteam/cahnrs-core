@@ -178,9 +178,14 @@ class content_view {
 	}
 	
 	
-	public function get_editor_ops(){
+	public function get_editor_ops( $display_obj = false ){
 		if( current_user_can( 'edit_posts') || current_user_can( 'edit_pages') ){
-    		edit_post_link(' - Edit Item', '<span class="cc-edit-link">', '</span>');
+			if( !$display_obj ){
+    			edit_post_link(' - Edit Item', '<span class="cc-edit-link">', '</span>');
+			}
+			else if( isset( $display_obj->post ) ){
+				echo ' <a href="'.get_edit_post_link( $display_obj->post->ID, '' ).'" > - Edit Item</a>';
+			} 
 		}
 	}
 	
@@ -202,7 +207,7 @@ class content_view {
         	<span class="cc-title"><?php echo $ls.$display_obj->title.$le;?></span>
             <span class="cc-excerpt"><?php echo $ls.$display_obj->excerpt.$le;?></span>
             <span class="cc-content"><?php echo $ls.$display_obj->content.$le;?></span>
-            <?php if( current_user_can( 'edit_posts') || current_user_can( 'edit_pages') ) $this->get_editor_ops(); ?>
+            <?php $this->get_editor_ops( $display_obj ); ?>
         </li>
 	<?php }
 	
@@ -229,7 +234,7 @@ class content_view {
                 <?php if( $display_obj->content ):?>
                 <span class="cc-content"><?php echo $ls.$display_obj->content.$le;?></span>
                 <?php endif;?>
-                <?php if( current_user_can( 'edit_posts') || current_user_can( 'edit_pages') ) $this->get_editor_ops(); ?>
+                <?php $this->get_editor_ops( $display_obj ); ?>
             </div>
             <div style="clear:both"></div>
         </div>
@@ -257,7 +262,7 @@ class content_view {
                 <?php if( $display_obj->content ):?>
                 <span class="cc-content"><?php echo $ls.$display_obj->content.$le;?></span>
                 <?php endif;?>
-                <?php if( current_user_can( 'edit_posts') || current_user_can( 'edit_pages') ) $this->get_editor_ops(); ?>
+                <?php $this->get_editor_ops( $display_obj ); ?>
 					<!--if( $display_obj->title )
 						echo '<h4>' . $link_start . $display_obj->title . $link_end . '</h4>';
 					//if( $display_obj->pubdate )

@@ -134,16 +134,10 @@ class cahnrs_custom_gallery_widget extends \WP_Widget {
 		}
 	}
 
-	/**
-	 * Outputs the options form on admin
-	 *
-	 * @param array $instance The widget options
-	 */
-	public function form( $in ) {
-		
-		include cahnrswp\cahnrs\core\DIR.'inc/item_form_legacy_handler.php';
-		
-		$val = array(
+	
+	public function get_defaults(){
+		return array(
+			'feed_type' => 'basic',
 			'post_type' => 'post',
 			'taxonomy' => 'all',
 			'terms' => '',
@@ -161,12 +155,33 @@ class cahnrs_custom_gallery_widget extends \WP_Widget {
 			//'display_date' => 1,
 			'display_meta' => 0,
 		);
-		foreach( $val as $v_k => $v_d ){
-			$in[ $v_k ] = ( isset( $in[ $v_k ] ) )? $in[ $v_k ] : $val[ $v_k ];
-		}
+	}
+	
+	public function set_defaults( $instance ){
+		$defaults = $this->get_defaults(); // GET THE DEFAULTS - DB
+		foreach( $defaults as $d_k => $d_v ){ // FOR EACH DEFAULT SETTING - DB
+			if( !isset($instance[ $d_k ] ) ){ // IF IS NOT SET - DB
+				$instance[ $d_k ] = $d_v; // ADD DEFAULT VALUE - DB
+			} // END IF - DB
+		} // END FOREACH - DB
+		return $instance;
+	}
+	
+	
+	public function form( $in ) {
 		
-		include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
-		include cahnrswp\cahnrs\core\DIR.'forms/gallery_display.phtml';
+		include cahnrswp\cahnrs\core\DIR.'inc/item_form_legacy_handler.php';
+		
+		/** DEFAULT HANDLER ****************/
+		$in = $this->set_defaults( $in );
+		/** END DEFAULT HANDLER ****************/
+		$caps = array(
+			'show_feed' => true,
+			'show_adv_feed' => true,
+			'show_display' => array( 'title', 'style','columns','imagesize', 'details' ),
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
 		//$this->content_feed_control->get_form( 'basic_feed', $this , $val );
 		//$this->content_feed_control->get_form( 'cahnrs_api_feed', $this , $val );
 		//$this->content_feed_control->get_form( 'gallery_display', $this , $val );

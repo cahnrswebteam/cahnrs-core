@@ -27,14 +27,22 @@
 	display: block;
 }
 
+
 .cc-form-feed-options {
 	background: #fff;
 	border: 1px solid #ddd;
 	padding: 10px 0;
 }
-.cc-form-feed-options p {
-	margin: 8px 10px;
+p.input-wrap  {
+	margin: 0;
+	padding: 6px 0;
 }
+
+.cc-form-feed-type-wrapper p.input-wrap  {
+	margin: 0 10px;
+	padding: 6px 0;
+}
+
 .cc-form-feed-options p.inline {
 	display: inline-block;
 	vertical-align: top;

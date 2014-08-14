@@ -21,6 +21,7 @@ class cahnrs_az_index extends \WP_Widget {
 	
 	public function get_defaults(){
 		return array(
+			'feed_type' => 'basic',
 			'image_size' => 'thumbnail',
 			'post_type' => 'post',
 			'taxonomy' => 'all',
@@ -76,8 +77,13 @@ class cahnrs_az_index extends \WP_Widget {
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
-		include cahnrswp\cahnrs\core\DIR.'forms/feed.phtml';
-		include cahnrswp\cahnrs\core\DIR.'forms/azindex_display.phtml';
+		$caps = array(
+			'show_feed' => true,
+			'show_adv_feed' => true,
+			'show_display' => array( 'title', 'style','columns','imagesize', 'details' ),
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
 		/*$this->content_feed_control->get_form( 'basic_feed', $this , $val );
         $this->content_feed_control->get_form( 'cahnrs_api_feed', $this , $val );
         $this->content_feed_control->get_form( 'feed_display', $this , $val );

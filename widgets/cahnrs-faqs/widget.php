@@ -68,10 +68,19 @@ class cahnrs_faqs extends \WP_Widget {
 	}
 	
 	public function form( $in ) {
-		/** DEFAULT HANDLER ****************/
+			/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
-		include cahnrswp\cahnrs\core\DIR.'forms/feed-w-static.phtml';
+		$caps = array(
+			'show_feed' => true,
+			'show_adv_feed' => true,
+			);
+		$form = new cahnrswp\cahnrs\core\form_view;
+		$form->get_form($in , $caps , $this );
+		/** DEFAULT HANDLER ****************/
+		//$in = $this->set_defaults( $in );
+		/** END DEFAULT HANDLER ****************/
+		//include cahnrswp\cahnrs\core\DIR.'forms/feed-w-static.phtml';
 		//include cahnrswp\cahnrs\core\DIR.'forms/slideshow_display.phtml';
 	}
 
