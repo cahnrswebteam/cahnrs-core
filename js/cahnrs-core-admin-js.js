@@ -45,6 +45,8 @@ var cahnrs_core_widget_settings = function(){
 	
 	s.chg_set_ops = function( i_c ){
 		var sel_set = i_c.data('set');
+		var inpt = i_c.next('input');
+		inpt.prop('checked', true);
 		i_c.addClass('active').siblings('label').removeClass('active');
 		if( sel_set ){
 			var par = i_c.parents('.settings-wrapper');

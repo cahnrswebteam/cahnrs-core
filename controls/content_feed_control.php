@@ -5,7 +5,7 @@ class content_feed_control {
 	public function __construct() {
 	}
 	
-	public function get_query_args( $in ){
+	public function get_query_args( $in ){ // Legacy function but could be user to route url and api requests
 		return $this->get_basic_query_args( $in );
 	}
 		
