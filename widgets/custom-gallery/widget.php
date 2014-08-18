@@ -48,6 +48,8 @@ class cahnrs_custom_gallery_widget extends \WP_Widget {
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
 		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
+		
+		\wp_reset_postdata();
 		// The Loop
 		/*$q_args = $this->content_feed_control->get_query_args( $instance );
 		$the_query = new WP_Query( $q_args );

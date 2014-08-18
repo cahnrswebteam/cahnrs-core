@@ -68,6 +68,8 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
 		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE
+		
+		\wp_reset_postdata();
 		/** END QUERY FEED *************************/
 		
 		/*$feed_control = $this->content_feed_control;

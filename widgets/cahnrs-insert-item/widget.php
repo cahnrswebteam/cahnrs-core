@@ -69,6 +69,8 @@ class cahnrs_insert_item extends \WP_Widget {
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
 		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
+		
+		\wp_reset_postdata();
 	}
 
 
