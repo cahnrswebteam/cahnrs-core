@@ -11,6 +11,7 @@ class widget_control {
 		include DIR . '/widgets/cahnrs-insert-item/widget.php';
 		include DIR . '/widgets/cahnrs-azindex/widget.php';
 		include DIR . '/widgets/cahnrs-faqs/widget.php';
+		include DIR . '/widgets/cahnrs-scroll-pageload/widget.php';
 	}
 
 }

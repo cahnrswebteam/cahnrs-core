@@ -3,45 +3,7 @@
 class content_feed_control {
 
 	public function __construct() {
-		//if( isset( $_GET['cahnrs-feed'] ) ){
-			//\add_action( 'template_include', array( $this , 'feed_template' ) );
-		//}
 	}
-	
-	/*public function get_form( $form = '', $widget , $val ){
-		switch( $form ){
-			case 'form_part_count':
-				include DIR.'inc/form_part_feed_count_inc.phtml';
-				break;
-			case 'slideshow_display':
-				include DIR.'inc/form_part_slideshow_display.phtml';
-				break;
-			case 'display_view_all':
-				include DIR.'inc/form_part_display_views_all.phtml';
-				break;
-			case 'content_display':
-				include DIR.'inc/form_part_content_display.phtml';
-				break;
-			case 'select_item':
-				include DIR.'inc/select_post_type_item_form_inc.phtml';
-				break;
-			case 'cahnrs_api_feed' :
-				include DIR.'inc/api_feed_form_inc.phtml';
-				break;
-			case 'feed_display':
-				include DIR.'inc/feed_display_form_inc.phtml';
-				break;
-			case 'display':
-				include DIR.'inc/display_form_inc.phtml';
-				break;
-			case 'gallery_display':
-				include DIR.'inc/gallery_display_form_inc.phtml';
-				break;
-			default:
-				include DIR.'inc/basic_feed_form_inc.phtml';
-				break;
-		}
-	}*/
 	
 	public function get_query_args( $in ){
 		return $this->get_basic_query_args( $in );
@@ -56,8 +18,13 @@ class content_feed_control {
 		** HANDLE POST TYPE ARG **
 		*************************************/
 		if( isset( $in['post_type'] ) ){ // IS TYPE SET??
-			$query['post_type'] = $in['post_type']; // ASSIGN TO QUERY ARG
-			if( $in['post_type'] == 'attachment' ) $query['post_status'] = 'any'; // ATTACHMENTS AREN'T PUBLISHED SO SET STATUS
+			if( isset( $in['feed_type'] ) && 'select' == $in['feed_type'] ){ // If is select feed type
+				$query['post_type'] = 'any'; // ASSIGN TO QUERY ARG
+			} else {
+				$query['post_type'] = $in['post_type']; // ASSIGN TO QUERY ARG
+			}
+			/** Attachments aren't published so set "post_status" to any **/
+			if( $in['post_type'] == 'attachment' ) $query['post_status'] = 'any'; 
 		} else { // IF NOT SET: SET TO ANY
 			$query['post_type'] = 'any'; // SET POST TYPE TO ANY IF NOT SET
 		} // END IF
