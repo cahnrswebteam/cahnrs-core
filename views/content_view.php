@@ -32,6 +32,18 @@ class content_view {
 	
 	public function get_index_view( $args, $instance , $query ){
 		$alpha_list = explode(',','a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z');
+		$number_list = array( 
+			'0' => 'z', 
+			'1' => 'o',
+			'2' => 't',
+			'3' => 't',
+			'4' => 'f',
+			'5' => 'f',
+			'6' => 's',
+			'7' => 's',
+			'8' => 'e',
+			'9' => 'n',
+			);
 		$index_list = array();
 		$index_list[ 'count' ] = 0;
 		$view = $this->get_sub_view( $instance ); // GET VIEW LAYOUT TYPE AND USED FIELDS
@@ -41,8 +53,13 @@ class content_view {
 				global $post; 
 				$display_obj = $this->get_display_obj( $args, $instance, $post, $view['fields'] );
 				if( $display_obj->title ){
-					$alpha = strtolower( substr( $display_obj->title ,0,1) );
-					$index_list[ $alpha ][] = $display_obj;
+					$first_letter = substr( $display_obj->title ,0,1);
+					if( is_numeric( $first_letter ) ){
+						$index_list[ $number_list[$first_letter] ][] = $display_obj;
+					} else {
+						$alpha = strtolower( substr( $display_obj->title ,0,1) );
+						$index_list[ $alpha ][] = $display_obj;
+					}
 					$index_list[ 'count' ] = $index_list[ 'count' ]+1;
 				}
 			} // END WHILE

@@ -21,10 +21,25 @@ class content_feed_control {
 			if( isset( $in['feed_type'] ) && 'select' == $in['feed_type'] ){ // If is select feed type
 				$query['post_type'] = 'any'; // ASSIGN TO QUERY ARG
 			} else {
-				$query['post_type'] = $in['post_type']; // ASSIGN TO QUERY ARG
-			}
+				if (strpos($in['post_type'],'attachment') !== false) {
+					$p_t = explode('_', $in['post_type'] ); // Split mime type attachment_[mime type]
+					if( isset( $p_t[1] )){ // Has mime type
+						switch( $p_t[1] ){ // Switch based on mime type indicator
+							case 'image': // Is image
+								$query['post_mime_type'] = 'image'; // Use image mime type
+								break;
+							case 'file':
+								$query['post_mime_type'] = array( 'text','application' ); // Is document 
+								break;
+						}// End switch
+					}; // end if
+					$query['post_type'] = $p_t[0]; // ASSIGN TO QUERY ARG
+				} else { // else: not an attachment
+					$query['post_type'] = $in['post_type']; // ASSIGN TO QUERY ARG
+				} // end if
+			} // end if
 			/** Attachments aren't published so set "post_status" to any **/
-			if( $in['post_type'] == 'attachment' ) $query['post_status'] = 'any'; 
+			if( strpos( $in['post_type']  ,'attachment' ) !== false ) $query['post_status'] = 'any'; 
 		} else { // IF NOT SET: SET TO ANY
 			$query['post_type'] = 'any'; // SET POST TYPE TO ANY IF NOT SET
 		} // END IF

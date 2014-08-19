@@ -12,8 +12,13 @@ class form_view{
 	public function __construct(){
 		$post_types = \get_post_types( array( 'public' => true ) , 'objects' );
 		foreach( $post_types as $post_type ){
-			$title = ( 'attachment' != $post_type->name )? $post_type->labels->name : 'Media Libary';
-			$this->post_types[$post_type->name] = $title;
+			if( 'attachment' == $post_type->name ){ // Is an attachment
+				$this->post_types[$post_type->name] = 'Media Library - All';
+				$this->post_types[$post_type->name.'_image'] = 'Images';
+				$this->post_types[$post_type->name.'_file'] = 'Documents/Pdfs';
+			} else {
+				$this->post_types[$post_type->name] = $post_type->name;
+			}
 		}
 		if( is_multisite() ){
 			$sites = wp_get_sites();
