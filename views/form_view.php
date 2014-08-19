@@ -17,7 +17,7 @@ class form_view{
 				$this->post_types[$post_type->name.'_image'] = 'Images';
 				$this->post_types[$post_type->name.'_file'] = 'Documents/Pdfs';
 			} else {
-				$this->post_types[$post_type->name] = $post_type->name;
+				$this->post_types[$post_type->name] = $post_type->labels->name;
 			}
 		}
 		if( is_multisite() ){
