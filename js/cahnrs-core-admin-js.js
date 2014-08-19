@@ -15,6 +15,7 @@ var cahnrs_core_widget_settings = function(){
 		jQuery('body').on('click','.settings-wrapper .cc-inserted-items-wrap a', function( event ){ 
 			event.preventDefault(); s.rmv_sel_itm( jQuery( this ) ) });
 		//s.edtr.on('focus','.dynamic-load-select-content',function(){ s.dy_l_s( jQuery( this ) ) });
+		
 	}
 	
 	s.add_sel_item = function( i_c ){

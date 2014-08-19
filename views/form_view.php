@@ -228,7 +228,7 @@ class form_view{
 		$this->section_wrap( true , 'feed-type-wrapper' );
 			$this->header_wrap( 'Feed Settings' , 'active' );
 			$this->part_wrap( true , $class = 'feed-type-section active' );
-				$cap = ( is_array( $cap ))? $cap : array('select', 'basic');
+				$cap = ( is_array( $cap ))? $cap : array( 'select', 'basic','meta' );
 				$this->sub_section_wrap( true , 'feed-type' );
 					foreach( $cap as $feed ){
 						$active = ( $feed == $this->in['feed_type'] )? 'active' : '';
@@ -255,12 +255,41 @@ class form_view{
 							case 'basic':
 								$this->show_basic_feed();
 					  			break;
+							case 'meta':
+								$this->show_meta_feed();
+					  			break;
 						}
 						$this->sub_section_wrap();
 					}
 				
 			$this->part_wrap();
 		$this->section_wrap();
+	}
+	
+	public function show_meta_feed(){
+		/** Select Post Type **/
+		$this->input_wrap( true );
+			echo '<label>Select Type: </label>';
+			$this->input_select( 'post_type' , array( 'value' => $this->post_types ) );
+		$this->input_wrap();
+		/** Meta Key **/
+		$this->input_wrap( true );
+			echo '<label>Meta Key: </label>';
+			$this->input_text( 'meta_key' , array( 'value' => $this->in['meta_key'] ) );
+		$this->input_wrap();
+		/** Meta Value **/
+		$this->input_wrap( true );
+			echo '<label>Meta Value: </label>';
+			$this->input_text( 'meta_value' , array( 'value' => $this->in['meta_value'] ) );
+			echo '<br />';
+			$this->input_checkbox( 'meta_value_time', array( 'value' => 1 ) );
+			echo '<label>Use Current Date </label>';
+		$this->input_wrap();
+		/** Compare **/
+		$this->input_wrap( true );
+			echo '<label>Compare: </label>';
+			$this->input_text( 'compare', array( 'value' => $this->in['compare'] ) );
+		$this->input_wrap();
 	}
 	
 	public function show_basic_feed(){

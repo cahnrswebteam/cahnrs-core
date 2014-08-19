@@ -43,6 +43,22 @@ class content_feed_control {
 		} else { // IF NOT SET: SET TO ANY
 			$query['post_type'] = 'any'; // SET POST TYPE TO ANY IF NOT SET
 		} // END IF
+		
+		/************************************
+		** Handle meta feed type **
+		*************************************/
+		if( 'meta' == $in['feed_type'] && isset( $in['meta_key'] ) ) {
+			$meta_query = array(); // Populate this later
+			$meta_query['key'] = $in['meta_key'];
+			if( isset( $in['meta_value_time'] ) && 1 == $in['meta_value_time'] ){ // Override with time
+				$meta_query['value'] = time(); // Set to current time
+			} else { // Do not override
+				$meta_query['value'] = ( isset( $in['meta_value'] ) ) ? $in['meta_value'] : ''; // set value to value
+			}
+			if( isset( $in['compare'] ) ) $meta_query['compare'] = $in['compare'];
+			$query['meta_query'] = array( $meta_query );
+		}
+		
 		/************************************
 		** HANDLE ORDER BY ARG **
 		*************************************/
@@ -53,6 +69,17 @@ class content_feed_control {
 			} else { // NOT POST__IN ORDER
 				$query['orderby'] = $in['order_by']; // ASSIGN TO QUERY
 			} // END IF
+			if( 'meta_value' == $query['orderby'] && isset( $in['meta_key'] ) ) $query['meta_key'] = $in['meta_key'];
+			/*if( 'meta_value' == $in['order_by'] && isset( $in['meta_value'] ) ){ // Order by meta value
+				$meta_query = array();
+				if( isset( $in['meta_value_time'] ) && 1 == $in['meta_value_time'] ){
+					$meta_query['value'] = time();
+				} else {
+					$meta_query['value'] = $in['meta_value'];
+				}
+				$meta_query['key'] = $in['meta_value'];
+				if( isset( $in['compare'] ) ) $meta_query['compare'] = $in['compare'];
+				$query['meta_query'] = array( $meta_query );*/
 		} // END IF
 		/************************************
 		** HANDLE ORDER ARG **
