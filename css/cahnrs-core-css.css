@@ -2,12 +2,18 @@
 ** START WIDGET CSS **
 ************************************************************/
 
+/** Background for a majority of widgets *******/
+.pagebuilder-row .pagebuilder-column article,
+.pagebuilder-row .pagebuilder-column aside {
+	background: rgba( 255, 255, 255, 0.9 );
+}
+
 /* BASIC VIEW STYLES - OUT OF PLACE I KNOW - DB*
 ------------------------------------------------------------------- */
 .cahnrs-core-list {
 	padding-bottom: 10px; 
 }
-.post-edit-link {font-size: 11px;}
+.post-edit-link { font-size: 11px; }
 
 .cahnrs-core-list .cc-title > a {
 	font-weight: bold;
@@ -33,8 +39,7 @@
 	padding-left: 10px;
 }
 
-.pagebuilder-layout .pagebuilder-column > aside.widget_cahnrs_faqs,
-.pagebuilder-column > aside.widget_cahnrs_faqs {
+.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_faqs {
 	background: none;
 	padding: 0;
 } /* Probably need to accommodate for a title on accordion sections - PC */
@@ -45,6 +50,7 @@
 	background-color: #fff; background-color: rgba( 255, 255, 255, 0.9 );
 	background-image: url(../images/accordion-plus.svg);
 	background-position: 95% center;
+	background-position: calc(100% - 20px) center;
 	background-repeat: no-repeat;
 	/*border-top: 1px solid #eff0f1;*/
 	color: #981e32;
@@ -119,7 +125,7 @@
 
 /* CAHNRS SLIDESHOW WIDGET *
 ------------------------------------------------------------------- */
-.pagebuilder-column > aside.widget_CAHNRS_Slideshow_widget {
+.pagebuilder-row .pagebuilder-column aside.widget_CAHNRS_Slideshow_widget {
 	background: none; /* Override PC */
 	padding: 0;
 }
@@ -202,26 +208,26 @@
 .cahnrs-slideshow.slideshow-basic .cahnrs-slide.current-slide {
 	display: block;
 }
-.cahnrs-slideshow.slideshow-basic .cahnrs-slide.fade-next{
+.cahnrs-slideshow.slideshow-basic .cahnrs-slide.fade-next {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 50;
 }
-.cahnrs-slideshow.slideshow-basic .cahnrs-slide > a{
+.cahnrs-slideshow.slideshow-basic .cahnrs-slide > a {
 	position: absolute;
 	display: block;
 	width: 100%;
 	height: 100%;
 	z-index: 100;
 }
-.cahnrs-slideshow.slideshow-basic .cahnrs-slide img{
+.cahnrs-slideshow.slideshow-basic .cahnrs-slide img {
 	display: block;
 	width: 100%;
 	height: auto;
 }
-.cahnrs-slideshow.slideshow-basic .caption{
+.cahnrs-slideshow.slideshow-basic .caption {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -271,8 +277,7 @@
 }
 
 /*** Directory Search widget ***/
-.column > aside.widget_cahnrs_directory_search,
-.layout-builder-wrap .column > aside.widget_cahnrs_directory_search {
+.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_directory_search {
 	background: none;
 	padding: 0;
 }
@@ -353,8 +358,7 @@
 }
 
 /*** Action Item widget ***/
-.column > aside.widget_cahnrs_action_item,
-.layout-builder-wrap .column > aside.widget_cahnrs_action_item {
+.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_action_item {
 	background: none;
 	padding: 0;
 }
@@ -507,6 +511,12 @@ color: #981e32;
 
 /* ## SMALL (max 693)  */
 @media only screen and (max-width: 693px) {
+
+	/** Background for a majority of widgets *******/
+	.pagebuilder-row .pagebuilder-column article,
+	.pagebuilder-row .pagebuilder-column aside {
+		background: #fff;
+	}
 
 	/*** Action Item widget ***/
 	.layout-builder-wrap .column > aside.widget_cahnrs_action_item {
