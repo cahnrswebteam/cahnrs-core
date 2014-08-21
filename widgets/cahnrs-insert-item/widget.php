@@ -91,7 +91,7 @@ class cahnrs_insert_item extends \WP_Widget {
 		$caps = array(
 			'show_feed' => array('select'),
 			'show_adv_feed' => true,
-			'show_display' => array( 'title', 'imagesize', 'details' ),
+			'show_display' => array( 'title', 'style', 'imagesize', 'details' ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
