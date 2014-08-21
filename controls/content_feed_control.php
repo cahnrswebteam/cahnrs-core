@@ -17,7 +17,8 @@ class content_feed_control {
 		/************************************
 		** HANDLE POST TYPE ARG **
 		*************************************/
-		if( isset( $in['post_type'] ) ){ // IS TYPE SET??
+		if( isset( $in['post_type'] ) || isset( $in['post_type_meta'] ) ){ // IS TYPE SET??
+			if( 'meta' == $in['feed_type'] && isset( $in['post_type_meta'] ) ) $in['post_type'] = $in['post_type_meta'];
 			if( isset( $in['feed_type'] ) && 'select' == $in['feed_type'] ){ // If is select feed type
 				$query['post_type'] = 'any'; // ASSIGN TO QUERY ARG
 			} else {

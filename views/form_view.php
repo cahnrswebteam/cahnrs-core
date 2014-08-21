@@ -270,7 +270,7 @@ class form_view{
 		/** Select Post Type **/
 		$this->input_wrap( true );
 			echo '<label>Select Type: </label>';
-			$this->input_select( 'post_type' , array( 'value' => $this->post_types ) );
+			$this->input_select( 'post_type_meta' , array( 'value' => $this->post_types ) );
 		$this->input_wrap();
 		/** Meta Key **/
 		$this->input_wrap( true );
