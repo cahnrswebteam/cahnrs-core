@@ -10,10 +10,48 @@
 .pagebuilder-row .pagebuilder-column aside {
 	background: rgba( 255, 255, 255, 0.9 );
 }
+/* Crimson background */
+.pagebuilder-row .pagebuilder-column article.crimson,
+.pagebuilder-row .pagebuilder-column aside.crimson {
+	background: rgba( 152, 30, 50, 0.85 );
+	color: #fff;
+}
+.pagebuilder-row .pagebuilder-column article.crimson a,
+.pagebuilder-row .pagebuilder-column aside.crimson a {
+	color: #000;
+}
+.pagebuilder-row .pagebuilder-column article.crimson a:hover,
+.pagebuilder-row .pagebuilder-column aside.crimson a:hover {
+	color: #2a3033;
+}
 /* Gray background */
 .pagebuilder-row .pagebuilder-column article.gray,
 .pagebuilder-row .pagebuilder-column aside.gray {
 	background: rgba( 94, 106, 113, 0.85 );
+	color: #fff;
+}
+/* Blue background */
+.pagebuilder-row .pagebuilder-column article.blue,
+.pagebuilder-row .pagebuilder-column aside.blue {
+	background: rgba( 79, 134, 142, 0.85 );
+	color: #fff;
+}
+/* Green background */
+.pagebuilder-row .pagebuilder-column article.green,
+.pagebuilder-row .pagebuilder-column aside.green {
+	background: rgba( 143, 126, 53, 0.85 );
+	color: #fff;
+}
+/* Orange background */
+.pagebuilder-row .pagebuilder-column article.orange,
+.pagebuilder-row .pagebuilder-column aside.orange {
+	background: rgba( 182, 114, 51, 0.85 );
+	color: #fff;
+}
+/* Yellow background */
+.pagebuilder-row .pagebuilder-column article.yellow,
+.pagebuilder-row .pagebuilder-column aside.yellow {
+	background: rgba( 198, 146, 20, 0.85 );
 	color: #fff;
 }
 .cahnrs-core-list {
@@ -532,9 +570,31 @@
 	.pagebuilder-row .pagebuilder-column aside {
 		background: #fff;
 	}
+	.pagebuilder-row .pagebuilder-column article.crimson,
+	.pagebuilder-row .pagebuilder-column aside.crimson {
+		background: #981e32;
+	}
 	.pagebuilder-row .pagebuilder-column article.gray,
 	.pagebuilder-row .pagebuilder-column aside.gray {
 		background: #5e6a71;
+	}
+	.pagebuilder-row .pagebuilder-column article.blue,
+	.pagebuilder-row .pagebuilder-column aside.blue {
+		background: #4f868e;
+	}
+	.pagebuilder-row .pagebuilder-column article.green,
+	.pagebuilder-row .pagebuilder-column aside.green {
+		background: #8f7e35;
+	}
+	/* Orange background */
+	.pagebuilder-row .pagebuilder-column article.orange,
+	.pagebuilder-row .pagebuilder-column aside.orange {
+		background: #b67233;
+	}
+	/* Yellow background */
+	.pagebuilder-row .pagebuilder-column article.yellow,
+	.pagebuilder-row .pagebuilder-column aside.yellow {
+		background: #c69214;
 	}
 
 	/* Accordion/FAQs */
