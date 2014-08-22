@@ -265,10 +265,17 @@
 	margin-bottom: 2em;
 	vertical-align: top;
 }
-/* Two-column layout */
 .gallery-item-wrapper img {
 	width: 100%;
 }
+.gallery-item-wrapper h4 {
+	padding-bottom: 0.2em;
+}
+.gallery-item-wrapper time {
+	display: block;
+	font-size: 0.85em;
+}
+/* Two-column layout */
 .gallery-item-wrapper.two-columns {
 	width: 48%;
 }

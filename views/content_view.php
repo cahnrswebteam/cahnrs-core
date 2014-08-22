@@ -96,7 +96,7 @@ class content_view {
 			case 'basic_gallery':
 				$view['method'] = 'get_gallery_view';
 				$view['type'] = 'promo';
-				$view['fields'] = array('title','link','excerpt','content','image');
+				$view['fields'] = array('title','link','excerpt','content','image','meta');
 				break;
 			case 'promo':
 			case 'column_promo': // IF COLUMN PROMO DO THIS
@@ -260,35 +260,27 @@ class content_view {
 	public function get_gallery_view( $instance , $display_obj ){
 		$ls = $display_obj->link_start;
 		$le = $display_obj->link_end;
-		?><div class="gallery-item-wrapper <?php echo $instance['column_class']?>-columns">
-        	<div class="cc-inner-wrapper"> 
-				<?php if( $display_obj->image ):?>
-                <div class="cc-image-wrapper">
-                    <?php echo $ls.$display_obj->image.$le;?>
-                </div>
-            	<?php endif;?>
-            	<?php if( $display_obj->title ):?>
-                <h4 class="cc-title"><?php echo $ls.$display_obj->title.$le;?></h4>
-                <?php endif;?>
-                <?php if( $display_obj->pubdate ):?>
-                <time class="article-date" datetime="' . get_the_date( 'c' ) . '">' . get_the_date() . '</time>
-                <?php endif;?>
-                <?php if( $display_obj->excerpt ):?>
-                <span class="cc-excerpt"><?php echo $ls.$display_obj->excerpt.$le;?></span>
-                <?php endif;?>
-                <?php if( $display_obj->content ):?>
-                <span class="cc-content"><?php echo $ls.$display_obj->content.$le;?></span>
-                <?php endif;?>
-                <?php $this->get_editor_ops( $display_obj ); ?>
-					<!--if( $display_obj->title )
-						echo '<h4>' . $link_start . $display_obj->title . $link_end . '</h4>';
-					//if( $display_obj->pubdate )
-					//	echo '<time class="article-date" datetime="' . get_the_date( 'c' ) . '">' . get_the_date() . '</time>';
-					if( $display_obj->excerpt )
-						echo '<p>' . $display_obj->excerpt . '</p>';
-					if( $display_obj->content )
-						echo '<p>' . $display_obj->content . '</p>'; -->
-        	</div>       
+		?><div class="gallery-item-wrapper <?php echo $instance['column_class']; ?>-columns">
+			<div class="cc-inner-wrapper"> 
+			<?php if( $display_obj->image ): ?>
+				<div class="cc-image-wrapper">
+					<?php echo $ls.$display_obj->image.$le; ?>
+				</div>
+			<?php endif; ?>
+			<?php if( $display_obj->title ): ?>
+				<h4 class="cc-title"><?php echo $ls.$display_obj->title.$le;?></h4>
+			<?php endif; ?>
+      <?php if( $display_obj->meta ): ?>
+      	<time class="article-date" datetime=""><?php echo $display_obj->meta; ?></time>
+      <?php endif; ?>
+      <?php if( $display_obj->excerpt ): ?>
+      	<span class="cc-excerpt"><?php echo $display_obj->excerpt; ?></span>
+      <?php endif; ?>
+      <?php if( $display_obj->content ): ?>
+      	<span class="cc-content"><?php echo $display_obj->content; ?></span>
+      <?php endif; ?>
+      <?php $this->get_editor_ops( $display_obj ); ?>
+			</div>       
 		</div><?php }
 		
 	public function get_slide_view( $instance , $display_obj ){
