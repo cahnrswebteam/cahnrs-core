@@ -6,51 +6,48 @@
  * Basic item styles
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column article,
-.pagebuilder-row .pagebuilder-column aside {
-	background: rgba( 255, 255, 255, 0.9 );
-}
+
 /* Crimson background */
-.pagebuilder-row .pagebuilder-column article.crimson,
-.pagebuilder-row .pagebuilder-column aside.crimson {
+div.pagebuilder-item.crimson, 
+aside.pagebuilder-item.crimson {
 	background: rgba( 152, 30, 50, 0.85 );
 	color: #fff;
 }
-.pagebuilder-row .pagebuilder-column article.crimson a,
-.pagebuilder-row .pagebuilder-column aside.crimson a {
+div.pagebuilder-item.crimson a,
+aside.pagebuilder-item.crimson a {
 	color: #000;
 }
-.pagebuilder-row .pagebuilder-column article.crimson a:hover,
-.pagebuilder-row .pagebuilder-column aside.crimson a:hover {
+div.pagebuilder-item.crimson a:hover,
+aside.pagebuilder-item.crimson a:hover {
 	color: #2a3033;
 }
 /* Gray background */
-.pagebuilder-row .pagebuilder-column article.gray,
-.pagebuilder-row .pagebuilder-column aside.gray {
+div.pagebuilder-item.gray,
+aside.pagebuilder-item.gray {
 	background: rgba( 94, 106, 113, 0.85 );
 	color: #fff;
 }
 /* Blue background */
-.pagebuilder-row .pagebuilder-column article.blue,
-.pagebuilder-row .pagebuilder-column aside.blue {
+div.pagebuilder-item.blue,
+aside.pagebuilder-item.blue {
 	background: rgba( 79, 134, 142, 0.85 );
 	color: #fff;
 }
 /* Green background */
-.pagebuilder-row .pagebuilder-column article.green,
-.pagebuilder-row .pagebuilder-column aside.green {
+div.pagebuilder-item.green,
+aside.pagebuilder-item.green {
 	background: rgba( 143, 126, 53, 0.85 );
 	color: #fff;
 }
 /* Orange background */
-.pagebuilder-row .pagebuilder-column article.orange,
-.pagebuilder-row .pagebuilder-column aside.orange {
+div.pagebuilder-item.orange,
+aside.pagebuilder-item.orange {
 	background: rgba( 182, 114, 51, 0.85 );
 	color: #fff;
 }
 /* Yellow background */
-.pagebuilder-row .pagebuilder-column article.yellow,
-.pagebuilder-row .pagebuilder-column aside.yellow {
+div.pagebuilder-item.yellow,
+aside.pagebuilder-item.yellow {
 	background: rgba( 198, 146, 20, 0.85 );
 	color: #fff;
 }
@@ -125,7 +122,7 @@
  * Accordion/FAQs
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_faqs {
+aside.pagebuilder-item.widget_cahnrs_faqs {
 	background: none;
 	padding: 0;
 	/* Probably need to accommodate for a title on accordion sections - PC */
@@ -168,7 +165,7 @@
  * Action Items
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_action_item {
+aside.pagebuilder-item.widget_cahnrs_action_item {
 	background: none;
 	padding: 0;
 }
@@ -303,7 +300,7 @@
  * Directory Search
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column aside.widget_cahnrs_directory_search {
+aside.pagebuilder-item.widget_cahnrs_directory_search {
 	background: none;
 	padding: 0;
 }
@@ -382,7 +379,7 @@
  * Page title
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column aside.widget_page_title {
+aside.pagebuilder-item.widget_page_title {
 	background: none;
 	padding: 0;
 }
@@ -391,7 +388,7 @@
  * Slideshow
  * ----------------------------------------------------------------------------
  */
-.pagebuilder-row .pagebuilder-column aside.widget_CAHNRS_Slideshow_widget {
+aside.pagebuilder-item.widget_CAHNRS_Slideshow_widget {
 	background: none;
 	padding: 0;
 }
@@ -573,34 +570,34 @@
 @media only screen and (max-width: 693px) {
 
 	/* Basic item styles */
-	.pagebuilder-row .pagebuilder-column article,
-	.pagebuilder-row .pagebuilder-column aside {
+	div.pagebuilder-item,
+	aside.pagebuilder-item {
 		background: #fff;
 	}
-	.pagebuilder-row .pagebuilder-column article.crimson,
-	.pagebuilder-row .pagebuilder-column aside.crimson {
+	div.pagebuilder-item.crimson,
+	aside.pagebuilder-item.crimson {
 		background: #981e32;
 	}
-	.pagebuilder-row .pagebuilder-column article.gray,
-	.pagebuilder-row .pagebuilder-column aside.gray {
+	div.pagebuilder-item.gray,
+	aside.pagebuilder-item.gray {
 		background: #5e6a71;
 	}
-	.pagebuilder-row .pagebuilder-column article.blue,
-	.pagebuilder-row .pagebuilder-column aside.blue {
+	div.pagebuilder-item.blue,
+	aside.pagebuilder-item.blue {
 		background: #4f868e;
 	}
-	.pagebuilder-row .pagebuilder-column article.green,
-	.pagebuilder-row .pagebuilder-column aside.green {
+	div.pagebuilder-item.green,
+	aside.pagebuilder-item.green {
 		background: #8f7e35;
 	}
 	/* Orange background */
-	.pagebuilder-row .pagebuilder-column article.orange,
-	.pagebuilder-row .pagebuilder-column aside.orange {
+	div.pagebuilder-item.orange,
+	aside.pagebuilder-item.orange {
 		background: #b67233;
 	}
 	/* Yellow background */
-	.pagebuilder-row .pagebuilder-column article.yellow,
-	.pagebuilder-row .pagebuilder-column aside.yellow {
+	div.pagebuilder-item.yellow,
+	aside.pagebuilder-item.yellow {
 		background: #c69214;
 	}
 
