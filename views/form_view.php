@@ -333,8 +333,7 @@ class form_view{
 		echo '<script type="text/javascript">var widget_home_url = "'.\get_home_url().'"</script>';
 		$this->input_wrap( true );
 			echo '<select class="cc-select-content-drpdwn" style="width: 70%; max-width: 80%; max-height: 150px;" id="" name="" data-type="0">';
-			if( isset( $this->in['post_type'] ) ){
-				$post_query = new \WP_Query( array('post_type' => $this->in['post_type'], 'posts_per_page' => -1 ) );
+				$post_query = new \WP_Query( array('post_type' => 'post', 'posts_per_page' => -1 ) );
 				if ( $post_query->have_posts() ) {
 					while ( $post_query->have_posts() ) {
 						$post_query->the_post();
@@ -342,7 +341,6 @@ class form_view{
 					}
 				} 
 				wp_reset_postdata();
-			};
 			echo '</select>';
 			echo '<a href="#" class="cc-button-primary action-add-selected">+ ADD</a>';
 		$this->input_wrap();
