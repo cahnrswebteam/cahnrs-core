@@ -76,7 +76,34 @@ var cahnrs_core_init = function(){
 		}
 	}
 	/***********************************
+	** AZINDEX MODULE **
+	************************************/
+	s.init_az = function(){
+		var sf = this;
+		jQuery('.cahnrs-azindex-nav.dynamic-az > a').on('click',function( event ){ 
+			event.preventDefault(); sf.hdl_az( jQuery( this ) )});
+		
+		sf.hdl_az = function( ic ){
+			if( ic.hasClass('active') ){
+				var cls = '.column-group-'+ic.text();
+				var group = ic.parents('.pagebuilder-item').find( cls );
+				group.addClass('selected').siblings().removeClass('selected');
+				ic.addClass('selected').siblings().removeClass('selected');
+			}
+			
+			//if( ic.hasClass('active') ){
+				//ic.next('.cc-content').slideUp('medium');
+				//ic.removeClass('active');
+			///} else {
+				//ic.next('.cc-content').siblings('.cc-content').slideUp('medium');
+				//ic.addClass('active').siblings('a').removeClass('active');
+				//ic.next('.cc-content').slideDown('medium');
+			//}
+		}
+	}
+	/***********************************
 	** TEST AND ACTIVATE MODULES **
 	************************************/
 	if( jQuery('.cahnrs-core-faq').length > 0 ) s.init_faq();
+	if( jQuery('.cahnrs-azindex-nav.dynamic-az').length > 0 ) s.init_az();
 }

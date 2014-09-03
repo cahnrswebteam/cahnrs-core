@@ -38,6 +38,7 @@ class cahnrs_az_index extends \WP_Widget {
 			'display_content' => 0,
 			'display_image' => 1,
 			'display_link' => 1,
+			'display_azgroups' => 0,
 		);
 	}
 	
@@ -82,7 +83,7 @@ class cahnrs_az_index extends \WP_Widget {
 		$caps = array(
 			'show_feed' => true,
 			'show_adv_feed' => true,
-			'show_display' => array( 'title', 'style','columns','imagesize', 'details' ),
+			'show_display' => array( 'title', 'style','columns','az_index','imagesize', 'details' ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );

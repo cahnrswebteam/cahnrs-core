@@ -78,7 +78,7 @@ class cahnrs_faqs extends \WP_Widget {
 			'show_adv_feed' => true,
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
-		$form->get_form($in , $caps , $this );
+		$form->get_form($in , $caps , $this ); 
 		/** DEFAULT HANDLER ****************/
 		//$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/

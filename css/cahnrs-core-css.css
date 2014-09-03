@@ -209,10 +209,25 @@ aside.pagebuilder-item.widget_cahnrs_action_item {
 	background: #981e32;
 	color: #fff;
 }
+.widget_cahnrs_az_index .cahnrs-azindex-nav a.selected {
+	background: #981e32;
+	color: #fff;
+}
+
+.widget_cahnrs_az_index .cahnrs-az-column-wrapper.cahnrs-az-collapsed {
+	display: none;
+}
+.widget_cahnrs_az_index .cahnrs-az-column-wrapper.cahnrs-az-collapsed.selected {
+	display: block;
+}
+
 .widget_cahnrs_az_index .cahnrs-az-column {
 	display: inline-block;
 	vertical-align: top;
 }
+
+
+
 .widget_cahnrs_az_index .cahnrs-az-column .inner-column {
 	margin: 0 2%;
 }

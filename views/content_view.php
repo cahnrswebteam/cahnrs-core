@@ -64,13 +64,22 @@ class content_view {
 				}
 			} // END WHILE
 		} // END IF
-		echo '<nav class="cahnrs-azindex-nav">';
+		$aztype = ( $instance['display_azgroups'] )? ' dynamic-az':'';
+		echo '<nav class="cahnrs-azindex-nav'.$aztype.'">';
+		$stat = ' selected';
 		foreach( $alpha_list as $alpha ):
-			$active = ( array_key_exists( $alpha , $index_list ) )? 'active' : '';
-			?><a class="<?php echo $active;?>" href="#azindex-<?php echo $alpha;?>"><?php echo $alpha;?></a><?php
+			$active = '';
+			
+			if( array_key_exists( $alpha , $index_list ) ){ $active = 'active';}
+			$cls = ( $active )? $stat : '';
+			?><a class="<?php echo $active.$cls;?>" href="#azindex-<?php echo $alpha;?>"><?php echo $alpha;?></a><?php
+			if( $active ) $stat = '';
 		endforeach;
 		echo '</nav>';
-		switch ( $instance['display_full'] ){
+		switch ( $instance['display_azgroups'] ){
+			case 1:
+				$this->get_azindex_view_collapsed( $instance, $index_list );
+				break;
 			default:
 				$this->get_azindex_view_full( $instance, $index_list );
 				break;
@@ -349,6 +358,69 @@ class content_view {
 		}
 		echo '</div>';
 		//echo count($items_all);
+	}
+	public function get_azindex_view_collapsed( $instance , $item_index ){
+		$view = $this->get_sub_view( $instance ); // GET VIEW LAYOUT TYPE AND USED FIELDS
+		$instance['columns'] = ( isset( $instance['columns'] ))? $instance['columns'] : 1;
+		$c = 0;
+		foreach( $item_index as $label => $items ){
+			
+			if( is_array( $items ) ){
+				$stat = ( 0 == $c )? ' selected':'';
+				echo '<div class="cahnrs-az-column-wrapper cahnrs-az-collapsed az-columns-'.$instance['columns'].' '.$stat.' column-group-'.$label.'" >';
+				$per_column = count( $items ) / $instance['columns'];//ceil( count( $items ) / $instance['columns'] );
+				for( $i = 1; $i <= $instance['columns']; $i++ ){
+					echo '<div class="cahnrs-az-column azcolumn-'.$i.'" ><div class="inner-column">';
+					if( 'list' == $view['type'] ) echo '<ul>';
+					for( $x = $per_column * ( $i - 1 ); $x < $per_column * $i; $x++ ){
+						$this->$view['method']( $instance, $items[$x] );
+						//var_dump( $items[$x]->title );
+					}
+					if( 'list' == $view['type'] ) echo '</ul>';
+					echo '</div></div>';
+				}
+				echo '</div>';
+				$c++;
+			}
+			
+			
+		}
+		
+		/*$items_per_column = $items['count'] / $instance['columns'];
+		$items_all = array();
+		foreach( $items as $i_k => $i_v ){
+			if( is_array( $i_v ) ){
+				foreach( $i_v as $i_d ){
+					$items_all[] = array( 'display_obj' => $i_d , 'label' => $i_k );
+				}
+			}
+		}
+		
+		$items_total = count($items_all);
+		$c_total = 0;
+		$header_label = false;
+		$header_tag = ( 'list' == $view['type'] )? 'li' : 'div';
+		echo '<div class="cahnrs-az-column-wrapper az-columns-'.$instance['columns'].'" >';
+		for( $c = 1; $c <= $instance['columns']; $c++ ){
+			echo '<div class="cahnrs-az-column azcolumn-'.$c.'" ><div class="inner-column">'; 
+			if( 'list' == $view['type'] ) echo '<ul>';
+			$column_total = $items_total - ( $c * $items_per_column );
+			while( count( $items_all ) > $column_total ){
+				if( $header_label != $items_all[ $c_total ]['label'] ){
+					echo '<'.$header_tag.' id="azindex-'.$items_all[ $c_total ]['label'].'" class="cahnrs-azindex-header">'.$items_all[ $c_total ]['label'].'</'.$header_tag.'>';
+					$header_label = $items_all[ $c_total ]['label'];
+				}
+				$instance['i'] = $c_total+1;
+				$this->$view['method']( $instance, $items_all[ $c_total ]['display_obj'] );
+				unset( $items_all[ $c_total] );
+				$c_total++;
+			};
+			if( 'list' == $view['type'] ) echo '</ul>';
+			echo '</div></div>';
+		}
+		echo '</div>';
+		//echo count($items_all);
+	*/
 	}
 }
 ?>

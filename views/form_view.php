@@ -181,6 +181,12 @@ class form_view{
 			$this->input_wrap();
 		}
 	}
+	public function show_display_az_index(){
+		$this->input_wrap( true ); 
+				$this->input_checkbox( 'display_azgroups', array( 'value' => 1 ) );
+				echo ' <label>Collapse/Hide AZindex Groups</label>';
+		$this->input_wrap();
+	}
 	
 	public function show_display_details(){
 		$this->input_wrap( true ); 
