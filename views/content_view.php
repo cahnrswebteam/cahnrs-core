@@ -326,6 +326,7 @@ class content_view {
 		$instance['columns'] = ( isset( $instance['columns'] ))? $instance['columns'] : 1;
 		$items_per_column = $items['count'] / $instance['columns'];
 		$items_all = array();
+		ksort( $items );
 		foreach( $items as $i_k => $i_v ){
 			if( is_array( $i_v ) ){
 				foreach( $i_v as $i_d ){
@@ -363,6 +364,7 @@ class content_view {
 		$view = $this->get_sub_view( $instance ); // GET VIEW LAYOUT TYPE AND USED FIELDS
 		$instance['columns'] = ( isset( $instance['columns'] ))? $instance['columns'] : 1;
 		$c = 0;
+		ksort( $item_index );
 		foreach( $item_index as $label => $items ){
 			
 			if( is_array( $items ) ){
@@ -373,6 +375,7 @@ class content_view {
 					echo '<div class="cahnrs-az-column azcolumn-'.$i.'" ><div class="inner-column">';
 					if( 'list' == $view['type'] ) echo '<ul>';
 					for( $x = $per_column * ( $i - 1 ); $x < $per_column * $i; $x++ ){
+						$instance['i'] = $x;
 						$this->$view['method']( $instance, $items[$x] );
 						//var_dump( $items[$x]->title );
 					}
