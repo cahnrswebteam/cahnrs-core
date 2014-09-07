@@ -13,7 +13,7 @@ class cahnrs_action_item extends \WP_Widget {
 
 		parent::__construct(
 			'cahnrs_action_item', // Base ID
-			'CAHNRS Action Item', // Name
+			'Action Button', // Name
 			array( 'description' => 'Action items for CAHNRS website landing pages', ) // Args
 		);
 

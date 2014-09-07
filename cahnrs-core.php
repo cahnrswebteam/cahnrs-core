@@ -30,6 +30,7 @@ class cahnrs_core {
 
 	public function init_plugin() {
 		$widgets = new widget_control();
+		$widgets->register_widgets();
 		$scripts = new script_control();
 		$taxonomy = new taxonomy_control();
 		$feeds = new feed_control();

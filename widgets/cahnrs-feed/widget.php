@@ -14,7 +14,7 @@ class CAHNRS_feed_widget extends \WP_Widget {
 		//$this->post_content_view = new cahnrswp\cahnrs\core\post_content_view(); 
 		parent::__construct(
 			'cahnrs_feed', // Base ID
-			'Dynamic Content Feed', // Name
+			'Content Feed', // Name
 			array( 'description' => 'Creates a dynamic feed of Pages, Posts & other content items', ) // Args
 		);
 	}

@@ -3,7 +3,7 @@
  * Action item widget.
  */
 
-class cahnrs_insert_item extends \WP_Widget {
+class cahnrs_insert_existing extends \WP_Widget {
 	
 	public $is_content = true;
 
@@ -15,8 +15,8 @@ class cahnrs_insert_item extends \WP_Widget {
 		$this->view = new cahnrswp\cahnrs\core\content_view();
 
 		parent::__construct(
-			'cahnrs_insert_item', // Base ID
-			'Insert Item', // Name
+			'cahnrs_insert_existing', // Base ID 
+			'Existing Content', // Name
 			array( 'description' => 'Insert an existing Post, Page, or other Content.', ) // Args
 		);
 
@@ -26,15 +26,17 @@ class cahnrs_insert_item extends \WP_Widget {
 		return array(
 			'feed_type' => 'select',
 			'selected_item' => 0,
-			'image_size' => 'large',
 			'display' => 'full',
-			'columns' => 1,
-			'display_title' => 1,
-			'display_excerpt' => 1,
-			'display_content' => 0,
-			'display_link' => 1,
-			'display_image' => 1,
-			'display_meta' => 0
+			//'display' => 'basic_content',
+			//'image_size' => 'large',
+			//'display' => 'basic_gallery',
+			//'columns' => 1,
+			//'display_title' => 1,
+			//'display_excerpt' => 1,
+			//'display_content' => 0,
+			//'display_link' => 1,
+			//'display_image' => 1,
+			//'display_meta' => 0
 		);
 	}
 	
@@ -90,7 +92,7 @@ class cahnrs_insert_item extends \WP_Widget {
 		$caps = array(
 			'show_feed' => array('select'),
 			'show_adv_feed' => true,
-			'show_display' => array( 'title', 'style', 'imagesize', 'details' ),
+			'show_display' => array( 'title', 'style', 'override'/*'imagesize', 'details'*/ ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
@@ -132,7 +134,7 @@ class cahnrs_insert_item extends \WP_Widget {
  * Register widget with WordPress.
  */
 add_action( 'widgets_init', function(){
-	register_widget( 'cahnrs_insert_item' );
+	register_widget( 'cahnrs_insert_existing' );
 });
 
 ?>

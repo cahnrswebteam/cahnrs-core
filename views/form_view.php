@@ -157,7 +157,8 @@ class form_view{
 			"promo" => 'Promo',
 			"column_promo" => 'Column Promo',
 			'faq' => 'FAQs',
-			'basic_gallery' => 'Gallery'
+			'basic_gallery' => 'Gallery',
+			'full' => 'Full Content',
 		);
 		if( $has_columns ){ 
 			$this->input_wrap( true , '', 'display: inline-block; width: 70%;' );
@@ -210,6 +211,36 @@ class form_view{
 			echo $wrap;
 				$this->input_checkbox( 'display_link', array( 'value' => 1 ) );
 				echo ' <label>Link to Content</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_meta', array( 'value' => 1 ) );
+				echo ' <label>Display Meta</label>';
+			echo '</div>';
+		$this->input_wrap();
+	}
+	
+	public function show_display_override(){
+		$this->input_wrap( true ); 
+		$wrap = '<div class="cc-inline-input">';
+			echo $wrap;
+				$this->input_checkbox( 'hide_title', array( 'value' => 1 ) );
+				echo ' <label>Hide Post Title</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'force_excerpt', array( 'value' => 1 ) );
+				echo ' <label>Use Summary Text</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'force_content', array( 'value' => 1 ) );
+				echo ' <label>Use Full Text</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'hide_image', array( 'value' => 1 ) );
+				echo ' <label>Hide Image</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'hide_link', array( 'value' => 1 ) );
+				echo ' <label>Remove Link</label>';
 			echo '</div>';
 			echo $wrap;
 				$this->input_checkbox( 'display_meta', array( 'value' => 1 ) );

@@ -389,6 +389,7 @@ class content_view {
 			
 		}
 		
+		
 		/*$items_per_column = $items['count'] / $instance['columns'];
 		$items_all = array();
 		foreach( $items as $i_k => $i_v ){
@@ -424,6 +425,13 @@ class content_view {
 		echo '</div>';
 		//echo count($items_all);
 	*/
+	}
+	
+	public function check_get( $name , $fname , $fields , $in , $ovr = false ){
+		if( !in_array( 'image' , $fields ) ) return false; // Check if in fields
+		if( $ovr && isset( $in[$ovr] ) && $in[$ovr] ) return false; // Check if has override
+		if( isset( $in[$name] ) && !$in[$name] ) return false;
+		return true;
 	}
 }
 ?>
