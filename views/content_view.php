@@ -100,29 +100,29 @@ class content_view {
 			case 'slideshow-3-up':
 				$view['method'] = 'get_slide_view';
 				$view['type'] = 'slideshow';
-				$view['fields'] = array('title','link','excerpt','content','image');
+				$view['fields'] = array('title','link','excerpt','image');
 				break;
 			case 'basic_gallery':
 				$view['method'] = 'get_gallery_view';
 				$view['type'] = 'promo';
-				$view['fields'] = array('title','link','excerpt','content','image','meta');
+				$view['fields'] = array('title','link','excerpt','image','meta');
 				break;
 			case 'promo':
 			case 'column_promo': // IF COLUMN PROMO DO THIS
 				$view['method'] = 'get_promo_view';
 				$view['type'] = 'promo';
-				$view['fields'] = array('title','link','excerpt','content','image');
+				$view['fields'] = array('title','link','excerpt','image');
 				break;
 			case 'full': // IF COLUMN PROMO DO THIS
 				$view['method'] = 'get_full_view';
 				$view['type'] = 'full';
-				$view['fields'] = array('content');
+				$view['fields'] = array('title','content','image');
 				break;
 			case 'list':
 			default: // DEFAULT LIST VIEW
 				$view['method'] = 'get_basic_list_view';
 				$view['type'] = 'list';
-				$view['fields'] = array('title','link','excerpt','content');
+				$view['fields'] = array('title','link','excerpt');
 				break;
 		};
 		return $view;
@@ -140,13 +140,16 @@ class content_view {
 		/***********************************************
 		** TITLE **
 		************************************************/
-		$display_obj->title = ( in_array( 'title' , $fields ) && isset( $in['display_title'] ) && 1 == $in['display_title'] )? 
+		$display_obj->title = ( $this->check_get( 'display_title' , 'title' , $fields , $in , 'remove_title' ) )? 
 			$post->post_title : false;
 		/***********************************************
 		** EXCERPT **
 		************************************************/
-		if( in_array( 'excerpt' , $fields ) && isset( $in['display_excerpt'] ) && 1 == $in['display_excerpt']  ) {
-			if( $post->post_excerpt ){
+		if( $this->check_get( 'display_excerpt' , 'excerpt' , $fields , $in , 'hide_text' ) ) {
+			if( ( isset( $in['force_content'] ) && $in['force_content'] ) || ( isset( $in['display_content'] ) && $in['display_content'] ) ){
+				$display_obj->excerpt = \apply_filters( 'the_content', $post->post_content );
+			}
+			else if( $post->post_excerpt ){
 				$display_obj->excerpt = $post->post_excerpt;
 			} else {
 				$excerpt = strip_shortcodes( $post->post_content );
@@ -160,17 +163,31 @@ class content_view {
 		/***********************************************
 		** CONTENT **
 		************************************************/	
-		$display_obj->content = ( in_array( 'content' , $fields ) && isset( $in['display_content'] ) && 1 == $in['display_content'] )? 
-			\apply_filters( 'the_content', $post->post_content ) : false;
+		if( $this->check_get( 'display_content' , 'content' , $fields , $in , 'hide_text' ) ){
+			if( ( isset( $in['force_excerpt'] ) && $in['force_excerpt'] ) || ( isset( $in['display_excerpt'] ) && $in['display_excerpt'] ) ){
+				if( $post->post_excerpt ){
+					$display_obj->content = $post->post_excerpt;
+				} else {
+					$excerpt = strip_shortcodes( $post->post_content );
+					$excerpt = strip_tags( $excerpt );
+					$excerpt = wp_trim_words( $excerpt, 35, ' ...' );
+					$display_obj->content = $excerpt;
+				}
+			} else {
+				$display_obj->content = \apply_filters( 'the_content', $post->post_content );
+			}
+		} else {
+			$display_obj->content = false;
+		}
 		/***********************************************
 		** LINK **
 		************************************************/
-		$display_obj->link = ( in_array( 'link' , $fields ) && isset( $in['display_link'] ) && 1 == $in['display_link'] )? 
+		$display_obj->link = ( $this->check_get( 'display_link' , 'link' , $fields , $in , 'remove_link' ) )? 
 			\get_permalink( $post->ID ) : false;
 		/***********************************************
 		** IMAGE **
 		************************************************/
-		if( in_array( 'image' , $fields ) && isset( $in['display_link'] ) && 1 == $in['display_image'] ){
+		if( $this->check_get( 'display_image' , 'image' , $fields , $in , 'remove_image' )){
 			$post_type = ( $post->post_type )? $post->post_type : get_post_type( $post->ID );
 			$size = ( isset( $in['image_size'] ) )? $in['image_size'] : 'large';
 			if( 'attachment' == $post_type ){
@@ -428,10 +445,13 @@ class content_view {
 	}
 	
 	public function check_get( $name , $fname , $fields , $in , $ovr = false ){
-		if( !in_array( 'image' , $fields ) ) return false; // Check if in fields
+		if( !in_array( $fname , $fields ) ) return false; // Check if in fields
 		if( $ovr && isset( $in[$ovr] ) && $in[$ovr] ) return false; // Check if has override
-		if( isset( $in[$name] ) && !$in[$name] ) return false;
+		//if( isset( $in[$name] ) && !$in[$name] ) return false;
 		return true;
+	}
+	
+	public function handle_content(){
 	}
 }
 ?>

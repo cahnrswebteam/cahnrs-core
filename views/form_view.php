@@ -223,8 +223,12 @@ class form_view{
 		$this->input_wrap( true ); 
 		$wrap = '<div class="cc-inline-input">';
 			echo $wrap;
-				$this->input_checkbox( 'hide_title', array( 'value' => 1 ) );
+				$this->input_checkbox( 'remove_title', array( 'value' => 1 ) );
 				echo ' <label>Hide Post Title</label>';
+			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'hide_text', array( 'value' => 1 ) );
+				echo ' <label>Hide Text</label>';
 			echo '</div>';
 			echo $wrap;
 				$this->input_checkbox( 'force_excerpt', array( 'value' => 1 ) );
@@ -235,11 +239,11 @@ class form_view{
 				echo ' <label>Use Full Text</label>';
 			echo '</div>';
 			echo $wrap;
-				$this->input_checkbox( 'hide_image', array( 'value' => 1 ) );
+				$this->input_checkbox( 'remove_image', array( 'value' => 1 ) );
 				echo ' <label>Hide Image</label>';
 			echo '</div>';
 			echo $wrap;
-				$this->input_checkbox( 'hide_link', array( 'value' => 1 ) );
+				$this->input_checkbox( 'remove_link', array( 'value' => 1 ) );
 				echo ' <label>Remove Link</label>';
 			echo '</div>';
 			echo $wrap;
