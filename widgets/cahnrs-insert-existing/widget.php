@@ -16,7 +16,7 @@ class cahnrs_insert_existing extends \WP_Widget {
 
 		parent::__construct(
 			'cahnrs_insert_existing', // Base ID 
-			'Existing Content', // Name
+			'Insert Content', // Name
 			array( 'description' => 'Insert an existing Post, Page, or other Content.', ) // Args
 		);
 

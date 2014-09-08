@@ -131,6 +131,10 @@ class content_view {
 	public function get_display_obj( $args, $in, $post, $fields ){
 		
 		include DIR.'inc/item_form_legacy_handler.php';
+		/*********************************************
+		** Clean From Pagebuilder **
+		**********************************************/
+		$post->post_content = str_replace('<!-- PRIMARY CONTENT -->', '',$post->post_content ); 
 		
 		$display_obj = new \stdClass();
 		/***********************************************
@@ -146,7 +150,7 @@ class content_view {
 		** EXCERPT **
 		************************************************/
 		if( $this->check_get( 'display_excerpt' , 'excerpt' , $fields , $in , 'hide_text' ) ) {
-			if( ( isset( $in['force_content'] ) && $in['force_content'] ) || ( isset( $in['display_content'] ) && $in['display_content'] ) ){
+			if( ( isset( $in['force_content'] ) && $in['force_content'] ) || ( isset( $in['display_content'] ) && $in['display_content'] ) ){ 
 				$display_obj->excerpt = \apply_filters( 'the_content', $post->post_content );
 			}
 			else if( $post->post_excerpt ){
