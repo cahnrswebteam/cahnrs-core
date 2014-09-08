@@ -96,16 +96,21 @@ aside.pagebuilder-item.yellow {
 .cahnrs-promo-view .cc-image-wrapper img {
 	width: 100%;
 	height: auto;
+	display: block;
 }
 .cahnrs-promo-view.has_image .cc-content-wrapper {
 	margin-left: 165px;
 }
-.cahnrs-promo-view .cc-content-wrapper > h3 > a,
+.cahnrs-promo-view .cc-content-wrapper > h3 > a {
+	text-decoration: none;
+	color: #981e32;
+}
 .cahnrs-promo-view .cc-content-wrapper > .cc-excerpt > a,
 .cahnrs-promo-view .cc-content-wrapper > .cc-content > a {
 	text-decoration: none;
-	color: inherit;
+	color: #555;
 }
+
 .cahnrs-promo-view .cc-content-wrapper > h3 {
 	padding: 0;
 	margin: 0 0 6px;
@@ -274,7 +279,7 @@ aside.pagebuilder-item.widget_cahnrs_action_item {
 }
 .gallery-item-wrapper {
 	display: inline-block;
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
 	vertical-align: top;
 }
 .gallery-item-wrapper img {
