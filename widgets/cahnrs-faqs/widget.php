@@ -30,6 +30,8 @@ class cahnrs_faqs extends \WP_Widget {
 		$q_args = $this->content_feed_control->get_basic_query_args( $in ); // BUILD THE QUERY ARGS
 		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
 		
+		$in['is_legacy'] = true;
+		
 		\query_posts($q_args); // DO YOU HAVE A QUERY?????
 		
 		$this->view->get_content_view( $args, $in );

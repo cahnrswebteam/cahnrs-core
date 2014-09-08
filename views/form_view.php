@@ -455,7 +455,7 @@ class form_view{
 		$args = $this->input_defaults( $args );
 		$full_name = $this->wid_obj->get_field_name( $name );
 		$args['class'] = ( $args['hidden'] )? $args['class'].' hidden-input': $args['class']; 
-		echo '<input id="" class="hidden-input" type="checkbox" value="" name="'.$full_name.'" checked="checked" />';
+		echo '<input id="" class="hidden-input" type="checkbox" value="0" name="'.$full_name.'" checked="checked" />';
 		echo '<input id="'.$args['id'].'" class="'.$args['class']
 			.'" type="checkbox" value="'.$args['value'].'" name="'.$full_name.'" '.checked( $args['value'], $this->in[$name], false ).' />';
 	}

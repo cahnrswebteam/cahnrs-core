@@ -49,6 +49,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		/** DEFAULT HANDLER ****************/
 		$instance = $this->set_defaults( $instance );
 		/** END DEFAULT HANDLER ****************/
+		$instance['is_legacy'] = true;
 		/** QUERY FEED *************************/
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER

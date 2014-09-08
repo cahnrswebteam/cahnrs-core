@@ -24,7 +24,7 @@ class CAHNRS_feed_widget extends \WP_Widget {
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		$q_args = $this->content_feed_control->get_query_args( $instance ); // BUILD THE QUERY ARGS
 		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
-		
+		$instance['is_legacy'] = true;
 		\query_posts($q_args); // DO YOU HAVE A QUERY?????
 		
 		$this->view->get_content_view( $args, $instance , $query );

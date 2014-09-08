@@ -56,6 +56,8 @@ class cahnrs_az_index extends \WP_Widget {
 		/** DEFAULT HANDLER ****************/
 		$instance = $this->set_defaults( $instance );
 		/** END DEFAULT HANDLER ****************/
+		
+		$instance['is_legacy'] = true;
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		$q_args = $this->content_feed_control->get_query_args( $instance ); // BUILD THE QUERY ARGS
