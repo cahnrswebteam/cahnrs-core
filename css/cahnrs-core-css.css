@@ -127,7 +127,7 @@ aside.pagebuilder-item.yellow {
  * Accordion/FAQs
  * ----------------------------------------------------------------------------
  */
-aside.pagebuilder-item.widget_cahnrs_faqs {
+.pagebuilder-item.widget_cahnrs_faqs {
 	background: none;
 	padding: 0;
 	/* Probably need to accommodate for a title on accordion sections - PC */
@@ -170,7 +170,7 @@ aside.pagebuilder-item.widget_cahnrs_faqs {
  * Action Items
  * ----------------------------------------------------------------------------
  */
-aside.pagebuilder-item.widget_cahnrs_action_item {
+.pagebuilder-item.widget_cahnrs_action_item {
 	background: none;
 	padding: 0;
 }
@@ -320,7 +320,7 @@ aside.pagebuilder-item.widget_cahnrs_action_item {
  * Directory Search
  * ----------------------------------------------------------------------------
  */
-aside.pagebuilder-item.widget_cahnrs_directory_search {
+.pagebuilder-item.widget_cahnrs_directory_search {
 	background: none;
 	padding: 0;
 }
@@ -399,7 +399,7 @@ aside.pagebuilder-item.widget_cahnrs_directory_search {
  * Page title
  * ----------------------------------------------------------------------------
  */
-aside.pagebuilder-item.widget_page_title {
+.pagebuilder-item.widget_page_title {
 	background: none;
 	padding: 0;
 }
@@ -408,7 +408,7 @@ aside.pagebuilder-item.widget_page_title {
  * Slideshow
  * ----------------------------------------------------------------------------
  */
-aside.pagebuilder-item.widget_CAHNRS_Slideshow_widget {
+.pagebuilder-item.widget_CAHNRS_Slideshow_widget {
 	background: none;
 	padding: 0;
 }
