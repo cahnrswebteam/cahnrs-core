@@ -145,7 +145,7 @@ class content_view {
 		** TITLE **
 		************************************************/
 		$display_obj->title = ( $this->check_get( 'title' , $fields , $in , 'remove_title' ) )? 
-			$post->post_title : false;
+			\apply_filters( 'the_title', $post->post_title ) : false;
 		/***********************************************
 		** EXCERPT **
 		************************************************/
@@ -276,11 +276,11 @@ class content_view {
                 <h3 class="cc-title"><?php echo $ls.$display_obj->title.$le;?></h3>
                 <?php endif;?>
                 <?php if( $display_obj->excerpt ):?>
-                <span class="cc-excerpt"><?php echo $ls.$display_obj->excerpt.$le;?></span>
+                <span class="cc-excerpt"><?php echo $display_obj->excerpt;?></span>
                 <?php endif;?>
-                <?php if( $display_obj->content ):?>
-                <span class="cc-content"><?php echo $ls.$display_obj->content.$le;?></span>
-                <?php endif;?>
+                <?php /* if( $display_obj->content ):?>
+                <span class="cc-content"><?php echo $display_obj->content;?></span>
+                <?php endif; */?>
                 <?php $this->get_editor_ops( $display_obj ); ?>
             </div>
             <div style="clear:both"></div>
