@@ -316,24 +316,16 @@ class content_view {
 	public function get_slide_view( $instance , $display_obj ){
 		$ls = $display_obj->link_start;
 		$le = $display_obj->link_end;
-		$is_active = ( 0 == $instance[ 'i'] )? 'current-slide' : ''; 
+		$is_active = ( 0 == $instance[ 'i'] )? 'currentslide' : ''; 
 		?><div class="cahnrs-slide <?php echo $is_active;?>" >
-        	<?php echo $ls; echo $le;?>
-        	<div class="image-wrapper">
-				<?php echo $display_obj->image;?>
-            </div>
+			<?php echo $ls.$display_obj->image.$le;?>
             <div class="caption">
-                <div class="caption-inner">
                     <?php if( $display_obj->title ):?>
-                    <div class="title"><?php echo $display_obj->title;?></div>
+                    <div class="title"><?php echo $ls.$display_obj->title.$le;?></div>
                     <?php endif;?>
                     <?php if( $display_obj->excerpt ):?>
                     <div class="excerpt"><?php echo $display_obj->excerpt;?></div>
                     <?php endif;?>
-                    <?php if( $display_obj->link ):?>
-                    <div class="link"><?php echo $ls;?>Learn More ><?php echo $le;?></div>
-                    <?php endif;?>
-                </div>
             </div>
         </div><?php 
 	}

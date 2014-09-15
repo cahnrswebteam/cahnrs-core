@@ -29,7 +29,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 			'skip' => 0,
 			'display_title' => 1,
 			'display_excerpt' => 1,
-			'display_content' => 0,
+			//'display_content' => 0,
 			'display_image' => 1,
 			'display_link' => 1,
 		);
@@ -64,7 +64,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		
 		$this->view->get_content_view( $args, $instance , $query );
 		
-		$this->render_slideshow_wrapper_end( $instance , $temp_query_2 );
+		echo '</div>';
 		
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
@@ -97,13 +97,16 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 	 * @param array $instance The widget options
 	 */
 	public function form( $in) {
+		
+		include cahnrswp\cahnrs\core\DIR.'inc/item_form_legacy_handler.php';
+		
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
 			'show_feed' => true,
 			'show_adv_feed' => true,
-			'show_display' => array( 'title','slideshowstyle', 'imagesize', 'details' ),
+			'show_display' => array( 'title','slideshowstyle', 'imagesize', 'override' ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
@@ -142,28 +145,9 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 	<?php }*/
 	
 	public function render_slideshow_wrapper_start( $instance ){?>
-			<div class="cahnrs-slideshow <?php echo $instance['display'];?>" data-speed="5000" data-action="fade" data-auto="1" data-transition="fade">
-				<div class="slideshow-inner">
-					<div class="slideshow-wrapper">
+			<div class="cahnrs-slideshow <?php echo $instance['display'];?>" data-auto="1" data-spd="8000" data-transpd="700" data-pager="1" >
 	<?php }
 	
-	public function render_slideshow_wrapper_end( $instance , $query = false ){?>
-			</div></div>
-            <?php if( 'slideshow-basic' == $instance['display'] && $query ){
-				$i = 0;
-				if ( $query->have_posts() && $query->post_count > 1 ) {
-					echo '<div class="cahnrs-slide-nav">';
-					while ( $query->have_posts() ) {
-						$query->the_post();
-						$is_active = ( 0 == $i )? 'current-slide' : '';
-						echo '<a href="#" class="'.$is_active.'" data-slide="'.$i.'" ></a>';
-						$i++;
-					}
-					echo '</div>';
-				}
-			}?>
-            </div>
-	<?php }
 };
 
 
