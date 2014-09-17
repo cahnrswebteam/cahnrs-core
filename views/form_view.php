@@ -133,7 +133,7 @@ class form_view{
 	public function show_display_slideshowstyle(){
 		$this->input_wrap( true ); 
 		echo '<label>Slideshow Style: </label>';
-		$vals = array( 'slideshow-basic' => 'Standard Slideshow' , 'slideshow-3-up' => 'CAHNRS 3 UP' );
+		$vals = array( 'slideshow-basic' => 'Standard Slideshow' , 'slideshow-three' => 'CAHNRS 3 UP' );
 		$this->input_select( 'display' , array( 'value' => $vals ) );
 		$this->input_wrap();
 	}

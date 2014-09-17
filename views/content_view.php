@@ -30,6 +30,60 @@ class content_view {
 		}
 	}
 	
+	public function get_slideshow_view( $args, $in , $query_obj = false ){
+		$core_settings = array(
+			'slideshow-basic' => array(
+				'auto' => 1,
+				'spd' => 8000,
+				'transpd' => 700,
+				'pager' => '1',
+				'up' => '1',
+				'fx' => 'slideHorz',
+				),
+			'slideshow-three' => array(
+				'auto' => 0,
+				'spd' => 8000,
+				'transpd' => 500,
+				'pager' => '0',
+				'up' => '3',
+				'fx' => 'threeup',
+				'adv' => '1',
+				),
+		);
+		$has_wrapper = ( 'slideshow-three' == $in['display'] )? true : false;
+		$i = 0;
+		$view = $this->get_sub_view( $in ); // GET VIEW LAYOUT TYPE AND USED FIELDS
+		$data = array();
+		foreach( $core_settings[$in['display']] as $k => $v ){
+			$data[] = 'data-'.$k.'="'.$v.'"';
+		}
+		//if( isset( $in['auto'] ) && $in['auto'] ) $data[] = 'data-auto="1"';
+		//$data[] = 'data-auto="1"';
+		//$data[] = 'data-spd="8000"';
+		//$data[] = 'data-transpd="700"';
+		//$data[] = 'data-pager="1"';
+		//$data[] = ( 'slideshow-three' == $in['display'] )? 'data-up="3"' : 'data-up="1"';
+		//if( 'slideshow-three' == $in['display'] ) $data[] =  'data-fx="threeup"';
+		if( 'slideshow-three' == $in['display'] ) $in['slides-up'] = 2;
+		echo '<div class="cahnrs-slideshow-wrapper '.$in['display'].'">';
+		echo '<div class="cahnrs-slideshow '.$in['display'].'" '.implode(' ', $data).' >';
+		/**********************************************
+		** Start Render Feed **
+		***********************************************/
+		//var_dump( $query_obj );
+		foreach( $query_obj as $post ){
+			$display_obj = $this->get_display_obj( $args, $in, $post, $view['fields'] );
+			$in['i'] = $post->i;
+			$this->$view['method']( $in, $display_obj );
+			
+		}
+		/**********************************************
+		** End Render Feed **
+		***********************************************/
+		echo '</div>';
+		echo '</div>';
+	}
+	
 	public function get_index_view( $args, $instance , $query ){
 		$alpha_list = explode(',','a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z');
 		$number_list = array( 
@@ -96,8 +150,12 @@ class content_view {
 				$view['type'] = 'faq';
 				$view['fields'] = array('title','content', 'link');
 				break;
+			case 'slideshow-three':
+				//$view['method'] = 'get_subslide_view';
+				//$view['type'] = 'slideshow';
+				//$view['fields'] = array('title','link','excerpt','image');
+				//break;
 			case 'slideshow-basic':
-			case 'slideshow-3-up':
 				$view['method'] = 'get_slide_view';
 				$view['type'] = 'slideshow';
 				$view['fields'] = array('title','link','excerpt','image');
@@ -316,7 +374,8 @@ class content_view {
 	public function get_slide_view( $instance , $display_obj ){
 		$ls = $display_obj->link_start;
 		$le = $display_obj->link_end;
-		$is_active = ( 0 == $instance[ 'i'] )? 'currentslide' : ''; 
+		$slides_up = ( isset( $instance['slides-up'] ) )? $instance['slides-up'] : 0;
+		$is_active = ( $slides_up >= $instance[ 'i'] )? 'currentslide' : ''; 
 		?><div class="cahnrs-slide <?php echo $is_active;?>" >
 			<?php echo $ls.$display_obj->image.$le;?>
             <div class="caption">
@@ -329,6 +388,22 @@ class content_view {
             </div>
         </div><?php 
 	}
+	
+	/*public function get_subslide_view( $instance , $display_obj ){
+		$ls = $display_obj->link_start;
+		$le = $display_obj->link_end;
+		?><div class="cahnrs-subslide" >
+			<?php echo $ls.$display_obj->image.$le;?>
+            <div class="caption">
+                    <?php if( $display_obj->title ):?>
+                    <div class="title"><?php echo $ls.$display_obj->title.$le;?></div>
+                    <?php endif;?>
+                    <?php if( $display_obj->excerpt ):?>
+                    <div class="excerpt"><?php echo $display_obj->excerpt;?></div>
+                    <?php endif;?>
+            </div>
+        </div><?php 
+	}*/
 	
 	public function get_full_view( $instance , $display_obj ){
 		echo $display_obj->content;
