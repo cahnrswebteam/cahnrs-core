@@ -7,6 +7,9 @@ class query_control {
 		$in['feed_type'] = ( isset( $in['feed_type'] ) && $in['feed_type'] )? $in['feed_type'] : 'basic'; 
 		// Based on type call feed method
 		switch( $in['feed_type'] ){
+			case 'select':
+				$query = $this->get_select( $in );
+				break;
 			case 'basic':
 			case 'default':
 				$query = $this->get_basic( $in );
@@ -39,10 +42,26 @@ class query_control {
 		/**********************************************
 		** Return Results **
 		**********************************************/
+		if( $this->check( $in , 'order' ) ) $query['order'] = $in['order']; // SEND IN THE MICRO MANAGER
+		if( $this->check( $in , 'order_by' ) ) $query['orderby'] = $in['order_by'];
+		
 		return $query; 
 	}
 	
+	public function get_select( $in ){
+		$query = array();
+		if( $this->check( $in , 'selected_item') ){
+			$query['post_type'] = 'any'; // ASSIGN TO QUERY ARG
+			$in['selected_item'] = explode(',' , $in['selected_item'] ); // SPLIT BY ,
+			$query['post__in'] = $in['selected_item']; // ASSIGN TO QUERY
+			$query['orderby'] = $this->check( $in , 'order_by', 'post__in' );
+			if( $this->check( $in , 'order' ) ) $query['order'] = $in['order']; // SEND IN THE MICRO MANAGER
+		}
+		return $query;
+	}
+	
 	public function get_query_obj( $query ){
+		if(!$query) return array();
 		$query_obj = array();
 		global $wp_query; // GET GLOBAL QUERY
 		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT

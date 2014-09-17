@@ -60,6 +60,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		//\query_posts($q_args); // DO WE HAVE A QUERY?????
 		
 		//$temp_query_2 = clone $wp_query; // JUST IN CASE LETS WRITE A SEDON QUERY
+		 
 		$query_obj = $this->query->get_query( $in );
 		
 		$this->view->get_slideshow_view( $args, $in , $query_obj );
@@ -85,7 +86,7 @@ class CAHNRS_Slideshow_widget extends \WP_Widget {
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
-			'show_feed' => array('basic'),
+			'show_feed' => array('select','basic'),
 			'show_adv_feed' => true,
 			'show_display' => array( 'title','slideshowstyle', 'imagesize', 'override' ),
 			);
