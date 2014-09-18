@@ -430,6 +430,9 @@ aside.pagebuilder-item.yellow {
 .cahnrs-slideshow .cahnrs-slide > img,
 .cahnrs-slideshow .cahnrs-slide > a > img {
 	display: block;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
 }
 
 .cahnrs-slideshow-wrapper .slide-nav {
@@ -641,6 +644,11 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 		padding: 0 0 4px;
 	}
 }
+@media only screen and (max-width: 1100px) {
+	.cahnrs-slideshow.slideshow-three {
+		width: 200%;
+	}	
+}
 
 /* Medium (after first break) - Tablets (iPad) then iPads (portrait, not landscape) */
 @media screen and (max-width: 989px), only screen and (max-device-width: 1024px) and (orientation: portrait) {
@@ -654,6 +662,12 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 		margin-right: 4%;
 	}
 
+}
+
+@media only screen and (max-width: 900px) {
+	.cahnrs-slideshow.slideshow-three {
+		width: 400%;
+	}
 }
 
 /* Medium and Desktop - Small */
