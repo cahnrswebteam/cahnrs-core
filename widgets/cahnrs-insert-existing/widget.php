@@ -13,6 +13,7 @@ class cahnrs_insert_existing extends \WP_Widget {
 	public function __construct() {
 		$this->content_feed_control = new cahnrswp\cahnrs\core\content_feed_control();
 		$this->view = new cahnrswp\cahnrs\core\content_view();
+		$this->query = new cahnrswp\cahnrs\core\query_control();
 
 		parent::__construct(
 			'cahnrs_insert_existing', // Base ID 
@@ -57,21 +58,23 @@ class cahnrs_insert_existing extends \WP_Widget {
 		
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
-		$q_args = $this->content_feed_control->get_query_args( $in ); // BUILD THE QUERY ARGS
-		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
+		//$q_args = $this->content_feed_control->get_query_args( $in ); // BUILD THE QUERY ARGS
+		//$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
 		
-		\query_posts($q_args); // DO YOU HAVE A QUERY?????
+		//\query_posts($q_args); // DO YOU HAVE A QUERY?????
 		/**********************************************************
 		** LET'S GET READY TO RENDER **
 		***********************************************************/
-		$this->view->get_content_view( $args, $in , $query ); // RENDER THE VIEW
+		//$this->view->get_content_view( $args, $in , $query ); // RENDER THE VIEW
 		//$this->widget_basic_gallery_view( $args, $in , $wp_query ); // SWAP PHIL'S VIEW
+		$query_obj = $this->query->get_query( $in );
+		$this->view->get_updated_content_view( $args, $in , $query_obj );
 		
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
-		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
+		//$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
 		
-		\wp_reset_postdata();
+		//\wp_reset_postdata();
 	}
 
 

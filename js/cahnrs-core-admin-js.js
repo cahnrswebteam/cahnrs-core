@@ -71,20 +71,23 @@ var cahnrs_core_widget_settings = function(){
 	}
 	
 	s.dy_l_s = function( ci ){ // DYNAMIC LOAD SELECT
+		var site = ci.parents('.form-content').find('.cc-adv-feed-src');
+		site = ( site.length > 0 && site.val() )? '&site='+encodeURIComponent( site.val() ):'';
 		var p = ci.parents('.cc-form-section');
 		var l = p.find('.cc-select-content-drpdwn');
 		var v = ci.val();
-		if( v != l.data('type') ){
-			//l.addClass('inactive');
-			l.prop('disabled', true);
-			l.attr('data-type', v );
-			var src = widget_home_url+ci.data('source');
-			l.find('option').not(':selected').remove();
-			jQuery.get( src+'&post_type='+v , function( data ) {
-				l.append( data );
-				l.prop('disabled', false);
-			});
-		}
+		
+		//l.addClass('inactive');
+		l.prop('disabled', true);
+
+		var src = widget_home_url+ci.data('source');
+		l.find('option').not(':selected').remove();
+		alert( src+'&post_type='+v+site );
+		jQuery.get( src+'&post_type='+v+site , function( data ) {
+			l.append( data );
+			l.prop('disabled', false);
+		});
+		
 	}
 	
 	//s.act_n = function( ic ){ // ACTIVATE NEXT

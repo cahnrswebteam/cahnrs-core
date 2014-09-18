@@ -26,7 +26,8 @@ class form_view{
 				$this->sites[0] = 'Current Site';
 				foreach( $sites as $site ){
 					$details = get_blog_details( $site['blog_id'] );
-					$this->sites[ $site['blog_id'] ] = $details->blogname;
+					//$this->sites[ $site['blog_id'] ] = $details->blogname;
+					$this->sites[ $details->siteurl ] = $details->blogname;
 				}
 			}
 		}
@@ -65,7 +66,7 @@ class form_view{
 				if( $this->sites ){
 					$this->input_wrap( true );
 						echo '<label>Source: </label>';
-						$this->input_select( 'current_site' , array( 'value' => $this->sites, 'style' => 'max-width: 60%' ) );
+						$this->input_select( 'current_site' , array( 'class' => 'cc-adv-feed-src','value' => $this->sites, 'style' => 'max-width: 60%' ) );
 					$this->input_wrap();
 				}
 				/** Query Order **/
@@ -362,7 +363,7 @@ class form_view{
 	public function select_post_type( ){
 		$this->input_wrap( true );
 			echo '<label>Select Type:</label>';
-			echo '<select class="dynamic-load-select" id="" name="" data-source="?cahnrs-feed=select-list">';
+			echo '<select class="dynamic-load-select" id="" name="" data-source="?service=select-list">';
 			foreach( $this->post_types as $type_key => $type_title ){
 				echo '<option value="'.$type_key.'" '.selected( $type_key, $this->in['post_type'], false).'>'.$type_title.'</option>';
 			}

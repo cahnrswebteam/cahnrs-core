@@ -30,7 +30,17 @@ class content_view {
 		}
 	}
 	
-	public function get_slideshow_view( $args, $in , $query_obj = false ){
+	public function get_updated_content_view( $args, $in , $query_obj = array() ){
+		$view = $this->get_sub_view( $in ); // GET VIEW LAYOUT TYPE AND USED FIELDS
+		foreach( $query_obj as $post ){
+			$display_obj = $this->get_display_obj( $args, $in, $post, $view['fields'] );
+			$in['i'] = $post->i;
+			$this->$view['method']( $in, $display_obj );
+			
+		}
+	}
+	
+	public function get_slideshow_view( $args, $in , $query_obj = array() ){
 		$core_settings = array(
 			'slideshow-basic' => array(
 				'auto' => 1,
@@ -244,25 +254,31 @@ class content_view {
 		/***********************************************
 		** LINK **
 		************************************************/
-		$display_obj->link = ( $this->check_get( 'link' , $fields , $in , 'remove_link' ) )? 
-			\get_permalink( $post->ID ) : false;
+		if( $this->check_get( 'link' , $fields , $in , 'remove_link' ) ){
+			$display_obj->link = ( isset( $post->post_link ) )? $post->post_link : \get_permalink( $post->ID );
+		} else {
+			$display_obj->link = false;
+		}
 		/***********************************************
 		** IMAGE **
 		************************************************/
 		if( $this->check_get( 'image' , $fields , $in , 'remove_image' )){
-			$post_type = ( $post->post_type )? $post->post_type : get_post_type( $post->ID );
-			$size = ( isset( $in['image_size'] ) )? $in['image_size'] : 'large';
-			if( 'attachment' == $post_type ){
-			}
-			else if( 'video' == $post_type ){
-				$size = ( $in['image_size'] )? $in['image_size'] : 'medium';
-				$image = get_the_post_thumbnail( $post->ID, $size, array( 'style' => 'max-width: 100%' ));
-				$display_obj->image = '<div class="video-image-wrapper" style="position: relative">'.$image.'<span class="video-play"></span></div>';
-			}
-			else if( has_post_thumbnail( $post->ID ) ){
-				$display_obj->image = get_the_post_thumbnail( $post->ID, $size, array( 'style' => 'max-width: 100%' ));
-			} else {
-				$display_obj->image = false;
+			if( $post->img ){ $display_obj->image = $post->img;}
+			else {
+				$post_type = ( $post->post_type )? $post->post_type : get_post_type( $post->ID );
+				$size = ( isset( $in['image_size'] ) )? $in['image_size'] : 'large';
+				if( 'attachment' == $post_type ){
+				}
+				else if( 'video' == $post_type ){
+					$size = ( $in['image_size'] )? $in['image_size'] : 'medium';
+					$image = get_the_post_thumbnail( $post->ID, $size, array( 'style' => 'max-width: 100%' ));
+					$display_obj->image = '<div class="video-image-wrapper" style="position: relative">'.$image.'<span class="video-play"></span></div>';
+				}
+				else if( has_post_thumbnail( $post->ID ) ){
+					$display_obj->image = get_the_post_thumbnail( $post->ID, $size, array( 'style' => 'max-width: 100%' ));
+				} else {
+					$display_obj->image = false;
+				}
 			}
 		} else {
 			$display_obj->image = false;

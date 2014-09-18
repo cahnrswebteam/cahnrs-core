@@ -3,6 +3,7 @@
 class query_control {
 
 	public function get_query( $in ){
+		$query_obj = array();
 		// Just in case let's set a default for feed type
 		$in['feed_type'] = ( isset( $in['feed_type'] ) && $in['feed_type'] )? $in['feed_type'] : 'basic'; 
 		// Based on type call feed method
@@ -15,7 +16,21 @@ class query_control {
 				$query = $this->get_basic( $in );
 				break;
 		}
-		$query_obj = $this->get_query_obj( $query );
+		
+		$query['image-size'] = $this->check( $in , 'image_size', 'thumbnail' );
+		
+		if( $this->check( $in , 'current_site' ) ){
+			$query = $this->convert_query( $in ,$query );
+			try {
+				$query_obj = \file_get_contents( $query );
+				$query_obj = json_decode( $query_obj );
+			} catch ( Exception $e ){
+				$query_obj = array();
+			}
+			return $query_obj;
+		} else {
+			$query_obj = $this->get_query_obj( $query );
+		}
 		return $query_obj;
 		//return $query;
 	}
@@ -61,6 +76,11 @@ class query_control {
 	}
 	
 	public function get_query_obj( $query ){
+		$image_size = 'thumbnail';
+		if( isset( $query['image-size'] ) ){
+				$image_size = $query['image-size'];
+				unset( $query['image-size'] );
+			};
 		if(!$query) return array();
 		$query_obj = array();
 		global $wp_query; // GET GLOBAL QUERY
@@ -70,7 +90,17 @@ class query_control {
 			$i = 0;
 			while ( $the_query->have_posts() ) {
 				$the_query->the_post();
+				$the_query->post->post_link = \get_permalink( $the_query->post->ID );
 				$the_query->post->i = $i;
+				// Handle images 
+				$image = get_the_post_thumbnail( $the_query->post->ID , $image_size );
+				if( 'attachment' == $the_query->post->post_type ){
+				}
+				else if( 'video' == $the_query->post->post_type ){
+					$image = '<div class="video-image-wrapper" style="position: relative">'.
+						$image.'<span class="video-play"></span></div>';
+				}
+				$the_query->post->img = $image;
 				$query_obj[] = $the_query->post;
 				$i++;
 			} // END WHILE
@@ -78,6 +108,11 @@ class query_control {
 		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE
 		\wp_reset_postdata();
 		return $query_obj;
+	}
+	
+	public function convert_query( $in , $query ){
+		$query = $in['current_site'].'?service=query&'.http_build_query( $query );
+		return $query;
 	}
 	/************************************************
 	** Services **

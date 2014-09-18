@@ -33,8 +33,8 @@ class cahnrs_core {
 		$widgets->register_widgets();
 		$scripts = new script_control();
 		$taxonomy = new taxonomy_control();
-		$feeds = new feed_control();
-		$feeds->init_feed_control();
+		$services = new service_control();
+		$services->init();
 		$metabox = new metabox_control();
 		$metabox->init();
 		/*********************************************

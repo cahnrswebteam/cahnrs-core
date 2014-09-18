@@ -593,7 +593,7 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 	display: block;
 	padding: 1em 0;
 }
-.cahnrs-slideshow.slideshow-three .caption .excerpt {
+.cahnrs-slideshow.slideshow-three .caption .excerpt { 
 	display: none;
 }
 
@@ -602,8 +602,8 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
  * ----------------------------------------------------------------------------
  */
 @media only screen and (max-width: 1250px) {
-	.cahnrs-slideshow .cahnrs-slide > img,
-	.cahnrs-slideshow .cahnrs-slide > a > img {
+	.cahnrs-slideshow.slideshow-basic .cahnrs-slide > img,
+	.cahnrs-slideshow.slideshow-basic .cahnrs-slide > a > img {
 		width: 60%;
 	}
 	.cahnrs-slideshow.slideshow-basic .caption {
@@ -619,8 +619,8 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 @media only screen and (max-width: 1150px) {
-	.cahnrs-slideshow .cahnrs-slide > img,
-	.cahnrs-slideshow .cahnrs-slide > a > img {
+	.cahnrs-slideshow.slideshow-basic .cahnrs-slide > img,
+	.cahnrs-slideshow.slideshow-basic .cahnrs-slide > a > img {
 		width: 100%;
 		border-right: none;
 	}
