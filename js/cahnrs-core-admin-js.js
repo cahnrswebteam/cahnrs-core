@@ -82,7 +82,6 @@ var cahnrs_core_widget_settings = function(){
 
 		var src = widget_home_url+ci.data('source');
 		l.find('option').not(':selected').remove();
-		alert( src+'&post_type='+v+site );
 		jQuery.get( src+'&post_type='+v+site , function( data ) {
 			l.append( data );
 			l.prop('disabled', false);
