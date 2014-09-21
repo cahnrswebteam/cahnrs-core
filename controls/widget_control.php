@@ -13,6 +13,7 @@ class widget_control {
 		include DIR . '/widgets/cahnrs-faqs/widget.php';
 		include DIR . '/widgets/cahnrs-scroll-pageload/widget.php';
 		include DIR . '/widgets/cahnrs-insert-existing/widget.php';
+		include DIR . '/widgets/cahnrs-insert-video/widget.php';
 	}
 
 }

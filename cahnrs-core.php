@@ -41,8 +41,7 @@ class cahnrs_core {
 		** ADD CUSTOM POST TYPES **
 		*********************************************/
 		$post_types = new post_type_control();
-		
-		\add_action( 'init', array( $post_types , 'register_post_types' ) );
+		$post_types->init();
 	}
 
 }

@@ -361,6 +361,7 @@ class form_view{
 	}
 	
 	public function select_post_type( ){
+		if( isset( $this->in['is_simple'] ) ) return false;
 		$this->input_wrap( true );
 			echo '<label>Select Type:</label>';
 			echo '<select class="dynamic-load-select" id="" name="" data-source="?service=select-list">';
@@ -372,10 +373,11 @@ class form_view{
 	}
 	
 	public function show_feed_select(){ 
+		$pt = ( isset( $this->in['post_type'] ) ) ? $this->in['post_type'] : 'post';
 		echo '<script type="text/javascript">var widget_home_url = "'.\get_home_url().'"</script>';
 		$this->input_wrap( true );
 			echo '<select class="cc-select-content-drpdwn" style="width: 70%; max-width: 80%; max-height: 150px;" id="" name="" data-type="0">';
-				$post_query = new \WP_Query( array('post_type' => 'post', 'posts_per_page' => -1 ) );
+				$post_query = new \WP_Query( array('post_type' => $pt, 'posts_per_page' => -1 ) );
 				if ( $post_query->have_posts() ) {
 					while ( $post_query->have_posts() ) {
 						$post_query->the_post();
