@@ -20,7 +20,7 @@ class query_control {
 		$query['image-size'] = $this->check( $in , 'image_size', 'thumbnail' );
 		
 		if( $this->check( $in , 'current_site' ) ){
-			$query = $this->convert_query( $in ,$query );
+			$query = $this->convert_query( $in ,$query ); 
 			try {
 				$query_obj = \file_get_contents( $query );
 				$query_obj = json_decode( $query_obj );
@@ -111,7 +111,8 @@ class query_control {
 	}
 	
 	public function convert_query( $in , $query ){
-		$query = $in['current_site'].'?service=query&'.http_build_query( $query );
+		$site = $this->check( $in , 'current_site' , '' );
+		$query = $site.'?service=query&'.http_build_query( $query );
 		return $query;
 	}
 	/************************************************

@@ -251,6 +251,10 @@ class form_view{
 				$this->input_checkbox( 'display_meta', array( 'value' => 1 ) );
 				echo ' <label>Display Meta</label>';
 			echo '</div>';
+			echo $wrap;
+				$this->input_checkbox( 'display_lightbox', array( 'value' => 1 ) );
+				echo ' <label>Display Lightbox</label>';
+			echo '</div>';
 		$this->input_wrap();
 	}
 	

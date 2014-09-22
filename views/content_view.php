@@ -286,8 +286,16 @@ class content_view {
 		/***********************************************
 		** LINK **
 		************************************************/
-		$display_obj->link_start = ( $display_obj->link )? '<a href="'.$display_obj->link.'">' : '';
-		$display_obj->link_end = ( $display_obj->link )? '</a>' : '';
+		$display_obj->link_start = '';
+		$display_obj->link_end = '';
+		if( $display_obj->link ){
+			$site = ( isset( $post->src )  && $post->src != get_home_url() )? '&src='.urlencode( $post->src ): '' ;
+			$ld = array();
+			$ld[] = ( isset( $post->post_type ) )? 'data-type="'.$post->post_type.'"' : '';
+			$lcls = $this->check( 'display_lightbox', $in , '', ' cahnrs-lightbox-item' );
+			$display_obj->link_start = ( $display_obj->link )? '<a class="'.$lcls.'" href="'.$display_obj->link.'" '.implode(' ',$ld ).'>' : '';
+			$display_obj->link_end = ( $display_obj->link )? '</a>' : '';	
+		}
 		/***********************************************
 		** META **
 		************************************************/
@@ -529,6 +537,19 @@ class content_view {
 		echo '</div>';
 		//echo count($items_all);
 	*/
+	}
+	public function check( $name , $in , $default = 'na' , $alt = 'na' ){
+		if( 'na' == $default ){
+			if( isset( $in[$name] ) && $in[$name] ) return true;
+			return false;
+		} 
+		else if( 'na' != $alt ){
+			if( isset( $in[$name] ) && $in[$name] ) return $alt;
+			return $default;
+		} else {
+			if( isset( $in[$name] ) && $in[$name] ) return $in[$name];
+			return $default;
+		}
 	}
 	
 	public function check_get( $fname , $fields , $in , $ovr = false ){
