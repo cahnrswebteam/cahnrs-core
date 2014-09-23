@@ -602,12 +602,25 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 /**************************************************************
 ** Video Object **
 **************************************************************/
+.pagebuilder-item .video-image-wrapper.has_video {
+	cursor: pointer;
+}
+.pagebuilder-item .video-image-wrapper span {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: url(../images/play-2.svg) no-repeat center center;
+	display: block;
+}
 .pagebuilder-item .video-image-wrapper iframe {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
+	z-index: 100;
 }
 .pagebuilder-item .video-image-wrapper img {
 	position: relative;
