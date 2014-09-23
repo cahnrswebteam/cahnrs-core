@@ -35,7 +35,7 @@ class service_control {
 			case 'query':
 				$template = DIR.'/templates/query.php';
 				break;
-			case 'html-embed':
+			case 'iframe':
 				$template = DIR.'/templates/html-embed.php';
 				break;
 		}

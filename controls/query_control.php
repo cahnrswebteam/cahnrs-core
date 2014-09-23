@@ -29,7 +29,7 @@ class query_control {
 			}
 			return $query_obj;
 		} else {
-			$query_obj = $this->get_query_obj( $query );
+			$query_obj = $this->get_query_obj( $query, $in );
 		}
 		return $query_obj;
 		//return $query;
@@ -75,7 +75,7 @@ class query_control {
 		return $query;
 	}
 	
-	public function get_query_obj( $query ){
+	public function get_query_obj( $query , $in = array() ){
 		$image_size = 'thumbnail';
 		if( isset( $query['image-size'] ) ){
 				$image_size = $query['image-size'];
@@ -92,13 +92,19 @@ class query_control {
 				$the_query->the_post();
 				$the_query->post->post_link = \get_permalink( $the_query->post->ID );
 				$the_query->post->i = $i;
+				$the_query->post->meta = \get_post_meta( $the_query->post->ID );
 				// Handle images 
 				$image = get_the_post_thumbnail( $the_query->post->ID , $image_size );
 				if( 'attachment' == $the_query->post->post_type ){
 				}
 				else if( 'video' == $the_query->post->post_type ){
-					$image = '<div class="video-image-wrapper" style="position: relative">'.
-						$image.'<span class="video-play"></span></div>';
+					$vid = '';
+					$has_link = ( isset( $in['remove_link'] ) && $in['remove_link'] )? false : true;
+					$has_lightbox = ( isset( $in['display_lightbox'] ) && $in['display_lightbox'] )? true : false;
+					$vid_wp_cls = ( !$has_link && !$has_lightbox )? ' has_video': '';
+					$data = 'data-vid="'.implode( $the_query->post->meta['_video_id'] ).'"';
+					$image = '<div class="video-image-wrapper '.$vid_wp_cls.'" '.$data.'style="position: relative">'
+						.$image.'<span class="video-play"></span></div>';
 				}
 				$the_query->post->img = $image;
 				$query_obj[] = $the_query->post;

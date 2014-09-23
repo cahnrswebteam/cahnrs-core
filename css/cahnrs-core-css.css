@@ -599,7 +599,66 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 .cahnrs-slideshow.slideshow-three .caption .excerpt { 
 	display: none;
 }
-
+/**************************************************************
+** Video Object **
+**************************************************************/
+.pagebuilder-item .video-image-wrapper iframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.pagebuilder-item .video-image-wrapper img {
+	position: relative;
+	display: block;
+}
+/**************************************************************
+** Lightbox **
+**************************************************************/
+#cahnrs-lightbox-bg {
+	background-color: rgba( 0, 0, 0, 0.8 );
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	display: none;
+}
+#cahnrs-lightbox-frame-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100000;
+	display: none;
+}
+#cahnrs-lightbox-frame {
+	width: 90%;
+	max-width: 900px;
+	background: #fff;
+	margin: 0 auto;
+	border-radius: 2px;
+	
+}
+#cahnrs-lightbox-frame header {
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	border-bottom: 1px solid #ddd;
+}
+#cahnrs-lightbox-frame header a {
+	display: block;
+	font-size: 0;
+	width: 30px;
+	height: 30px;
+	background: url(../images/accordion-x-hover.svg) no-repeat center center;
+	position: absolute;
+	right: 0;
+}
+#cahnrs-lightbox-frame .cahnrs-frame-content {
+	min-height: 200px;
+}
 /**
  * Media Queries
  * ----------------------------------------------------------------------------

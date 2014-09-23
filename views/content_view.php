@@ -292,6 +292,8 @@ class content_view {
 			$site = ( isset( $post->src )  && $post->src != get_home_url() )? '&src='.urlencode( $post->src ): '' ;
 			$ld = array();
 			$ld[] = ( isset( $post->post_type ) )? 'data-type="'.$post->post_type.'"' : '';
+			$ld[] = ( isset( $post->post_type ) )? 'data-serviceurl="'.get_home_url().'"' : '';
+			if( isset( $post->post_type ) && 'video' == $post->post_type ) $ld[] = 'data-vid="'. implode( $post->meta['_video_id'] ).'"';
 			$lcls = $this->check( 'display_lightbox', $in , '', ' cahnrs-lightbox-item' );
 			$display_obj->link_start = ( $display_obj->link )? '<a class="'.$lcls.'" href="'.$display_obj->link.'" '.implode(' ',$ld ).'>' : '';
 			$display_obj->link_end = ( $display_obj->link )? '</a>' : '';	
