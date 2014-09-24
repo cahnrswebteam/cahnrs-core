@@ -60,7 +60,6 @@ class cahnrs_action_item extends \WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-
 		if ( isset( $instance[ 'name_1' ] ) )
 			$name_1 = $instance[ 'name_1' ];
 		else
