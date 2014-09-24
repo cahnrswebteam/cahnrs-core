@@ -31,8 +31,10 @@ class cahnrs_iframe extends \WP_Widget {
 	public function widget( $args, $in ) {
 		$in = $this->check_defaults( $in );
 		$style = 'style="width:'.$in['width'].';height:'.$in['height'].';'.$in['scroll'].'"';
+		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		echo '<iframe src="'.$in['src'].'" frameborder="0" '.$style.' >';
 		echo '</iframe>';
+		echo $args['after_widget']; // ECHO AFTER WRAPPER
 	}
 	
 	public function check_defaults( $in ){
