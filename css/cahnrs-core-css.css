@@ -251,6 +251,11 @@ aside.pagebuilder-item.yellow {
 	display: inline-block;
 	width: 25%;
 }
+.widget_cahnrs_az_index .cahnrs-az-column .inner-column > ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
 .widget_cahnrs_az_index .cahnrs-az-column .inner-column > ul > li {
 	list-style-type: none;
 	padding: 0.4em 0.4em 0.4em 0.8em;
