@@ -16,7 +16,7 @@ class cahnrs_faqs extends \WP_Widget {
 		parent::__construct(
 			'cahnrs_faqs', // Base ID
 			'Add FAQs', // Name
-			array( 'description' => 'Add FAQ items by category/tag or individaul item', ) // Args
+			array( 'description' => 'Add FAQ items by category/tag or individual item', ) // Args
 		);
 
 	}
@@ -76,9 +76,21 @@ class cahnrs_faqs extends \WP_Widget {
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
+			//'show_display_title' => true,
 			'show_feed' => true,
 			'show_adv_feed' => true,
-			);
+		);
+
+		// A less-than-pretty way to do it - PC
+		echo '<section class="cc-form-section cc-form-feed">
+		<header>Display Settings</header>
+		<div class="section-wrapper">
+		<div class="form-sub-section">';
+		include cahnrswp\cahnrs\core\DIR.'forms/parts/display_title.phtml';
+		echo '</div>
+		</div>
+		</section>';
+		
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this ); 
 		/** DEFAULT HANDLER ****************/

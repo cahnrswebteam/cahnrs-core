@@ -130,7 +130,15 @@ aside.pagebuilder-item.yellow {
 .pagebuilder-item.widget_cahnrs_faqs {
 	background: none;
 	padding: 0;
-	/* Probably need to accommodate for a title on accordion sections - PC */
+}
+/* Probably need to accommodate for a title on accordion sections - PC */
+/* Done, but maybe not in the best way - PC */
+.widget_cahnrs_faqs h2,
+.widget_cahnrs_faqs h3,
+.widget_cahnrs_faqs h4 {
+	background: rgba( 255, 255, 255, 0.9 );
+	margin-bottom: 1px;
+	padding: 1rem 2rem;
 }
 .cahnrs-core-faq > a {
 	background-color: rgba( 255, 255, 255, 0.9 );
@@ -230,9 +238,6 @@ aside.pagebuilder-item.yellow {
 	display: inline-block;
 	vertical-align: top;
 }
-
-
-
 .widget_cahnrs_az_index .cahnrs-az-column .inner-column {
 	margin: 0 2%;
 }
@@ -797,6 +802,11 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 	}
 
 	/* Accordion/FAQs */
+	.widget_cahnrs_faqs h2,
+	.widget_cahnrs_faqs h3,
+	.widget_cahnrs_faqs h4 {
+		background: #fff;
+	}
 	.cahnrs-core-faq > a,
 	.cahnrs-core-faq > .cc-content {
 		background-color: #fff;
