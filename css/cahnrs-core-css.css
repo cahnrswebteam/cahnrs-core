@@ -8,46 +8,38 @@
  */
 
 /* Crimson background */
-div.pagebuilder-item.crimson, 
-aside.pagebuilder-item.crimson {
+.pagebuilder-item.crimson {
 	background: rgba( 152, 30, 50, 0.85 );
 	color: #fff;
 }
-div.pagebuilder-item.crimson a,
-aside.pagebuilder-item.crimson a {
+.pagebuilder-item.crimson a {
 	color: #000;
 }
-div.pagebuilder-item.crimson a:hover,
-aside.pagebuilder-item.crimson a:hover {
+.pagebuilder-item.crimson a:hover {
 	color: #2a3033;
 }
 /* Gray background */
-div.pagebuilder-item.gray,
-aside.pagebuilder-item.gray {
+.pagebuilder-item.gray {
 	background: rgba( 94, 106, 113, 0.85 );
 	color: #fff;
 }
 /* Blue background */
-div.pagebuilder-item.blue,
-aside.pagebuilder-item.blue {
+.pagebuilder-item.blue {
 	background: rgba( 79, 134, 142, 0.85 );
 	color: #fff;
 }
 /* Green background */
-div.pagebuilder-item.green,
-aside.pagebuilder-item.green {
+.pagebuilder-item.green {
 	background: rgba( 143, 126, 53, 0.85 );
 	color: #fff;
 }
 /* Orange background */
-div.pagebuilder-item.orange,
-aside.pagebuilder-item.orange {
+.pagebuilder-item.orange {
 	background: rgba( 182, 114, 51, 0.85 );
 	color: #fff;
 }
 /* Yellow background */
-div.pagebuilder-item.yellow,
-aside.pagebuilder-item.yellow {
+.pagebuilder-item.yellow {
 	background: rgba( 198, 146, 20, 0.85 );
 	color: #fff;
 }
@@ -770,34 +762,25 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 @media only screen and (max-width: 693px) {
 
 	/* Basic item styles */
-	div.pagebuilder-item,
-	aside.pagebuilder-item {
+	.pagebuilder-item {
 		background: #fff;
 	}
-	div.pagebuilder-item.crimson,
-	aside.pagebuilder-item.crimson {
+	.pagebuilder-item.crimson {
 		background: #981e32;
 	}
-	div.pagebuilder-item.gray,
-	aside.pagebuilder-item.gray {
+	.pagebuilder-item.gray {
 		background: #5e6a71;
 	}
-	div.pagebuilder-item.blue,
-	aside.pagebuilder-item.blue {
+	.pagebuilder-item.blue {
 		background: #4f868e;
 	}
-	div.pagebuilder-item.green,
-	aside.pagebuilder-item.green {
+	.pagebuilder-item.green {
 		background: #8f7e35;
 	}
-	/* Orange background */
-	div.pagebuilder-item.orange,
-	aside.pagebuilder-item.orange {
+	.pagebuilder-item.orange {
 		background: #b67233;
 	}
-	/* Yellow background */
-	div.pagebuilder-item.yellow,
-	aside.pagebuilder-item.yellow {
+	.pagebuilder-item.yellow {
 		background: #c69214;
 	}
 
