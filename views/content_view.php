@@ -40,6 +40,58 @@ class content_view {
 		}
 	}
 	
+	public function get_updated_azindex_view( $args, $in , $query_obj = array() ){
+		$view = $this->get_sub_view( $in ); // GET VIEW LAYOUT TYPE AND USED FIELDS
+		$alpha_list = explode(',','a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z');
+		$number_list = array( 
+			'0' => 'z', 
+			'1' => 'o',
+			'2' => 't',
+			'3' => 't',
+			'4' => 'f',
+			'5' => 'f',
+			'6' => 's',
+			'7' => 's',
+			'8' => 'e',
+			'9' => 'n',
+			);
+		$index_list = array();
+		$index_list[ 'count' ] = 0;
+		foreach( $query_obj as $post ){
+			$display_obj = $this->get_display_obj( $args, $in, $post, $view['fields'] );
+			if( $display_obj->title ){
+				$frst = substr( $display_obj->title ,0,1);
+				if( is_numeric( $frst ) ){
+					$index_list[ $number_list[$frst] ][] = $display_obj;
+				} else {
+					$index_list[ strtolower( $frst ) ][] = $display_obj;
+				}
+				$index_list[ 'count' ] = $index_list[ 'count' ] + 1;
+			}
+		}
+		$aztype = ( $in['display_azgroups'] )? ' dynamic-az':'';
+		echo '<nav class="cahnrs-azindex-nav'.$aztype.'">';
+		$stat = ' selected';
+		foreach( $alpha_list as $alpha ):
+			$active = '';
+			
+			if( array_key_exists( $alpha , $index_list ) ){ $active = 'active';}
+			$cls = ( $active )? $stat : '';
+			?><a class="<?php echo $active.$cls;?>" href="#azindex-<?php echo $alpha;?>"><?php echo $alpha;?></a><?php
+			if( $active ) $stat = '';
+		endforeach;
+		echo '</nav>';
+		switch ( $in['display_azgroups'] ){
+			case 1:
+				$this->get_azindex_view_collapsed( $in, $index_list );
+				break;
+			default:
+				$this->get_azindex_view_full( $in, $index_list );
+				break;
+		}
+		
+	}
+	
 	public function get_slideshow_view( $args, $in , $query_obj = array() ){
 		$core_settings = array(
 			'slideshow-basic' => array(
@@ -94,7 +146,7 @@ class content_view {
 		echo '</div>';
 	}
 	
-	public function get_index_view( $args, $instance , $query ){
+	/*public function get_index_view( $args, $instance , $query ){
 		$alpha_list = explode(',','a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z');
 		$number_list = array( 
 			'0' => 'z', 
@@ -148,7 +200,7 @@ class content_view {
 				$this->get_azindex_view_full( $instance, $index_list );
 				break;
 		}
-	}
+	}*/
 	
 	
 	
@@ -484,11 +536,14 @@ class content_view {
 			if( is_array( $items ) ){
 				$stat = ( 0 == $c )? ' selected':'';
 				echo '<div class="cahnrs-az-column-wrapper cahnrs-az-collapsed az-columns-'.$instance['columns'].' '.$stat.' column-group-'.$label.'" >';
-				$per_column = count( $items ) / $instance['columns'];//ceil( count( $items ) / $instance['columns'] );
-				for( $i = 1; $i <= $instance['columns']; $i++ ){
+				$per_column = ceil( count( $items ) / $instance['columns'] );//ceil( count( $items ) / $instance['columns'] );
+				//var_dump( count( $items ) );
+				//var_dump( $per_column );
+				for( $i = 1; $i <= $instance['columns']; $i++ ){ 
 					echo '<div class="cahnrs-az-column azcolumn-'.$i.'" ><div class="inner-column">';
 					if( 'list' == $view['type'] ) echo '<ul>';
 					for( $x = $per_column * ( $i - 1 ); $x < $per_column * $i; $x++ ){
+						if( $x >= count( $items ) ) break;  
 						$instance['i'] = $x;
 						$this->$view['method']( $instance, $items[$x] );
 						//var_dump( $items[$x]->title );

@@ -53,6 +53,7 @@ class cahnrs_insert_item extends \WP_Widget {
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$in['is_legacy'] = true;
+		
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		$q_args = $this->content_feed_control->get_query_args( $in ); // BUILD THE QUERY ARGS

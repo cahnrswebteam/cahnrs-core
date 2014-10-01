@@ -20,6 +20,7 @@ class CAHNRS_feed_widget extends \WP_Widget {
 	}
 
 	public function widget( $args, $instance = array() ) {
+		
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		$q_args = $this->content_feed_control->get_query_args( $instance ); // BUILD THE QUERY ARGS

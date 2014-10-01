@@ -52,26 +52,34 @@ class cahnrs_az_index extends \WP_Widget {
 		return $instance;
 	}
 
-	public function widget( $args, $instance = array() ) {
+	public function widget( $args, $in = array() ) {
 		/** DEFAULT HANDLER ****************/
-		$instance = $this->set_defaults( $instance );
+		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		
-		$instance['is_legacy'] = true;
-		global $wp_query; // GET GLOBAL QUERY
+		$in['is_legacy'] = true;
+		
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
-		$q_args = $this->content_feed_control->get_query_args( $instance ); // BUILD THE QUERY ARGS
-		$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
-		
-		\query_posts($q_args); // DO YOU HAVE A QUERY?????
-		
-		$this->view->get_index_view( $args, $instance , $query );
-		
+		$this->query = new cahnrswp\cahnrs\core\query_control();
+		$query_obj = $this->query->get_query( $in );
+		$this->view->get_updated_azindex_view( $args, $in , $query_obj );
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
-		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
 		
-		\wp_reset_postdata();
+		//global $wp_query; // GET GLOBAL QUERY
+		//echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
+		//$q_args = $this->content_feed_control->get_query_args( $instance ); // BUILD THE QUERY ARGS
+		//$temp_query = clone $wp_query; // WRITE MAIN QUERY TO TEMP SO WE DON'T LOSE IT
+		
+		//\query_posts($q_args); // DO YOU HAVE A QUERY?????
+		
+		//$this->view->get_index_view( $args, $instance , $query );
+		
+		//echo $args['after_widget']; // ECHO AFTER WRAPPER
+		
+		//$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE ANYTHING
+		
+		//\wp_reset_postdata();
 	}
 	
 

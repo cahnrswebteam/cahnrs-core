@@ -49,6 +49,7 @@ class query_control {
 		/**********************************************
 		** Set Count **
 		**********************************************/
+		if( $this->check( $in , 'count' ) && 'all' == $in['count'] ) $in['count'] = -1 ; 
 		$query['posts_per_page'] = $this->check( $in , 'count' , 10 );
 		/**********************************************
 		** Set Skip **
@@ -143,6 +144,7 @@ class query_control {
 		if( strpos( $query['post_type'] , 'attachment' ) !== false ){
 			$pt = explode( '_' , $query['post_type'] );
 			$query['post_type'] = 'attachment';
+			$query['post_status'] = 'any'; 
 			switch( $pt[1] ){ // Switch based on mime type indicator
 				case 'image': // Is image
 					$query['post_mime_type'] = 'image'; // Use image mime type
