@@ -675,6 +675,59 @@ box-shadow:         inset 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
 	min-height: 200px;
 }
 /**
+ * Campaign Progress
+ * ----------------------------------------------------------------------------
+ */
+.pagebuilder-item.widget_cahnrs_campaign_progress {
+	background: none;
+	padding: 0;
+}
+#meter-container {
+	position: relative;
+}
+.meter-padding {
+	background: #fff;
+	min-height: 1em;
+	padding: 1em 2em;
+}
+#meter-container img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+.meter-progress {
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+}
+#meter-bar {
+	border-left: 0.5em solid #5e6a71;
+	height: 100%;
+	margin-left: 2em;
+	position: absolute;
+	top: 0;
+}
+#meter-bar p {
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1;
+	padding: 0 0 0 0.5em
+}
+.meter-progress.background {
+	background-color: #981E32;
+	z-index: -1;
+}
+#progress-amount-wrapper {
+	background: transparent url(../images/arrow.png) no-repeat top right;
+	top: 0;
+	color: #fff;
+	font-size: 0.95em;
+	font-weight: bold;
+	left: 2.5em;
+	padding: 0.2em 2em 0.2em 0.5em;
+	position: absolute;
+}
+/**
  * Media Queries
  * ----------------------------------------------------------------------------
  */
