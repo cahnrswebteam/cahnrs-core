@@ -3,7 +3,7 @@
  * Campaign Progress widget
  */
 
-class cahnrs_campaign_progress extends WP_Widget {
+class cahnrs_campaign_progress extends \WP_Widget {
 
 
 	/**
