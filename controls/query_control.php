@@ -8,6 +8,9 @@ class query_control {
 		$in['feed_type'] = ( isset( $in['feed_type'] ) && $in['feed_type'] )? $in['feed_type'] : 'basic'; 
 		// Based on type call feed method
 		switch( $in['feed_type'] ){
+			case 'meta':
+				$query = $this->get_meta_query( $in );
+				break;
 			case 'select':
 				$query = $this->get_select( $in );
 				break;
@@ -74,6 +77,47 @@ class query_control {
 			if( $this->check( $in , 'order' ) ) $query['order'] = $in['order']; // SEND IN THE MICRO MANAGER
 		}
 		return $query;
+	}
+	
+	public function get_meta_query( $in ){
+		$query = array();
+		/**********************************************
+		** Set Post Type  **
+		**********************************************/
+		$this->check_post_type( $in, $query );
+		/**********************************************
+		** Set Count **
+		**********************************************/
+		if( $this->check( $in , 'count' ) && 'all' == $in['count'] ) $in['count'] = -1 ; 
+		$query['posts_per_page'] = $this->check( $in , 'count' , 10 );
+		/**********************************************
+		** Set Skip **
+		**********************************************/
+		$query['offset'] = $this->check( $in , 'skip' , 0 );
+		/**********************************************
+		** Set-Up Meta Query **
+		**********************************************/
+		$meta_query = array(); // Populate this later
+		/**********************************************
+		** Set Key **
+		**********************************************/
+		$meta_query['key'] = $in['meta_key'];
+		/**********************************************
+		** Check Current Time **
+		**********************************************/
+		if( isset( $in['meta_value_time'] ) && 1 == $in['meta_value_time'] ){ // Override with time
+			$meta_query['value'] = time(); // Set to current time
+		} else { // Do not override
+			$meta_query['value'] = ( isset( $in['meta_value'] ) ) ? $in['meta_value'] : ''; // set value to value
+		}
+		/**********************************************
+		** Set Compare **
+		**********************************************/
+		if( isset( $in['compare'] ) ) $meta_query['compare'] = $in['compare'];
+		/**********************************************
+		** Return Query **
+		**********************************************/
+		$query['meta_query'] = array( $meta_query );
 	}
 	
 	public function get_query_obj( $query , $in = array() ){

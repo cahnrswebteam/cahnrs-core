@@ -3,7 +3,8 @@ $content = array();
 if( isset( $_GET['site'] ) && $_GET['site'] ){
 	//$content[] = '<option value="'.$_GET['site'].'">'.$_GET['site'].'</option>';
 	try {
-		$content = \file_get_contents( $_GET['site'].'?service=select-list&return-json=true&post_type=post' );
+		$pt = ( isset( $_GET['post_type'] ) )? $_GET['post_type'] : 'post';
+		$content = \file_get_contents( $_GET['site'].'?service=select-list&return-json=true&post_type='.$pt );
 		$content = json_decode( $content );
 	} catch ( Exception $e ){
 				$content[] = '<option value="'.$the_query->post->ID.'">Fail</option>';
