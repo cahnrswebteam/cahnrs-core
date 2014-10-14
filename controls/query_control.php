@@ -84,7 +84,7 @@ class query_control {
 		/**********************************************
 		** Set Post Type  **
 		**********************************************/
-		$this->check_post_type( $in, $query );
+		if( isset( $in['post_type_meta'] ) ) $query['post_type'] = $in['post_type_meta'];
 		/**********************************************
 		** Set Count **
 		**********************************************/
@@ -118,6 +118,8 @@ class query_control {
 		** Return Query **
 		**********************************************/
 		$query['meta_query'] = array( $meta_query );
+		
+		return $query;
 	}
 	
 	public function get_query_obj( $query , $in = array() ){

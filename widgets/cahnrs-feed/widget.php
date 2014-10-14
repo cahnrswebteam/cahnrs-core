@@ -138,7 +138,7 @@ class CAHNRS_feed_widget extends \WP_Widget {
 		$caps = array(
 			'show_feed' => true,
 			'show_adv_feed' => true,
-			'show_display' => array( 'title', 'style','imagesize', 'details' ),
+			'show_display' => array( 'title', 'style','imagesize', 'override' ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
