@@ -38,12 +38,12 @@ class cahnrs_campaign_progress extends \WP_Widget {
 			<div class="meter-padding">
 				<h2>Campaign Progress</h2>
 			</div>
-			<div id="meter-container">
+			<div class="meter-container">
 				<img src="<?php echo plugins_url( 'cahnrs-core' ); ?>/images/spirit-mark.png" width="700" height="553" />
-				<div id="meter-bar"><p>$250 Million</p></div>
+				<div class="meter-bar"><p>$250 Million</p></div>
 				<div class="meter-progress background"></div>
 				<div class="meter-progress">
-					<p id="progress-amount-wrapper">$<span id="progress-amount" data-progress="<?php echo $progress; ?>">0</span> Million</p>
+					<p class="progress-amount-wrapper">$<span class="progress-amount" data-progress="<?php echo $progress; ?>">0</span> Million</p>
 				</div>
 			</div>
 			<div class="meter-padding"></div>

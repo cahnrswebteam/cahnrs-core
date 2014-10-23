@@ -355,22 +355,19 @@ var cahnrs_core_init = function(){
 	** CAMPAIGN PROGRESS MODULE **
 	************************************/
 	s.init_cp = function(){
-		var lb = this;
-		jQuery(document).ready(function(event) {
-			var progress = parseInt(jQuery('#progress-amount').attr('data-progress')),
-					percent  = ~~( ( progress / 250 ) * 100 ),
-					dollars  = ~~( progress + 1 );
-			jQuery( '.meter-progress' ).animate({
-				height: percent+"%"
-				}, 2500
-			);
-			jQuery({ countNum: jQuery('#progress-amount').text() }).animate({
-				countNum: dollars
-				},
-				{ duration: 2500, easing:'linear', step: function() {
-					jQuery('#progress-amount').text( Math.floor( this.countNum ) );
-				}
-			});
+		var progress = parseInt(jQuery('.progress-amount').attr('data-progress')),
+				percent  = ~~( ( progress / 250 ) * 100 ),
+				dollars  = ~~( progress + 1 );
+		jQuery( '.meter-progress' ).animate({
+			height: percent+"%"
+			}, 2500
+		);
+		jQuery({ countNum: jQuery('.progress-amount').text() }).animate({
+			countNum: dollars
+			},
+			{ duration: 2500, easing:'linear', step: function() {
+				jQuery('.progress-amount').text( Math.floor( this.countNum ) );
+			}
 		});
 	}
 	/***********************************
@@ -379,6 +376,6 @@ var cahnrs_core_init = function(){
 	if( jQuery('.cahnrs-core-faq').length > 0 ) s.init_faq();
 	if( jQuery('.cahnrs-azindex-nav.dynamic-az').length > 0 ) s.init_az();
 	if( jQuery('a.cahnrs-lightbox-item').length > 0 ) s.init_lb();
-	if( jQuery('#meter-container').length > 0 ) s.init_cp();
+	if( jQuery('.meter-container').length > 0 ) s.init_cp();
 	
 }
