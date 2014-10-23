@@ -89,6 +89,55 @@ var cahnrs_core_widget_settings = function(){
 		
 	}
 	
+	s.init_url_feed = function(){
+		var s_url = this;
+		
+		jQuery('body').on('click', '.action-add-url', function( event ){
+			event.preventDefault();
+			s_url.add_item( jQuery( this ) );
+			});
+		jQuery('body').on('click', '.url-inserted-item', function( event ){
+			event.preventDefault();
+			s_url.remove_item( jQuery( this ) );
+		});
+		s_url.add_item = function( ic ){
+			var wrap = ic.parents('.form-sub-section');
+			var new_url = wrap.find('.input-select-url').val();
+			var exist_urls = wrap.find('.selected-urls');
+			if( new_url ){
+				var button = '<a href="#" class="url-inserted-item" data-id="'+new_url+'"><span>X</span>'+new_url+'</a>';
+				ic.after( button );
+				s_url.update_selected( wrap );
+				wrap.find('.input-select-url').val('');
+				//var exist = exist_urls.val();
+				//if( exist ){
+					//var exist = exist.split(',');
+					//exist.push( new_url );
+					//exist_urls.val( exist.join(',') );
+					//new_url.val('');
+				//} else {
+					//exist_urls.val( new_url );
+				//}
+			}
+		}
+		
+		s_url.remove_item = function( ic ){
+			var wrap = ic.parents('.form-sub-section');
+			ic.remove();
+			s_url.update_selected( wrap );
+		}
+		
+		s_url.update_selected = function( wrap ){
+			var selected_input = wrap.find('.selected-urls');
+			var selected = new Array();
+			wrap.find('.url-inserted-item').each( function(){
+				selected.push( jQuery( this ).data('id') );
+				});
+			console.log( selected.join(',') );	
+			selected_input.val( selected.join(',') );
+		}
+	}
+	
 	//s.act_n = function( ic ){ // ACTIVATE NEXT
 		//var p = ic.parents('.activate-group');
 		//p.find('select.inactive, input.inactive').removeClass('inactive');
@@ -96,4 +145,5 @@ var cahnrs_core_widget_settings = function(){
 	//}
 	
 	s.be();
+	s.init_url_feed();
 }

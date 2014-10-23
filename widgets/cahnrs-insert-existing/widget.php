@@ -13,7 +13,7 @@ class cahnrs_insert_existing extends \WP_Widget {
 	public function __construct() {
 		$this->content_feed_control = new cahnrswp\cahnrs\core\content_feed_control();
 		$this->view = new cahnrswp\cahnrs\core\content_view();
-		$this->query = new cahnrswp\cahnrs\core\query_control();
+		
 
 		parent::__construct(
 			'cahnrs_insert_existing', // Base ID 
@@ -52,10 +52,12 @@ class cahnrs_insert_existing extends \WP_Widget {
 	}
 	
 	public function widget( $args, $in ) {
+		global $post;
+		
+		$this->query = new cahnrswp\cahnrs\core\query_control( $in );
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
-		
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		//$q_args = $this->content_feed_control->get_query_args( $in ); // BUILD THE QUERY ARGS
@@ -67,8 +69,15 @@ class cahnrs_insert_existing extends \WP_Widget {
 		***********************************************************/
 		//$this->view->get_content_view( $args, $in , $query ); // RENDER THE VIEW
 		//$this->widget_basic_gallery_view( $args, $in , $wp_query ); // SWAP PHIL'S VIEW
-		$query_obj = $this->query->get_query( $in );
-		$this->view->get_updated_content_view( $args, $in , $query_obj );
+		if( 'html_email' == $post->post_type ){
+			$query_model = $this->query->get_query( $in );
+			$items_model = new cahnrswp\cahnrs\core\items_model( $in , $query_model );
+			$email_view = new cahnrswp\cahnrs\core\item_email_view( $in , $items_model );
+			echo $email_view->get_view();
+		} else {
+			$query_obj = $this->query->get_query( $in );
+			$this->view->get_updated_content_view( $args, $in , $query_obj );
+		}
 		
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
@@ -93,7 +102,7 @@ class cahnrs_insert_existing extends \WP_Widget {
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
-			'show_feed' => array('select'),
+			'show_feed' => array('select','url'),
 			'show_adv_feed' => true,
 			'show_display' => array( 'title', 'style', 'override'/*'imagesize', 'details'*/ ),
 			);

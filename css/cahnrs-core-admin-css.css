@@ -77,9 +77,10 @@ p.input-wrap  {
 	display: inline-block; width: 50%;
 }
 
+.cc-form-section .section-wrapper .url-inserted-item,
 .cc-form-section .section-wrapper .cc-inserted-items-wrap a {
 	display: block;
-	padding: 4px 10px;
+	padding: 4px 15px;
 	margin: 4px 10px;
 	background: #777;
 	color: #fff;
@@ -87,9 +88,13 @@ p.input-wrap  {
 	border: 1px solid #555;
 	text-decoration: none;
 	position: relative;
+	word-wrap: break-word;
 }
+.cc-form-section .section-wrapper .url-inserted-item span,
 .cc-form-section .section-wrapper .cc-inserted-items-wrap a span {
-	float: right;
+	position: absolute;
+	right: 5px;
+	top: 3px;
 }
 
 .cc-form-section .section-wrapper .cc-inserted-items-wrap a:hover span {

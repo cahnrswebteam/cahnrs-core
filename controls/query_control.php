@@ -1,38 +1,50 @@
 <?php namespace cahnrswp\cahnrs\core;
 
 class query_control {
+	
+	private $in;
+	
+	public function __construct( $in = array() ) {
+		$this->in = $in;
+	}
 
 	public function get_query( $in ){
-		$query_obj = array();
-		// Just in case let's set a default for feed type
-		$in['feed_type'] = ( isset( $in['feed_type'] ) && $in['feed_type'] )? $in['feed_type'] : 'basic'; 
-		// Based on type call feed method
-		switch( $in['feed_type'] ){
-			case 'meta':
-				$query = $this->get_meta_query( $in );
-				break;
-			case 'select':
-				$query = $this->get_select( $in );
-				break;
-			case 'basic':
-			case 'default':
-				$query = $this->get_basic( $in );
-				break;
-		}
-		
-		$query['image-size'] = $this->check( $in , 'image_size', 'thumbnail' );
-		
-		if( $this->check( $in , 'current_site' ) ){
-			$query = $this->convert_query( $in ,$query ); 
-			try {
-				$query_obj = \file_get_contents( $query );
-				$query_obj = json_decode( $query_obj );
-			} catch ( Exception $e ){
-				$query_obj = array();
-			}
+		if( 'url' == $in['feed_type'] ){
+			$query_obj = array();
+			$this->get_url_query( $query_obj );
 			return $query_obj;
 		} else {
-			$query_obj = $this->get_query_obj( $query, $in );
+			$query_obj = array();
+			// Just in case let's set a default for feed type
+			$in['feed_type'] = ( isset( $in['feed_type'] ) && $in['feed_type'] )? $in['feed_type'] : 'basic'; 
+			// Based on type call feed method
+			switch( $in['feed_type'] ){
+				case 'meta':
+					$query = $this->get_meta_query( $in );
+					break;
+				case 'select':
+					$query = $this->get_select( $in );
+					break;
+				case 'basic':
+				case 'default':
+					$query = $this->get_basic( $in );
+					break;
+			}
+			
+			$query['image-size'] = $this->check( $in , 'image_size', 'thumbnail' );
+			
+			if( $this->check( $in , 'current_site' ) ){
+				$query_obj = array();
+				$query = $this->convert_query( $in ,$query ); 
+				$query_data = @file_get_contents( $query );
+				if( $query_data  ){
+					$query_data = json_decode( $query_data );
+					if( $query_data ) $query_obj = $query_data;
+				}
+				return $query_obj;
+			} else {
+				$query_obj = $this->get_query_obj( $query, $in );
+			}
 		}
 		return $query_obj;
 		//return $query;
@@ -154,6 +166,13 @@ class query_control {
 						.$image.'<span class="video-play"></span></div>';
 				}
 				$the_query->post->img = $image;
+				$the_query->post->images = array();
+				$image_sizes = \get_intermediate_image_sizes();
+				foreach( $image_sizes as $size ){
+					$image = wp_get_attachment_image_src( get_post_thumbnail_id( $the_query->post->ID ), $size );
+					$the_query->post->images = new \stdClass;
+					$the_query->post->images->$size = $image[0]; 
+				}
 				$query_obj[] = $the_query->post;
 				$i++;
 			} // END WHILE
@@ -161,6 +180,20 @@ class query_control {
 		$wp_query = clone $temp_query; // RESET ORIGINAL QUERY - IT NEVER HAPPEND, YOU DIDN'T SEE
 		\wp_reset_postdata();
 		return $query_obj;
+	}
+	
+	public function get_url_query(&$query_obj){
+		if( isset( $this->in['selected_item_url'] ) && $this->in['selected_item_url'] ){
+			$urls = explode(',',$this->in['selected_item_url'] );
+			foreach( $urls as $url ){
+				$url .= '?cahnrs-feed=true';
+				$query_data = @file_get_contents( $url );
+				if( $query_data  ){
+					$query_data = json_decode( $query_data );
+					if( $query_data ) $query_obj[] = $query_data[0];
+				}
+			}
+		}
 	}
 	
 	public function convert_query( $in , $query ){
