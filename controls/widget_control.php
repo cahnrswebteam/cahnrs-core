@@ -18,6 +18,7 @@ class widget_control {
 		include DIR . '/widgets/cahnrs-iframe/widget.php';
 		include DIR . '/widgets/cahnrs-surveygizmo/widget.php';
 		include DIR . '/widgets/campaign-progress/widget.php';
+		include DIR . '/widgets/dept-actions/widget.php';
 	}
 
 }
