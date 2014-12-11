@@ -35,7 +35,8 @@ class CAHNRS_dept_action_widget extends \WP_Widget {
 			'post_type'      => $in['post_type'],
 			'category_name'  => $in['terms'],
 			'posts_per_page' => $in['count'],
-
+			'orderby'        => $in['order_by'],
+			'order'          => $in['order'],
 		);
 
 		$the_query = new WP_Query( $loop_args );
@@ -100,6 +101,7 @@ class CAHNRS_dept_action_widget extends \WP_Widget {
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
 			'show_feed' => true,
+			'show_adv_feed' => true,
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );
