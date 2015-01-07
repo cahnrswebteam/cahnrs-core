@@ -86,6 +86,7 @@ class query_control {
 			$in['selected_item'] = explode(',' , $in['selected_item'] ); // SPLIT BY ,
 			$query['post__in'] = $in['selected_item']; // ASSIGN TO QUERY
 			$query['orderby'] = $this->check( $in , 'order_by', 'post__in' );
+			$query['post__not_in'] = get_option( 'sticky_posts' ); // Exclude sticky posts
 			if( $this->check( $in , 'order' ) ) $query['order'] = $in['order']; // SEND IN THE MICRO MANAGER
 		}
 		return $query;
