@@ -437,7 +437,7 @@ class content_view {
 				<h4 class="cc-title"><?php echo $ls.$display_obj->title.$le;?></h4>
 			<?php endif; ?>
       <?php if( $display_obj->meta ): ?>
-      	<time class="article-date" datetime=""><?php echo $display_obj->meta; ?></time>
+      	<time class="article-date" datetime=""><?php /* echo $display_obj->meta;*/ ?></time>
       <?php endif; ?>
       <?php if( $display_obj->excerpt ): ?>
       	<span class="cc-excerpt"><?php echo $display_obj->excerpt; ?></span>

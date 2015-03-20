@@ -13,12 +13,6 @@ class post_type_control {
 				'taxonomies' => array('category','post_tag'),
 				'supports' => array('title','excerpt','thumbnail'), 
 				),
-		'html_email' => array(
-				'public' => true,
-				'label'  => 'HTML Emails',
-				'taxonomies' => array('category','post_tag'),
-				'supports' => array('title','editor','excerpt','thumbnail'), 
-				),
 	);
 	public $metaboxes = array(
 		'video' => array(
