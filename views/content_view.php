@@ -31,12 +31,29 @@ class content_view {
 	}
 	
 	public function get_updated_content_view( $args, $in , $query_obj = array() ){
+		$wrap_display = array('faq');
+		
 		$view = $this->get_sub_view( $in ); // GET VIEW LAYOUT TYPE AND USED FIELDS
-		foreach( $query_obj as $post ){
-			$display_obj = $this->get_display_obj( $args, $in, $post, $view['fields'] );
-			$in['i'] = $post->i;
-			$this->$view['method']( $in, $display_obj );
+		
+		if( in_array( $in['display'], $wrap_display ) ){
 			
+			echo '<div class="cahnrs-core-'.$in['display'].'" >';
+			 
+		}
+		
+		if( $query_obj && is_array( $query_obj ) ) {
+			foreach( $query_obj as $post ){
+				$display_obj = $this->get_display_obj( $args, $in, $post, $view['fields'] );
+				$in['i'] = $post->i;
+				$this->$view['method']( $in, $display_obj );
+				
+			}
+		}
+		
+		if( in_array( $in['display'], $wrap_display ) ){
+			
+			echo '</div>';
+			 
 		}
 	}
 	
@@ -437,7 +454,7 @@ class content_view {
 				<h4 class="cc-title"><?php echo $ls.$display_obj->title.$le;?></h4>
 			<?php endif; ?>
       <?php if( $display_obj->meta ): ?>
-      	<time class="article-date" datetime=""><?php /* echo $display_obj->meta;*/ ?></time>
+      	<time class="article-date" datetime=""><?php echo $display_obj->meta; ?></time>
       <?php endif; ?>
       <?php if( $display_obj->excerpt ): ?>
       	<span class="cc-excerpt"><?php echo $display_obj->excerpt; ?></span>

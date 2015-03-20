@@ -3,7 +3,7 @@
  * Action item widget.
  */
 
-class cahnrs_faqs extends \WP_Widget {
+class cahnrs_faqs_updated extends \WP_Widget {
 
 
 	/**
@@ -16,7 +16,7 @@ class cahnrs_faqs extends \WP_Widget {
 
 		parent::__construct(
 			'cahnrs_faqs', // Base ID
-			'Add FAQs', // Name
+			'Update FAQs', // Name
 			array( 'description' => 'Add FAQ items by category/tag or individual item', ) // Args
 		);
 
@@ -106,7 +106,7 @@ class cahnrs_faqs extends \WP_Widget {
  * Register widget with WordPress.
  */
 add_action( 'widgets_init', function(){
-	register_widget( 'cahnrs_faqs' );
+	register_widget( 'cahnrs_faqs_updated' );
 });
 
 ?>

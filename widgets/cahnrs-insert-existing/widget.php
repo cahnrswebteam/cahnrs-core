@@ -13,7 +13,7 @@ class cahnrs_insert_existing extends \WP_Widget {
 	public function __construct() {
 		$this->content_feed_control = new cahnrswp\cahnrs\core\content_feed_control();
 		$this->view = new cahnrswp\cahnrs\core\content_view();
-		
+		$this->query = new cahnrswp\cahnrs\core\query_control();
 
 		parent::__construct(
 			'cahnrs_insert_existing', // Base ID 
@@ -29,9 +29,9 @@ class cahnrs_insert_existing extends \WP_Widget {
 			'selected_item' => 0,
 			'display' => 'full',
 			//'display' => 'basic_content',
-			//'image_size' => 'large',
+			'image_size' => 'medium',
 			//'display' => 'basic_gallery',
-			//'columns' => 1,
+			'columns' => 1,
 			//'display_title' => 1,
 			//'display_excerpt' => 1,
 			//'display_content' => 0,
@@ -52,12 +52,17 @@ class cahnrs_insert_existing extends \WP_Widget {
 	}
 	
 	public function widget( $args, $in ) {
-		global $post;
-		
-		$this->query = new cahnrswp\cahnrs\core\query_control( $in );
 		/** DEFAULT HANDLER ****************/
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
+		
+		switch ( $in['columns'] ) {
+			case 1: $in['column_class'] = 'one'; break; // WE'LL JUST HARD CODE THE " " AND "-COLUMNS" 
+			case 2: $in['column_class'] = 'two'; break;
+			case 3: $in['column_class'] = 'three'; break;
+			case 4: $in['column_class'] = 'four'; break;
+		}
+		
 		global $wp_query; // GET GLOBAL QUERY
 		echo $args['before_widget']; // ECHO BEFORE WIDGET WRAPPER
 		//$q_args = $this->content_feed_control->get_query_args( $in ); // BUILD THE QUERY ARGS
@@ -69,15 +74,8 @@ class cahnrs_insert_existing extends \WP_Widget {
 		***********************************************************/
 		//$this->view->get_content_view( $args, $in , $query ); // RENDER THE VIEW
 		//$this->widget_basic_gallery_view( $args, $in , $wp_query ); // SWAP PHIL'S VIEW
-		if( 'html_email' == $post->post_type ){
-			$query_model = $this->query->get_query( $in );
-			$items_model = new cahnrswp\cahnrs\core\items_model( $in , $query_model );
-			$email_view = new cahnrswp\cahnrs\core\item_email_view( $in , $items_model );
-			echo $email_view->get_view();
-		} else {
-			$query_obj = $this->query->get_query( $in );
-			$this->view->get_updated_content_view( $args, $in , $query_obj );
-		}
+		$query_obj = $this->query->get_query( $in );
+		$this->view->get_updated_content_view( $args, $in , $query_obj );
 		
 		echo $args['after_widget']; // ECHO AFTER WRAPPER
 		
@@ -102,9 +100,9 @@ class cahnrs_insert_existing extends \WP_Widget {
 		$in = $this->set_defaults( $in );
 		/** END DEFAULT HANDLER ****************/
 		$caps = array(
-			'show_feed' => array('select','url'),
+			'show_feed' => array('select'),
 			'show_adv_feed' => true,
-			'show_display' => array( 'title', 'style', 'override'/*'imagesize', 'details'*/ ),
+			'show_display' => array( 'title', 'style', 'imagesize', 'override'/*'imagesize', 'details'*/ ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );

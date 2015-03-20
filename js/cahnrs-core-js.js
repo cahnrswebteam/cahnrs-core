@@ -371,27 +371,11 @@ var cahnrs_core_init = function(){
 		});
 	}
 	/***********************************
-	** DEPARTMENT ACTION WIDGET **
-	************************************/
-	s.init_da = function(){
-		jQuery( '.widget_CAHNRS_dept_action_widget' ).on( 'click', '.dept-action', function( event ) {
-			if ( jQuery(this).hasClass('active') ) {
-				jQuery(this).removeClass('active');
-			} else {
-				jQuery(this).addClass('active');
-			}
-			jQuery(this).children('.cc-content').slideToggle( 'slow' );
-			jQuery(this).siblings().children('.cc-content').slideUp( 'slow' );
-			jQuery(this).siblings().removeClass('active');
-		});
-	}
-	/***********************************
 	** TEST AND ACTIVATE MODULES **
 	************************************/
 	if( jQuery('.cahnrs-core-faq').length > 0 ) s.init_faq();
 	if( jQuery('.cahnrs-azindex-nav.dynamic-az').length > 0 ) s.init_az();
 	if( jQuery('a.cahnrs-lightbox-item').length > 0 ) s.init_lb();
 	if( jQuery('.meter-container').length > 0 ) s.init_cp();
-	if( jQuery('.widget_CAHNRS_dept_action_widget').length > 0 ) s.init_da();
 	
 }

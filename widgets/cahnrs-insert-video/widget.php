@@ -99,7 +99,7 @@ class cahnrs_insert_video extends \WP_Widget {
 		$caps = array(
 			'show_feed' => array('select'),
 			//'show_adv_feed' => true,
-			'show_display' => array( 'title', 'style','imagesize', 'override'/*'imagesize', 'details'*/ ),
+			'show_display' => array( 'title', 'style','columns','imagesize', 'override'/*'imagesize', 'details'*/ ),
 			);
 		$form = new cahnrswp\cahnrs\core\form_view;
 		$form->get_form($in , $caps , $this );

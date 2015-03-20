@@ -293,10 +293,6 @@ class form_view{
 						$selected = ( $feed == $this->in['feed_type'] )? 'selected' : '';
 						$this->sub_section_wrap( true , 'select-feed cc-form-feed-options '.$feed.'-feed-type cc-dynamic-section '.$selected );
 						switch( $feed ){
-							case 'url':
-								$this->show_url_feed();
-								$this->show_feed_selected_url();
-					  			break;
 							case 'select':
 								$this->select_post_type();
 								$this->show_feed_select();
@@ -342,24 +338,15 @@ class form_view{
 		$this->input_wrap();
 	}
 	
-	public function show_url_feed(){
-		/** Select Post Type **/
-		$this->input_wrap( true );
-			echo '<label>URL Address: </label><br />';
-			echo '<input type="text" class="input-select-url" style="width: 70%; max-width: 80%; max-height: 150px;" id="" name="" data-type="0" />';
-			echo '<a href="#" class="cc-button-primary action-add-url">+ ADD</a>';
-		$this->input_wrap();
-	}
-	
 	public function show_basic_feed(){
 		/** Select Post Type **/
 		$this->input_wrap( true );
-			echo '<label>Select Type: </label><br />';
+			echo '<label>Select Type: </label>';
 			$this->input_select( 'post_type' , array( 'value' => $this->post_types ) );
 		$this->input_wrap();
 		/** Select Taxonomy **/
 		$this->input_wrap( true );
-			$tax_vals = array( 'all' => 'All', 'category' => 'Categories', 'tag' => 'Tags' );
+			$tax_vals = array( 'all' => 'All', 'category' => 'Categories', 'post_tag' => 'Tags' );
 			echo '<label>Feed By: </label>';
 			$this->input_select( 'taxonomy' , array( 'value' => $tax_vals ) );
 		$this->input_wrap();
@@ -382,6 +369,12 @@ class form_view{
 		$this->input_wrap( true );
 			echo '<label>Select Type:</label>';
 			echo '<select class="dynamic-load-select" id="" name="" data-source="?service=select-list">';
+			
+			if( !array_key_exists( 'news-release' , $this->post_types ) ) {
+				
+				$this->post_types['news-release'] = 'News Release';
+			}
+			
 			foreach( $this->post_types as $type_key => $type_title ){
 				echo '<option value="'.$type_key.'" '.selected( $type_key, $this->in['post_type'], false).'>'.$type_title.'</option>';
 			}
@@ -404,19 +397,6 @@ class form_view{
 				wp_reset_postdata();
 			echo '</select>';
 			echo '<a href="#" class="cc-button-primary action-add-selected">+ ADD</a>';
-		$this->input_wrap();
-	}
-	
-	public function show_feed_selected_url(){
-		$this->input_wrap( true );
-			if( isset( $this->in['selected_item_url'] ) && $this->in['selected_item_url'] ){
-				$selected_items = explode(',',$this->in['selected_item_url'] );
-				foreach( $selected_items as $item ){
-					echo '<a href="#" class="url-inserted-item" data-id="'.$item.'"><span>X</span>'.$item.'</a>';
-				}
-			}
-			echo '<label>Selected IDs: </label>';
-			$this->input_text('selected_item_url', array( 'value' => $this->in['selected_item_url'] , 'hidden' => false , 'class' => 'selected-urls' ));
 		$this->input_wrap();
 	}
 	
