@@ -255,6 +255,10 @@ class form_view{
 				$this->input_checkbox( 'display_lightbox', array( 'value' => 1 ) );
 				echo ' <label>Display Lightbox</label>';
 			echo '</div>';
+			echo '<div>';
+				echo ' <label>Override Url:</label>';
+				$this->input_text( 'override_url' , array( 'value' => $this->in['override_url'] ) );
+			echo '</div>';
 		$this->input_wrap();
 	}
 	

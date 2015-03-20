@@ -324,9 +324,21 @@ class content_view {
 		** LINK **
 		************************************************/
 		if( $this->check_get( 'link' , $fields , $in , 'remove_link' ) ){
-			$display_obj->link = ( isset( $post->post_link ) )? $post->post_link : \get_permalink( $post->ID );
+			
+			if ( ! empty( $in[ 'override_url' ] ) ){
+				
+				$display_obj->link = $in[ 'override_url' ];
+				
+			} else {
+				
+				$display_obj->link = ( isset( $post->post_link ) )? $post->post_link : \get_permalink( $post->ID );
+				
+			}
+			
 		} else {
+			
 			$display_obj->link = false;
+			
 		}
 		/***********************************************
 		** IMAGE **
